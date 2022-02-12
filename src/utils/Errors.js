@@ -1,0 +1,17 @@
+module.exports = {
+
+    COMMAND_NOT_A_SLASH_COMMAND_OBJECT: "The object must be a slash command object",
+
+    COMMAND_NOT_ENABLED_FOR_DEPLOYING: "The command is not enabled for deploying",
+
+    COMMAND_NOT_EXISTS: "A command with that name doesn't exist",
+
+    INTERACTION_NOT_EXISTS: "A interaction with that name doesn't exist",
+
+    INVALID_CLIENT: "An invalid client was provided",
+
+    UNRESOLVABLE_GUILD: "The id of a guild is not resolvable",
+
+    USER_NOT_A_USER_INTERACTION_OBJECT: "The object must be a user object"
+
+}

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: structures/BaseCommand.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: structures/BaseCommand.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const Base = require('./Base');
+const Discord = require('discord.js');
+
+/**
+ * @typedef {Object} BaseCommandData The raw data of the base command
+ * @property {String} name The name of the base command
+ * @property {String} description The description of the base command
+ * @property {?String} usage The usage of the base command
+ * @property {?Boolean} enabled If the base command is enabled (Default: true)
+ * @property {?Array&lt;Discord.PermissionResolvable>} clientPermissions An array of all permission which the client needs (Default: [])
+ * @property {?Array&lt;Discord.PermissionResolvable>} userPermissions An array of all permission which the user needs (Default: [])
+ * @property {?String} category The name of the category of the base command (Will be set automatically)
+ * @property {?Number} cooldown The cooldown in seconds of the base command (Default: 5)
+ * @property {?String} dirname The dirname of the base command (Will be set automatically)
+ * @property {?String} location The location of the base command (Will be set automatically)
+ * @property {?Boolean} betaOnly If the base command is beta only (Default: false)
+ * @property {?Array&lt;Discord.TextBasedChannelTypes>} channelOnly An array of all channels which the base command can be executed (Default: ALL)
+ * @property {?Boolean} devOnly If the base command is developer only (Default: false)
+ * @property {?Boolean} devGuildOnly If the base command is developer guild only (Default: false)
+ * @property {?Boolean} guildOnly If the base command is guild only (Default: true)
+ * @property {?Boolean} ownerOnly If the base command is premium only (Default: true)
+ * @property {?Boolean} premiumOnly If the base command is premium only (Default: false)
+ * @property {?Boolean} nsfw If the base command is nsfw (Default: false)
+ */
+
+/**
+ * The base command
+ * @extends {Base}
+ */
+class BaseCommand extends Base {
+
+    /**
+     * The constructor of the slash command
+     * @param client {Discord.Client}
+     * @param data {BaseCommandData}
+     */
+    constructor(client, data) {
+
+        super(client);
+
+        /**
+         * A collection of all cooldowns
+         * @type {Collection&lt;Discord.Snowflake, Boolean>}
+         * @private
+         */
+        this._cooldowns = new Discord.Collection();
+
+        /**
+         * The raw data of the slash command
+         * @type {BaseCommandData}
+         * @private
+         */
+        this.data = data;
+
+    }
+
+    /**
+     * Gets the category of the base command
+     * @returns {String}
+     * @public
+     */
+    get category() {
+
+        return this.data?.category ?? ' ';
+
+    }
+
+    /**
+     * Gets the client permission which the client needs to execute the base command
+     * @returns {Array&lt;Discord.PermissionResolvable>|*[]}
+     * @public
+     */
+    get clientPermissions() {
+
+        return this.data?.clientPermissions ?? [];
+
+    }
+
+    /**
+     * Gets the cooldown in seconds of the base command
+     * @return {Number}
+     * @public
+     */
+    get cooldown() {
+
+        return this.data?.cooldown ?? 5;
+
+    }
+
+    /**
+     * Deletes the cooldown of a user for the base command
+     * @param {Discord.UserResolvable} user The user of the cooldown
+     * @return {Promise&lt;Boolean>}
+     * @public
+     * @async
+     */
+    async deleteCooldown(user) {
+
+        return new Promise(async (resolve, reject) => {
+
+            const commandUser = await this.client.users.resolve(user);
+
+            if(!commandUser) reject(false);
+
+            const cooldown = this._cooldowns.get(commandUser.id);
+
+            if(!cooldown) reject(false);
+
+            resolve(true);
+
+        });
+
+    }
+
+    /**
+     * Gets the description of the base command
+     * @returns {String}
+     * @public
+     */
+    get description() {
+
+        return this.data?.description ?? ' ';
+
+    }
+
+    /**
+     * Gets the dirname of the base command
+     * @returns {String}
+     * @public
+     */
+    get dirname() {
+
+        return this.data?.dirname ?? ' ';
+
+    }
+
+    /**
+     * Checks if the base command is enabled
+     * @returns {Boolean}
+     * @public
+     */
+    get enabled() {
+
+        return this.data?.enabled ?? true;
+
+    }
+
+    /**
+     * Gets the cooldown of a user for the base command
+     * @param {Discord.UserResolvable} user The user of the cooldown
+     * @return {Promise&lt;Boolean>}
+     * @public
+     * @async
+     */
+    async getCooldown(user) {
+
+        return new Promise(async (resolve, reject) => {
+
+            const commandUser = await this.client.users.resolve(user);
+
+            if(!commandUser) reject(false);
+
+            const cooldown = this._cooldowns.get(commandUser.id);
+
+            if(!cooldown) reject(false);
+
+            resolve(cooldown);
+
+        });
+
+    }
+
+    /**
+     * Checks if the base command is beta only
+     * @returns {Boolean}
+     * @public
+     */
+    get isBetaOnly() {
+
+        return this.data?.betaOnly ?? false;
+
+    }
+
+    /**
+     * Checks if the base command is guild channel only
+     * @return {Array&lt;Discord.TextBasedChannelTypes>|boolean}
+     * @public
+     */
+    get isChannelOnly() {
+
+        return this.data?.channelOnly ?? false;
+
+    }
+
+    /**
+     * Checks if the base command is developer only
+     * @return {?Boolean}
+     * @public
+     */
+    get isDevOnly() {
+
+        return this.data?.devOnly ?? false;
+
+    }
+
+    /**
+     * Checks if the base command is developer guild only
+     * @return {?Boolean}
+     * @public
+     */
+    get isDevGuildOnly() {
+
+        return this.data?.devGuildOnly ?? false;
+
+    }
+
+    /**
+     * Checks if the base command is guild only
+     * @return {?Boolean}
+     * @public
+     */
+    get isGuildOnly() {
+
+        return this.data?.guildOnly ?? true;
+
+    }
+
+    /**
+     * Checks if the base command is nsfw
+     * @return {?Boolean}
+     * @public
+     */
+    get isNSFW() {
+
+        return this.data?.nsfw ?? false;
+
+    }
+
+    /**
+     * Checks if the base command is owner only
+     * @return {?Boolean}
+     * @public
+     */
+    get isOwnerOnly() {
+
+        return this.data?.ownerOnly ?? true;
+
+    }
+
+    /**
+     * Checks if the base command is premium only
+     * @return {?Boolean}
+     * @public
+     */
+    get isPremiumOnly() {
+
+        return this.data?.premiumOnly ?? false;
+
+    }
+
+    /**
+     * Gets the location of the base command
+     * @returns {String}
+     * @public
+     */
+    get location() {
+
+        return this.data?.location ?? ' ';
+
+    }
+
+    /**
+     * Gets the name of the base command
+     * @returns {String}
+     * @public
+     */
+    get name() {
+
+        return this.data?.name ?? ' ';
+
+    }
+
+    /**
+     * Sets the cooldown for the base command
+     * @param {Discord.UserResolvable} user The user for the cooldown
+     * @return {Promise&lt;Boolean|Discord.Collection&lt;Discord.Snowflake, Boolean>>}
+     * @public
+     * @async
+     */
+    async setCooldown(user) {
+
+        return new Promise(async (resolve, reject) => {
+
+            const commandUser = await this.client.users.resolve(user);
+
+            if(!commandUser) reject(false);
+
+            this._cooldowns.set(commandUser.id, true);
+
+            setTimeout(() => {
+
+                this.deleteCooldown(commandUser);
+
+            }, this.cooldown * 1000);
+
+            resolve(this._cooldowns);
+
+        });
+
+    }
+
+    /**
+     * Sets the location of the base command
+     * @param {String} path The new path of the base command
+     * @returns {String}
+     * @public
+     */
+    setLocation(path) {
+
+        this.data?.location === path;
+
+        return this.data?.location;
+
+    }
+
+    /**
+     * Gets the usage of the base command
+     * @returns {String}
+     * @public
+     */
+    get usage() {
+
+        return this.data?.usage ?? ' ';
+
+    }
+
+    /**
+     * Gets the user permission which the user needs to execute the base command
+     * @returns {Array&lt;Discord.PermissionResolvable>}
+     * @public
+     */
+    get userPermissions() {
+
+        return this.data?.userPermissions ?? [];
+
+    }
+
+}
+
+module.exports = BaseCommand;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Badges.html">Badges</a></li><li><a href="Base.html">Base</a></li><li><a href="BaseCommand.html">BaseCommand</a></li><li><a href="BaseInteraction.html">BaseInteraction</a></li><li><a href="ButtonInteraction.html">ButtonInteraction</a></li><li><a href="ButtonInteractionManager.html">ButtonInteractionManager</a></li><li><a href="Colors.html">Colors</a></li><li><a href="InteractionManager.html">InteractionManager</a></li><li><a href="MenuInteraction.html">MenuInteraction</a></li><li><a href="MessageInteraction.html">MessageInteraction</a></li><li><a href="MessageInteractionManager.html">MessageInteractionManager</a></li><li><a href="Partner.html">Partner</a></li><li><a href="SlashCommand.html">SlashCommand</a></li><li><a href="SlashCommandManager.html">SlashCommandManager</a></li><li><a href="UserInteraction.html">UserInteraction</a></li><li><a href="UserInteractionManager.html">UserInteractionManager</a></li></ul><h3><a href="global.html">Global</a></h3>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Sat Feb 12 2022 20:13:24 GMT+0100 (Mitteleuropäische Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
