@@ -139,7 +139,7 @@ class InteractionManager extends Base {
     }
 
     /**
-     * Gets a interaction
+     * Gets an interaction
      * @param {String} name The name of the interaction
      * @returns {?SlashCommand|null}
      */

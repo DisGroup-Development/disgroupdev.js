@@ -8,6 +8,7 @@ const MenuInteractionManager = require('./manager/MenuInteractionManager');
 const MessageInteractionManager = require('./manager/MessageInteractionManager');
 const ModalInteractionManager = require('./manager/ModalInteractionManager');
 const SlashCommandManager = require('./manager/SlashCommandManager');
+const TranslationManager = require('./manager/TranslationManager');
 const UserInteractionManager = require('./manager/UserInteractionManager');
 
 const Base = require('./structures/Base');
@@ -31,6 +32,7 @@ module.exports = {
     MessageInteractionManager,
     ModalInteractionManager,
     SlashCommandManager,
+    TranslationManager,
     UserInteractionManager,
 
     Base,
