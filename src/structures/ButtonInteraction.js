@@ -39,7 +39,7 @@ class ButtonInteraction extends BaseInteraction {
      * @param client {Discord.Client}
      * @param data {ButtonInteractionData}
      */
-    constructor(client, data) {
+    constructor(client, data = {}) {
 
         super(client, data);
 
@@ -75,7 +75,7 @@ class ButtonInteraction extends BaseInteraction {
 
     /**
      * Gets the emoji of the button
-     * @returns {?String|null}
+     * @returns {?String}
      */
     get emoji() {
 
@@ -95,7 +95,7 @@ class ButtonInteraction extends BaseInteraction {
 
     /**
      * Gets the style of the button
-     * @returns {?Discord.MessageButtonStyleResolvable|null}
+     * @returns {?Discord.MessageButtonStyleResolvable}
      */
     get style() {
 
@@ -105,7 +105,7 @@ class ButtonInteraction extends BaseInteraction {
 
     /**
      * Gets the url of the button
-     * @returns {?String|null}
+     * @returns {?String}
      */
     get url() {
 

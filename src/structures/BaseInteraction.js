@@ -330,7 +330,7 @@ class BaseInteraction extends Base {
 
         this.data.location = path;
 
-        return this.data?.location;
+        return this.location;
 
     }
 

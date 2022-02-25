@@ -30,7 +30,7 @@ const Discord = require('discord.js');
 class BaseCommand extends Base {
 
     /**
-     * The constructor of the slash command
+     * The constructor of the base command
      * @param client {Discord.Client}
      * @param data {BaseCommandData}
      */
@@ -46,7 +46,7 @@ class BaseCommand extends Base {
         this._cooldowns = new Discord.Collection();
 
         /**
-         * The raw data of the slash command
+         * The raw data of the base  command
          * @type {BaseCommandData}
          * @private
          */

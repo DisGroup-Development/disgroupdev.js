@@ -37,7 +37,7 @@ class UserInteraction extends BaseInteraction {
      * @param client {Discord.Client}
      * @param data {UserInteractionData}
      */
-    constructor(client, data) {
+    constructor(client, data = {}) {
 
         super(client, data);
 

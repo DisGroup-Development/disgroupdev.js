@@ -6,9 +6,15 @@ module.exports = {
 
     COMMAND_NOT_EXISTS: "A command with that name doesn't exist",
 
+    EVENT_NEEDS_EXECUTE: "The event file needs an 'execute' function for emitting the event",
+
+    EVENT_NOT_EXISTS: "An event with that name doesn't exist",
+
     INTERACTION_NOT_EXISTS: "A interaction with that name doesn't exist",
 
     INVALID_CLIENT: "An invalid client was provided",
+
+    INVALID_SOURCE: "An invalid source was provided",
 
     UNRESOLVABLE_GUILD: "The id of a guild is not resolvable",
 

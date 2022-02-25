@@ -40,7 +40,7 @@ class SlashCommand extends BaseInteraction {
      * @param client {Discord.Client}
      * @param data {SlashCommandData}
      */
-    constructor(client, data) {
+    constructor(client, data = {}) {
 
         super(client, data);
 
@@ -98,7 +98,7 @@ class SlashCommand extends BaseInteraction {
 
     /**
      * Gets the options of the slash command
-     * @returns {Array<Discord.ApplicationCommandOptionData>|null}
+     * @returns {Array<Discord.ApplicationCommandOptionData>}
      * @public
      */
     get options() {

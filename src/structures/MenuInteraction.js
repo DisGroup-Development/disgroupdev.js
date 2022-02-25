@@ -39,7 +39,7 @@ class MenuInteraction extends BaseInteraction {
      * @param client {Discord.Client}
      * @param data {MenuInteractionData}
      */
-    constructor(client, data) {
+    constructor(client, data = {}) {
 
         super(client, data);
 
@@ -94,7 +94,7 @@ class MenuInteraction extends BaseInteraction {
 
     /**
      * Gets the options of the menu interaction
-     * @returns {?Array<Discord.MessageSelectOptionData>|null}
+     * @returns {?Array<Discord.MessageSelectOptionData>}
      */
     get options() {
 
@@ -109,20 +109,6 @@ class MenuInteraction extends BaseInteraction {
     get placeholder() {
 
         return this.data?.placeholder ?? ' ';
-
-    }
-
-    /**
-     * Sets the id of the menu interaction
-     * @param {Discord.Snowflake} id
-     * @returns {MenuInteraction}
-     * @private
-     */
-    setID(id) {
-
-        this.data?.id === id;
-
-        return this;
 
     }
 

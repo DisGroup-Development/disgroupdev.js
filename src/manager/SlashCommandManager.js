@@ -1,6 +1,6 @@
 const Base = require('../structures/Base');
-const Errors = require('../utils/Errors');
 const Discord = require('discord.js');
+const Errors = require('../utils/Errors');
 const SlashCommand = require('../structures/SlashCommand');
 
 /**
@@ -9,6 +9,11 @@ const SlashCommand = require('../structures/SlashCommand');
  */
 class SlashCommandManager extends Base {
 
+    /**
+     * The constructor for the SlashCommandManager
+     * @param {Discord.Client} client
+     * @param {InteractionManager} interactionManager
+     */
     constructor(client, interactionManager) {
 
         super(client);
@@ -114,7 +119,7 @@ class SlashCommandManager extends Base {
     /**
      * Gets a slash command
      * @param {String} name The name of the slash command
-     * @returns {?SlashCommand|null}
+     * @returns {?SlashCommand}
      */
     get(name) {
 
@@ -147,11 +152,10 @@ class SlashCommandManager extends Base {
 
     /**
      * Load a specific slash command
-     * @param {String} name The name of the slash command
      * @param {String} path The path of the slash command
      * @returns {Promise<Boolean|Error>}
      */
-    load(name, path) {
+    load(path) {
 
         return new Promise(async (resolve, reject) => {
 
@@ -201,7 +205,7 @@ class SlashCommandManager extends Base {
 
                          for(const slashCommandFile of slashCommandFiles) {
 
-                             this.load(slashCommandFile, `${this.manager.options.locationSlashs}/${slashCommandFile}`);
+                             await this.load(`${this.manager.options.locationSlashs}/${slashCommandCategoryDir}/${slashCommandFile}`);
 
                          }
 
@@ -242,7 +246,7 @@ class SlashCommandManager extends Base {
 
                 await this.unload(name);
 
-                resolve(await this.load(name, clientCommand?.location))
+                resolve(await this.load(clientCommand?.location))
 
             } catch (e) {
 
@@ -341,7 +345,7 @@ class SlashCommandManager extends Base {
 
                             if(!this._slashCommands.has(slashCommandFile)) return;
 
-                            this.unload(slashCommandFile);
+                            await this.unload(slashCommandFile);
 
                         }
 

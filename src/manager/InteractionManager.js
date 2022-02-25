@@ -38,8 +38,8 @@ class InteractionManager extends Base {
 
         /**
          * The collection of all interactions
-         * @type {Discord.Collection<String, ButtonInteraction|MessageInteraction|SlashCommand|UserInteraction>}
-         * @public
+         * @type {Discord.Collection<String, ButtonInteraction|MenuInteraction|MessageInteraction|SlashCommand|UserInteraction>}
+         * @private
          */
         this._interactions = new Discord.Collection();
 
@@ -48,39 +48,39 @@ class InteractionManager extends Base {
          * @type {ButtonInteractionManager}
          * @private
          */
-        this._button = new ButtonInteractionManager(client, this);
+        this._button = ( options?.locationButtons ? new ButtonInteractionManager(client, this) : null );
 
         /**
          * The MenuInteractionManager
-         * @type {MenuInteractionManager}
+         * @type {?MenuInteractionManager}
          * @private
          */
-        this._menu = new MenuInteractionManager(client, this);
+        this._menu = ( options?.locationMenus ? new MenuInteractionManager(client, this) : null );
 
         /**
          * The MessageInteractionManager
-         * @type {MessageInteractionManager}
+         * @type {?MessageInteractionManager}
          * @private
          */
-        this._message = new MessageInteractionManager(client, this);
+        this._message = ( options?.locationModals ? new MessageInteractionManager(client, this) : null );
 
         /**
          * The ModalInteractionManager
-         * @type {?ModalInteractionManager|null}
+         * @type {?ModalInteractionManager}
          * @private
          */
         this._modal = ( options?.locationModals ? new ModalInteractionManager(client, this) : null );
 
         /**
          * The SlashCommandManager
-         * @type {?SlashCommandManager|null}
+         * @type {?SlashCommandManager}
          * @private
          */
         this._slash = ( options?.locationSlashs ? new SlashCommandManager(client, this) : null );
 
         /**
          * The UserInteractionManager
-         * @type {?UserInteractionManager|null}
+         * @type {?UserInteractionManager}
          * @private
          */
         this._user = ( options?.locationUsers ? new UserInteractionManager(client, this) : null )
@@ -141,7 +141,7 @@ class InteractionManager extends Base {
     /**
      * Gets an interaction
      * @param {String} name The name of the interaction
-     * @returns {?SlashCommand|null}
+     * @returns {?SlashCommand}
      */
     get(name) {
 
@@ -200,6 +200,7 @@ class InteractionManager extends Base {
                 await this.buttons.loadAll();
                 await this.menus.loadAll();
                 await this.messages.loadAll();
+                await this.modals.loadAll();
                 await this.slashs.loadAll();
                 await this.users.loadAll();
 
@@ -229,7 +230,7 @@ class InteractionManager extends Base {
     /**
      * The MessageInteractionManager
      * @public
-     * @returns {?MessageInteractionManager|null}
+     * @returns {?MessageInteractionManager}
      */
     get messages() {
 
@@ -239,9 +240,9 @@ class InteractionManager extends Base {
 
     /**
      * The ModalInteractionManager
-     * @return {?ModalInteractionManager|null}
+     * @return {?ModalInteractionManager}
      */
-    get modal() {
+    get modals() {
 
         return this._modal;
 
@@ -261,6 +262,7 @@ class InteractionManager extends Base {
                 await this.buttons.reloadAll();
                 await this.menus.reloadAll();
                 await this.messages.reloadAll();
+                await this.modals.reloadAll();
                 await this.slashs.reloadAll();
                 await this.users.reloadAll();
 
@@ -289,7 +291,7 @@ class InteractionManager extends Base {
     /**
      * The SlashCommandManager
      * @public
-     * @returns {?SlashCommandManager|null}
+     * @returns {?SlashCommandManager}
      */
     get slashs() {
 
@@ -311,6 +313,7 @@ class InteractionManager extends Base {
                 await this.buttons.unloadAll();
                 await this.menus.unloadAll();
                 await this.messages.unloadAll();
+                await this.modals.unloadAll();
                 await this.slashs.unloadAll();
                 await this.users.unloadAll();
 
@@ -329,7 +332,7 @@ class InteractionManager extends Base {
     /**
      * The UserInteractionManager
      * @public
-     * @returns {?UserInteractionManager|null}
+     * @returns {?UserInteractionManager}
      */
     get users() {
 

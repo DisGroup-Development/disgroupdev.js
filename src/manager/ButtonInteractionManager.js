@@ -1,7 +1,6 @@
 const Base = require('../structures/Base');
-const ButtonInteraction = require('../structures/ButtonInteraction');
-const Errors = require('../utils/Errors');
 const Discord = require('discord.js');
+const Errors = require('../utils/Errors');
 
 /**
  * The button interaction manager for handling button interactions
@@ -9,6 +8,11 @@ const Discord = require('discord.js');
  */
 class ButtonInteractionManager extends Base {
 
+    /**
+     * The constructor for the ButtonInteractionManager
+     * @param {Discord.Client} client
+     * @param {InteractionManager} interactionManager
+     */
     constructor(client, interactionManager) {
 
         super(client);
@@ -31,11 +35,10 @@ class ButtonInteractionManager extends Base {
 
     /**
      * Load a specific button interaction
-     * @param {String} name The name of the button interaction
      * @param {String} path The path of the button interaction
      * @returns {Promise<Boolean|Error>}
      */
-    load(name, path) {
+    load(path) {
 
         return new Promise(async (resolve, reject) => {
 
@@ -75,17 +78,17 @@ class ButtonInteractionManager extends Base {
 
             try {
 
-                const buttonInteractionDir = await this.manager.readDirectory(this.manager.options.locationbuttons);
+                const buttonInteractionDir = await this.manager.readDirectory(this.manager.options.locationButtons);
 
                 try {
 
                     for(const buttonInteractionCategoryDir of buttonInteractionDir) {
 
-                        const buttonInteractionFiles = await this.manager.readDirectory(`${this.manager.options.locationbuttons}/${buttonInteractionCategoryDir}`);
+                        const buttonInteractionFiles = await this.manager.readDirectory(`${this.manager.options.locationButtons}/${buttonInteractionCategoryDir}`);
 
                         for(const buttonInteractionFile of buttonInteractionFiles) {
 
-                            this.load(buttonInteractionFile, `${this.manager.options.locationbuttons}/${buttonInteractionFile}`);
+                            await this.load(`${this.manager.options.locationButtons}/${buttonInteractionCategoryDir}/${buttonInteractionFile}`);
 
                         }
 
@@ -126,7 +129,7 @@ class ButtonInteractionManager extends Base {
 
                 await this.unload(name);
 
-                resolve(await this.load(name, clientButtonInteraction?.location))
+                resolve(await this.load(clientButtonInteraction?.location))
 
             } catch (e) {
 
@@ -179,15 +182,15 @@ class ButtonInteractionManager extends Base {
      */
     unload(name) {
 
-        const clientCommand = this._buttonInteractions.get(name);
+        const clientButtonInteraction = this._buttonInteractions.get(name);
 
-        if(!clientCommand) throw new Error(Errors.INTERACTION_NOT_EXISTS);
+        if(!clientButtonInteraction) throw new Error(Errors.INTERACTION_NOT_EXISTS);
 
         return new Promise(async (resolve, reject) => {
 
             try {
 
-                delete require.cache[require.resolve(clientCommand?.location)];
+                delete require.cache[require.resolve(clientButtonInteraction?.location)];
 
                 this._buttonInteractions.delete(name);
 
@@ -213,19 +216,19 @@ class ButtonInteractionManager extends Base {
 
             try {
 
-                const buttonInteractionDir = await this.manager.readDirectory(this.manager.options.locationbuttons);
+                const buttonInteractionDir = await this.manager.readDirectory(this.manager.options.locationButtons);
 
                 try {
 
                     for(const buttonInteractionCategoryDir of buttonInteractionDir) {
 
-                        const buttonInteractionFiles = await this.manager.readDirectory(`${this.manager.options.locationbuttons}/${buttonInteractionCategoryDir}`);
+                        const buttonInteractionFiles = await this.manager.readDirectory(`${this.manager.options.locationButtons}/${buttonInteractionCategoryDir}`);
 
                         for(const buttonInteractionFile of buttonInteractionFiles) {
 
                             if(!this._buttonInteractions.has(buttonInteractionFile)) return;
 
-                            this.unload(buttonInteractionFile);
+                            await this.unload(buttonInteractionFile);
 
                         }
 

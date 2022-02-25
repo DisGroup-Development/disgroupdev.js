@@ -37,7 +37,7 @@ class MessageInteraction extends BaseInteraction {
      * @param client {Discord.Client}
      * @param data {MessageInteractionData}
      */
-    constructor(client, data) {
+    constructor(client, data = {}) {
 
         super(client, data);
 

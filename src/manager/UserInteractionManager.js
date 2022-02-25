@@ -1,6 +1,6 @@
 const Base = require('../structures/Base');
-const Errors = require('../utils/Errors');
 const Discord = require('discord.js');
+const Errors = require('../utils/Errors');
 const UserInteraction = require('../structures/UserInteraction');
 
 /**
@@ -9,6 +9,11 @@ const UserInteraction = require('../structures/UserInteraction');
  */
 class UserInteractionManager extends Base {
 
+    /**
+     * The constructor for the UserInteractionManager
+     * @param {Discord.Client} client
+     * @param {InteractionManager} interactionManager
+     */
     constructor(client, interactionManager) {
 
         super(client);
@@ -114,7 +119,7 @@ class UserInteractionManager extends Base {
     /**
      * Gets a user interaction
      * @param {String} name The name of the user interaction
-     * @returns {?UserInteraction|null}
+     * @returns {?UserInteraction}
      */
     get(name) {
 
@@ -147,11 +152,10 @@ class UserInteractionManager extends Base {
 
     /**
      * Load a specific user interaction
-     * @param {String} name The name of the user interaction
      * @param {String} path The path of the user interaction
      * @returns {Promise<Boolean|Error>}
      */
-    load(name, path) {
+    load(path) {
 
         return new Promise(async (resolve, reject) => {
 
@@ -185,7 +189,7 @@ class UserInteractionManager extends Base {
      * Loads all user interactions
      * @return {Promise<Boolean|Error>}
      */
-     loadAll() {
+    loadAll() {
 
          return new Promise(async (resolve, reject) => {
 
@@ -201,7 +205,7 @@ class UserInteractionManager extends Base {
 
                          for(const userInteractionFile of userInteractionFiles) {
 
-                             this.load(userInteractionFile, `${this.manager.options.locationUsers}/${userInteractionFile}`);
+                             await this.load(`${this.manager.options.locationUsers}/${userInteractionCategoryDir}/${userInteractionFile}`);
 
                          }
 
@@ -223,7 +227,7 @@ class UserInteractionManager extends Base {
 
          });
 
-     }
+    }
 
     /**
      * Reloads a specific user interactions
@@ -242,7 +246,7 @@ class UserInteractionManager extends Base {
 
                 await this.unload(name);
 
-                resolve(await this.load(name, clientUserInteraction?.location))
+                resolve(await this.load(clientUserInteraction?.location))
 
             } catch (e) {
 
@@ -341,7 +345,7 @@ class UserInteractionManager extends Base {
 
                             if(!this._userInteractions.has(userInteractionFile)) return;
 
-                            this.unload(userInteractionFile);
+                            await this.unload(userInteractionFile);
 
                         }
 

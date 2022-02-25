@@ -1,6 +1,6 @@
 const Base = require('../structures/Base');
-const Errors = require('../utils/Errors');
 const Discord = require('discord.js');
+const Errors = require('../utils/Errors');
 const MessageInteraction = require('../structures/MessageInteraction');
 
 /**
@@ -9,6 +9,11 @@ const MessageInteraction = require('../structures/MessageInteraction');
  */
 class MessageInteractionManager extends Base {
 
+    /**
+     * The constructor for the MessageInteractionManager
+     * @param {Discord.Client} client
+     * @param {InteractionManager} interactionManager
+     */
     constructor(client, interactionManager) {
 
         super(client);
@@ -114,7 +119,7 @@ class MessageInteractionManager extends Base {
     /**
      * Gets a message interaction
      * @param {String} name The name of the message interaction
-     * @returns {?UserInteraction|null}
+     * @returns {?UserInteraction}
      */
     get(name) {
 
@@ -147,11 +152,10 @@ class MessageInteractionManager extends Base {
 
     /**
      * Load a specific message interaction
-     * @param {String} name The name of the message interaction
      * @param {String} path The path of the message interaction
      * @returns {Promise<Boolean|Error>}
      */
-    load(name, path) {
+    load(path) {
 
         return new Promise(async (resolve, reject) => {
 
@@ -191,17 +195,17 @@ class MessageInteractionManager extends Base {
 
             try {
 
-                const messageInteractionDir = await this.manager.readDirectory(this.manager.options.locationmessages);
+                const messageInteractionDir = await this.manager.readDirectory(this.manager.options.locationMessages);
 
                 try {
 
                     for(const messageInteractionCategoryDir of messageInteractionDir) {
 
-                        const messageInteractionFiles = await this.manager.readDirectory(`${this.manager.options.locationmessages}/${messageInteractionCategoryDir}`);
+                        const messageInteractionFiles = await this.manager.readDirectory(`${this.manager.options.locationMessages}/${messageInteractionCategoryDir}`);
 
                         for(const messageInteractionFile of messageInteractionFiles) {
 
-                            this.load(messageInteractionFile, `${this.manager.options.locationmessages}/${messageInteractionFile}`);
+                            await this.load(`${this.manager.options.locationMessages}/${messageInteractionCategoryDir}/${messageInteractionFile}`);
 
                         }
 
@@ -242,7 +246,7 @@ class MessageInteractionManager extends Base {
 
                 await this.unload(name);
 
-                resolve(await this.load(name, clientMessageInteraction?.location))
+                resolve(await this.load(clientMessageInteraction?.location))
 
             } catch (e) {
 
@@ -329,19 +333,19 @@ class MessageInteractionManager extends Base {
 
             try {
 
-                const messageInteractionDir = await this.manager.readDirectory(this.manager.options.locationmessages);
+                const messageInteractionDir = await this.manager.readDirectory(this.manager.options.locationMessages);
 
                 try {
 
                     for(const messageInteractionCategoryDir of messageInteractionDir) {
 
-                        const messageInteractionFiles = await this.manager.readDirectory(`${this.manager.options.locationmessages}/${messageInteractionCategoryDir}`);
+                        const messageInteractionFiles = await this.manager.readDirectory(`${this.manager.options.locationMessages}/${messageInteractionCategoryDir}`);
 
                         for(const messageInteractionFile of messageInteractionFiles) {
 
                             if(!this._messageInteractions.has(messageInteractionFile)) return;
 
-                            this.unload(messageInteractionFile);
+                            await this.unload(messageInteractionFile);
 
                         }
 

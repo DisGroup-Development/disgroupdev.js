@@ -1,4 +1,3 @@
-const Base = require('../structures/Base');
 const FileSystem = require("node:fs");
 const I18Next = require('i18next');
 const I18NextFSBackend = require('i18next-fs-backend');
@@ -26,14 +25,14 @@ class TranslationManager {
 
         /**
          * The array of all namespaces
-         * @type {?[]|null}
+         * @type {?[]}
          * @private
          */
         this._namespaces = null;
 
         /**
          * The collection of all translations
-         * @type {?Map<String, Function>|null}
+         * @type {?Map<String, Function>}
          * @private
          */
         this._translations = null;
@@ -119,7 +118,7 @@ class TranslationManager {
     /**
      * Deletes a translation
      * @param {String} name The name of the translation
-     * @returns {?Boolean|null}
+     * @returns {?Boolean}
      */
     delete(name) {
 
@@ -138,7 +137,7 @@ class TranslationManager {
     /**
      * Gets a translation
      * @param {String} name The name of the translation
-     * @returns {?Function|null}
+     * @returns {?Function}
      */
     get(name) {
 
@@ -155,7 +154,7 @@ class TranslationManager {
      * @param {String} name The name of the translation
      * @param {String} key The key of the translation (Default category/file:KEY)
      * @param {?Object} args The arguments of the translation
-     * @return {?String|null}
+     * @return {?String}
      */
     translate(name, key, args = {}) {
 
