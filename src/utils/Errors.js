@@ -14,7 +14,13 @@ module.exports = {
 
     INVALID_CLIENT: "An invalid client was provided",
 
+    INVALID_DATE: "An invalid date was provided",
+
+    INVALID_LOGGER_NAME: "An invalid logger name was provided",
+
     INVALID_SOURCE: "An invalid source was provided",
+
+    LOGGER_FAILED: "There was an error while logging",
 
     UNRESOLVABLE_GUILD: "The id of a guild is not resolvable",
 

@@ -1,8 +1,3 @@
-const Badges = require('./utils/Badges');
-const Colors = require('./utils/Colors');
-const Errors = require('./utils/Errors');
-const Partner = require('./utils/Partner');
-
 const ButtonInteractionManager = require('./manager/ButtonInteractionManager');
 const CommandManager = require('./manager/CommandManager');
 const EventManager = require('./manager/EventManager');
@@ -26,11 +21,18 @@ const ModalInteraction = require('./structures/ModalInteraction');
 const SlashCommand = require('./structures/SlashCommand');
 const UserInteraction = require('./structures/UserInteraction');
 
+const Badges = require('./utils/Badges');
+const Colors = require('./utils/Colors');
+const Errors = require('./utils/Errors');
+const Logger = require('./utils/Logger');
+const Partner = require('./utils/Partner');
+
 module.exports = {
 
     Badges, 
     Colors,
     Errors,
+    Logger,
     Partner,
 
     ButtonInteractionManager,
