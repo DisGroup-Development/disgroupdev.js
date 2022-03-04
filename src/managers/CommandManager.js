@@ -90,6 +90,10 @@ class CommandManager extends Base {
      */
     load(path) {
 
+        const clientCommand = this._commands.some((cmd) => cmd.location === path);
+
+        if(clientCommand) throw new Error(Errors.COMMAND_ALREADY_LOADED);
+
         return new Promise(async (resolve, reject) => {
 
             try {
@@ -265,13 +269,13 @@ class CommandManager extends Base {
 
             try {
 
-                const commandDir = await this.manager.readDirectory(this.manager.options.locationSlashs);
+                const commandDir = await this.manager.readDirectory(this.options.locationCommands);
 
                 try {
 
                     for(const commandCategoryDir of commandDir) {
 
-                        const commandFiles = await this.manager.readDirectory(`${this.manager.options.locationSlashs}/${commandCategoryDir}`);
+                        const commandFiles = await this.manager.readDirectory(`${this.options.locationCommands}/${commandCategoryDir}`);
 
                         for(const commandFile of commandFiles) {
 

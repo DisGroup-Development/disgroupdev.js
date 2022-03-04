@@ -24,7 +24,7 @@ const Discord = require('discord.js');
  */
 
 /**
- * The base
+ * The base interaction
  * @extends {Base}
  */
 class BaseInteraction extends Base {
@@ -32,9 +32,10 @@ class BaseInteraction extends Base {
     /**
      * The constructor of the base interaction
      * @param client {Discord.Client}
+     * @param manager {ButtonInteractionManager|MenuInteractionManager|MessageInteractionManager|ModalInteractionManager|SlashCommandManager|UserInteractionManager}
      * @param data {BaseInteractionData}
      */
-    constructor(client, data) {
+    constructor(client, manager, data) {
 
         super(client);
 
@@ -44,6 +45,13 @@ class BaseInteraction extends Base {
          * @private
          */
         this._cooldowns = new Discord.Collection();
+
+        /**
+         * The manager which manages this interaction
+         * @type {ButtonInteractionManager|MenuInteractionManager|MessageInteractionManager|ModalInteractionManager|SlashCommandManager|UserInteractionManager}
+         * @private
+         */
+        this.manager = manager;
 
         /**
          * The raw data of the base interaction
@@ -157,6 +165,25 @@ class BaseInteraction extends Base {
     }
 
     /**
+     * Checks if the command is executable
+     * @param {Discord.Interaction} interaction The message which triggers the command
+     * @returns {Boolean}
+     */
+    async executable(interaction) {
+
+        if(!this.enabled) return false;
+        if(this.isGuildOnly && !interaction?.guild?.available) return false;
+        if(this.isNSFW && !interaction?.channel?.nsfw) return false;
+        if(await this.getCooldown(interaction.user)) return false;
+        if(!this.isChannelOnly !== 'ALL' && this.isChannelOnly.includes(interaction.channel.type)) return false;
+        if(!interaction?.guild?.me?.permissions?.has(this.clientPermissions) || interaction?.guild?.me?.permissionsIn(interaction?.channel)?.has(this.clientPermissions)) return false;
+        if(!interaction?.member?.permissions?.has(this.userPermissions) || !interaction?.memberPermissions?.has(this.clientPermissions)) return false;
+
+        return true;
+
+    }
+
+    /**
      * Gets the cooldown of a user for the base interaction
      * @param {Discord.UserResolvable} user The user of the cooldown
      * @return {Promise<Boolean>}
@@ -194,12 +221,12 @@ class BaseInteraction extends Base {
 
     /**
      * Checks if the base interaction is guild channel only
-     * @return {Array<Discord.TextBasedChannelTypes>|boolean}
+     * @return {Array<Discord.TextBasedChannelTypes>|String}
      * @public
      */
     get isChannelOnly() {
 
-        return this.data?.channelOnly ?? false;
+        return this.data?.channelOnly ?? 'ALL';
 
     }
 

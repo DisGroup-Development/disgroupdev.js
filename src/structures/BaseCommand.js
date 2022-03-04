@@ -32,9 +32,10 @@ class BaseCommand extends Base {
     /**
      * The constructor of the base command
      * @param client {Discord.Client}
+     * @param manager {CommandManager}
      * @param data {BaseCommandData}
      */
-    constructor(client, data) {
+    constructor(client, manager, data) {
 
         super(client);
 
@@ -44,6 +45,13 @@ class BaseCommand extends Base {
          * @private
          */
         this._cooldowns = new Discord.Collection();
+
+        /**
+         * The manager which manages this command
+         * @type {CommandManager}
+         * @private
+         */
+        this.manager = manager;
 
         /**
          * The raw data of the base  command
@@ -281,6 +289,16 @@ class BaseCommand extends Base {
     }
 
     /**
+     * Reloads the base command
+     * @return {Promise<Boolean|Error>|null}
+     */
+    reload() {
+
+        return ( this.manager.has(this.name) ? this.manager.reload(this.name) : null );
+
+    }
+
+    /**
      * Sets the cooldown for the base command
      * @param {Discord.UserResolvable} user The user for the cooldown
      * @return {Promise<Boolean|Discord.Collection<Discord.Snowflake, Boolean>>}
@@ -320,6 +338,16 @@ class BaseCommand extends Base {
         this.data?.location === path;
 
         return this.data?.location;
+
+    }
+
+    /**
+     * Unloads the base command
+     * @return {Promise<Boolean|Error>|null}
+     */
+    unload() {
+
+        return ( this.manager.has(this.name) ? this.manager.unload(this.name) : null );
 
     }
 

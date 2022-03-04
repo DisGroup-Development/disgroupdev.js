@@ -1,5 +1,7 @@
 module.exports = {
 
+    COMMAND_ALREADY_LOADED: "The command is already loaded",
+
     COMMAND_NOT_A_SLASH_COMMAND_OBJECT: "The object must be a slash command object",
 
     COMMAND_NOT_ENABLED_FOR_DEPLOYING: "The command is not enabled for deploying",
