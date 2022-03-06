@@ -1,30 +1,11 @@
 {
-  "name": "disgroupdev.js",
-  "version": "1.0.2",
-  "description": "The official library from DisGroup Development with all managers and data.",
-  "files": [
-    "src/",
-    "typings"
-  ],
-  "main": "./src/index.js",
-  "types": "typings/index.d.ts",
-  "scripts": {
-    "docs": "jsdoc src/ -d docs/ -p -r --readme README.md",
-    "test": "jest src/ --passWithNoTests"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/DisGroup-Development/disgroupdev.git"
-  },
-  "keywords": [
-    "disgroupdev"
-  ],
   "author": "DisGroup Development",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/DisGroup-Development/disgroupdev/issues"
   },
-  "homepage": "https://github.com/DisGroup-Development/disgroupdev#readme",
+  "contributors": [
+    "XEfnexX "
+  ],
   "dependencies": {
     "chalk": "^4.1.2",
     "discord.js": "^13.6.0",
@@ -33,10 +14,36 @@
     "i18next-fs-backend": "^1.1.4",
     "path": "^0.12.7"
   },
+  "description": "The official library from DisGroup Development with all managers and data.",
   "devDependencies": {
     "jest": "^27.4.7"
   },
+  "directories": {
+    "lib": "src",
+    "test": "testing"
+  },
   "engines": {
     "node": ">=16.9.0"
-  }
+  },
+  "files": [
+    "src/",
+    "typings/"
+  ],
+  "homepage": "https://github.com/DisGroup-Development/disgroupdev#readme",
+  "keywords": [
+    "disgroupdev"
+  ],
+  "license": "MIT",
+  "main": "./src/index.js",
+  "name": "disgroupdev.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DisGroup-Development/disgroupdev.git"
+  },
+  "scripts": {
+    "docs": "jsdoc src/ -d docs/ -p -r --readme README.md",
+    "test": "jest src/ --passWithNoTests"
+  },
+  "types": "./typings/index.d.ts",
+  "version": "1.0.4"
 }
