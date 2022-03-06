@@ -18,6 +18,7 @@ const Event = require('./structures/Event');
 const MenuInteraction = require('./structures/MenuInteraction');
 const MessageInteraction = require('./structures/MessageInteraction');
 const ModalInteraction = require('./structures/ModalInteraction');
+const Route = require('./structures/Route');
 const SlashCommand = require('./structures/SlashCommand');
 const UserInteraction = require('./structures/UserInteraction');
 
@@ -55,6 +56,7 @@ module.exports = {
     MenuInteraction,
     MessageInteraction,
     ModalInteraction,
+    Route,
     SlashCommand,
     UserInteraction
 
