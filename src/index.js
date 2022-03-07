@@ -1,29 +1,33 @@
-exports.ButtonInteractionManager = require('./managers/ButtonInteractionManager');
-exports.CommandManager = require('./managers/CommandManager');
-exports.EventManager = require('./managers/EventManager');
-exports.InteractionManager = require('./managers/InteractionManager');
-exports.MenuInteractionManager = require('./managers/MenuInteractionManager');
-exports.MessageInteractionManager = require('./managers/MessageInteractionManager');
-exports.ModalInteractionManager = require('./managers/ModalInteractionManager');
-exports.SlashCommandManager = require('./managers/SlashCommandManager');
-exports.TranslationManager = require('./managers/TranslationManager');
-exports.UserInteractionManager = require('./managers/UserInteractionManager');
+module.exports = {
 
-exports.Base = require('./structures/Base');
-exports.BaseCommand = require('./structures/BaseCommand');
-exports.BaseInteraction = require('./structures/BaseInteraction');
-exports.ButtonInteraction = require('./structures/ButtonInteraction');
-exports.Command = require('./structures/Command');
-exports.Event = require('./structures/Event');
-exports.MenuInteraction = require('./structures/MenuInteraction');
-exports.MessageInteraction = require('./structures/MessageInteraction');
-exports.ModalInteraction = require('./structures/ModalInteraction');
-exports.Route = require('./structures/Route');
-exports.SlashCommand = require('./structures/SlashCommand');
-exports.UserInteraction = require('./structures/UserInteraction');
+    ButtonInteractionManager: require('./managers/ButtonInteractionManager'),
+    CommandManager: require('./managers/CommandManager'),
+    EventManager: require('./managers/EventManager'),
+    InteractionManager: require('./managers/InteractionManager'),
+    MenuInteractionManager: require('./managers/MenuInteractionManager'),
+    MessageInteractionManager: require('./managers/MessageInteractionManager'),
+    ModalInteractionManager: require('./managers/ModalInteractionManager'),
+    SlashCommandManager: require('./managers/SlashCommandManager'),
+    TranslationManager: require('./managers/TranslationManager'),
+    UserInteractionManager: require('./managers/UserInteractionManager'),
 
-exports.Badges = require('./utils/Badges');
-exports.Colors = require('./utils/Colors');
-exports.Errors = require('./utils/Errors');
-exports.Logger = require('./utils/Logger');
-exports.Partner = require('./utils/Partner');
+    Base: require('./structures/Base'),
+    BaseCommand: require('./structures/BaseCommand'),
+    BaseInteraction: require('./structures/BaseInteraction'),
+    ButtonInteraction: require('./structures/ButtonInteraction'),
+    Command: require('./structures/Command'),
+    Event: require('./structures/Event'),
+    MenuInteraction: require('./structures/MenuInteraction'),
+    MessageInteraction: require('./structures/MessageInteraction'),
+    ModalInteraction: require('./structures/ModalInteraction'),
+    Route: require('./structures/Route'),
+    SlashCommand: require('./structures/SlashCommand'),
+    UserInteraction: require('./structures/UserInteraction'),
+
+    Badges: require('./utils/Badges'),
+    Colors: require('./utils/Colors'),
+    Errors: require('./utils/Errors'),
+    Logger: require('./utils/Logger'),
+    Partner: require('./utils/Partner')
+
+}
