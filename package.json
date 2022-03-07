@@ -4,7 +4,7 @@
     "url": "https://github.com/DisGroup-Development/disgroupdev/issues"
   },
   "contributors": [
-    "XEfnexX "
+    "XEfnexX"
   ],
   "dependencies": {
     "chalk": "^4.1.2",
@@ -46,5 +46,5 @@
   },
   "type": "commonjs",
   "types": "./typings/index.d.ts",
-  "version": "1.0.5"
+  "version": "1.0.6"
 }
