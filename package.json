@@ -44,6 +44,5 @@
     "docs": "jsdoc src/ -d docs/ -p -r --readme README.md",
     "test": "jest src/ --passWithNoTests"
   },
-  "types": "./typings/index.d.ts",
   "version": "1.0.5"
 }
