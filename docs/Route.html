@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Partner</title>
+    <title>JSDoc: Class: Route</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Partner</h1>
+    <h1 class="page-title">Class: Route</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Partner<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Route<span class="signature">(client, router)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Contains various color data for DisGroup Development partners</div>
+            <div class="class-description">The base of all routers</div>
         
     
 </header>
@@ -45,19 +45,95 @@
     
 
     
-    <h4 class="name" id="Partner"><span class="type-signature"></span>new Partner<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Route"><span class="type-signature"></span>new Route<span class="signature">(client, router)</span><span class="type-signature"></span></h4>
     
 
     
 
 
 
+<div class="description">
+    The constructor for the router class
+</div>
 
 
 
 
 
 
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>client</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Discord.Client</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>router</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Express.Router</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -93,7 +169,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="utils_Partner.js.html">utils/Partner.js</a>, <a href="utils_Partner.js.html#line5">line 5</a>
+        <a href="structures_Route.js.html">structures/Route.js</a>, <a href="structures_Route.js.html#line9">line 9</a>
     </li></ul></dd>
     
 
@@ -133,7 +209,7 @@
 
 
     <ul>
-        <li>null</li>
+        <li><a href="Base.html">Base</a></li>
     </ul>
 
 
@@ -154,16 +230,26 @@
 
         
             
-<h4 class="name" id=".KERNELHOST"><span class="type-signature">(static) </span>KERNELHOST<span class="type-signature"></span></h4>
+<h4 class="name" id="_router"><span class="type-signature">(private) </span>_router<span class="type-signature"> :Express.Router</span></h4>
 
 
 
 
 <div class="description">
-    KernelHost
+    The router
 </div>
 
 
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Express.Router</span>
+
+
+        </li>
+    </ul>
 
 
 
@@ -198,7 +284,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="utils_Partner.js.html">utils/Partner.js</a>, <a href="utils_Partner.js.html#line44">line 44</a>
+        <a href="structures_Route.js.html">structures/Route.js</a>, <a href="structures_Route.js.html#line25">line 25</a>
     </li></ul></dd>
     
 
@@ -216,13 +302,13 @@
 
         
             
-<h4 class="name" id=".LARAGAMING"><span class="type-signature">(static) </span>LARAGAMING<span class="type-signature"></span></h4>
+<h4 class="name" id="router"><span class="type-signature"></span>router<span class="type-signature"></span></h4>
 
 
 
 
 <div class="description">
-    Lara_Gaming
+    The router
 </div>
 
 
@@ -260,7 +346,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="utils_Partner.js.html">utils/Partner.js</a>, <a href="utils_Partner.js.html#line88">line 88</a>
+        <a href="structures_Route.js.html">structures/Route.js</a>, <a href="structures_Route.js.html#line33">line 33</a>
     </li></ul></dd>
     
 

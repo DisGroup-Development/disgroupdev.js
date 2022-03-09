@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: managers/InteractionManager.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: managers/InteractionManager.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const Base = require('../structures/Base');
+const ButtonInteractionManager = require('./ButtonInteractionManager');
+const Discord = require('discord.js');
+const FileSystem = require('node:fs');
+const MenuInteractionManager = require('./MenuInteractionManager');
+const MessageInteractionManager = require('./MessageInteractionManager');
+const ModalInteractionManager = require('./ModalInteractionManager');
+const SlashCommandManager = require('./SlashCommandManager');
+const UserInteractionManager = require('./UserInteractionManager');
+const Util = require('node:util');
+
+/**
+ * The options
+ * @typedef {Object} InteractionManagerOptions
+ * @property {Array&lt;String>} guildIds An array of all guild ids for deploying interactions
+ * @property {String} locationButtons The location of the button interactions
+ * @property {String} locationMenus The location of the menu interactions
+ * @property {String} locationMessages The location of the message interactions
+ * @property {String} locationModals The location of the modal interactions
+ * @property {String} locationSlashs The location of the slash interactions
+ * @property {String} locationUsers The location of the user interactions
+ */
+
+/**
+ * The interaction manager for handling interactions
+ * @extends {Base}
+ */
+class InteractionManager extends Base {
+
+    /**
+     * The constructor for the InteractionManager
+     * @param {Discord.Client} client 
+     * @param {InteractionManagerOptions} options
+     */
+    constructor(client, options = {}) {
+
+        super(client);
+
+        /**
+         * The collection of all interactions
+         * @type {Discord.Collection&lt;String, ButtonInteraction|MenuInteraction|MessageInteraction|SlashCommand|UserInteraction>}
+         * @private
+         */
+        this._interactions = new Discord.Collection();
+
+        /**
+         * The ButtonInteractionManager
+         * @type {ButtonInteractionManager}
+         * @private
+         */
+        this._button = ( options?.locationButtons ? new ButtonInteractionManager(client, this) : null );
+
+        /**
+         * The MenuInteractionManager
+         * @type {?MenuInteractionManager}
+         * @private
+         */
+        this._menu = ( options?.locationMenus ? new MenuInteractionManager(client, this) : null );
+
+        /**
+         * The MessageInteractionManager
+         * @type {?MessageInteractionManager}
+         * @private
+         */
+        this._message = ( options?.locationModals ? new MessageInteractionManager(client, this) : null );
+
+        /**
+         * The ModalInteractionManager
+         * @type {?ModalInteractionManager}
+         * @private
+         */
+        this._modal = ( options?.locationModals ? new ModalInteractionManager(client, this) : null );
+
+        /**
+         * The SlashCommandManager
+         * @type {?SlashCommandManager}
+         * @private
+         */
+        this._slash = ( options?.locationSlashs ? new SlashCommandManager(client, this) : null );
+
+        /**
+         * The UserInteractionManager
+         * @type {?UserInteractionManager}
+         * @private
+         */
+        this._user = ( options?.locationUsers ? new UserInteractionManager(client, this) : null )
+
+        /**
+         * Reads a directory
+         * @private
+         */
+        this.readDirectory = Util.promisify(FileSystem.readdir);
+
+        /**
+         * The options of the InteractionManager
+         * @type {InteractionManagerOptions}
+         * @public
+         */
+        this.options = options;
+
+    }
+
+    /**
+     * The ButtonInteractionManager
+     * @public
+     * @returns {ButtonInteractionManager}
+     */
+    get buttons() {
+
+        return this._button;
+
+    }
+
+    /**
+     * Deploys all interactions
+     * @public
+     * @returns {Promise&lt;Boolean | Error>}
+     */
+    deployAll() {
+
+        return new Promise(async (resolve, reject) => {
+
+            try {
+
+                await this.messages?.deployAll();
+                await this.slashs?.deployAll();
+                await this.users?.deployAll();
+
+                resolve(true);
+
+            } catch (e) {
+
+                reject (e);
+
+            }
+
+        });
+
+    }
+
+    /**
+     * Gets an interaction
+     * @param {String} name The name of the interaction
+     * @returns {?SlashCommand}
+     */
+    get(name) {
+
+        const clientInteraction = this._interactions.get(name);
+
+        return clientInteraction ?? null;
+
+    }
+
+    /**
+     * Handles a raw data interaction
+     * @param {*} rawData The raw data
+     * @private
+     * @returns {Boolean}
+     */
+    handle(rawData) {
+
+        const handledPackage = this.client.ws.handlePacket(rawData);
+
+        return handledPackage;
+
+    }
+
+    /**
+     * Checks if there is any interaction with a specific name
+     * @param {String} name The name of the interaction
+     * @returns {Boolean}
+     */
+    has(name) {
+
+        return this._interactions.has(name);
+
+    }
+
+    /**
+     * Lists all interactions
+     * @returns {(ButtonInteraction|MessageInteraction|SlashCommand|UserInteraction)[]}
+     */
+    list() {
+
+        return this._interactions.toJSON();
+
+    }
+
+    /**
+     * Loads all interactions
+     * @public
+     * @returns {Promise&lt;Boolean | Error>}
+     */
+    loadAll() {
+
+        return new Promise(async (resolve, reject) => {
+
+            try {
+
+                await this.buttons?.loadAll();
+                await this.menus?.loadAll();
+                await this.messages?.loadAll();
+                await this.modals?.loadAll();
+                await this.slashs?.loadAll();
+                await this.users?.loadAll();
+
+                resolve(true);
+
+            } catch (e) {
+
+                reject (e);
+
+            }
+
+        });
+
+    }
+
+    /**
+     * The MenuInteractionManager
+     * @public
+     * @returns {MenuInteractionManager}
+     */
+    get menus() {
+
+        return this._menu;
+
+    }
+
+    /**
+     * The MessageInteractionManager
+     * @public
+     * @returns {?MessageInteractionManager}
+     */
+    get messages() {
+
+        return this._message;
+
+    }
+
+    /**
+     * The ModalInteractionManager
+     * @return {?ModalInteractionManager}
+     */
+    get modals() {
+
+        return this._modal;
+
+    }
+
+    /**
+     * Reloads all interactions
+     * @public
+     * @returns {Promise&lt;Boolean | Error>}
+     */
+    reloadAll() {
+
+        return new Promise(async (resolve, reject) => {
+
+            try {
+
+                await this.buttons?.reloadAll();
+                await this.menus?.reloadAll();
+                await this.messages?.reloadAll();
+                await this.modals?.reloadAll();
+                await this.slashs?.reloadAll();
+                await this.users?.reloadAll();
+
+                resolve(true);
+
+            } catch (e) {
+
+                reject (e);
+
+            }
+
+        });
+
+    }
+
+    /**
+     * Gets the size of all interactions
+     * @returns {Number}
+     */
+    size() {
+
+        return this._interactions.size;
+
+    }
+
+    /**
+     * The SlashCommandManager
+     * @public
+     * @returns {?SlashCommandManager}
+     */
+    get slashs() {
+
+        return this._slash;
+
+    }
+
+    /**
+     * Unloads all interactions
+     * @public
+     * @returns {Promise&lt;Boolean | Error>}
+     */
+    unloadAll() {
+
+        return new Promise(async (resolve, reject) => {
+
+            try {
+
+                await this.buttons?.unloadAll();
+                await this.menus?.unloadAll();
+                await this.messages?.unloadAll();
+                await this.modals?.unloadAll();
+                await this.slashs?.unloadAll();
+                await this.users?.unloadAll();
+
+                resolve(true);
+
+            } catch (e) {
+
+                reject (e);
+
+            }
+
+        });
+
+    }
+
+    /**
+     * The UserInteractionManager
+     * @public
+     * @returns {?UserInteractionManager}
+     */
+    get users() {
+
+        return this._user;
+
+    }
+
+}
+
+module.exports = InteractionManager;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Badges.html">Badges</a></li><li><a href="Base.html">Base</a></li><li><a href="BaseCommand.html">BaseCommand</a></li><li><a href="BaseInteraction.html">BaseInteraction</a></li><li><a href="ButtonInteraction.html">ButtonInteraction</a></li><li><a href="ButtonInteractionManager.html">ButtonInteractionManager</a></li><li><a href="Colors.html">Colors</a></li><li><a href="Command.html">Command</a></li><li><a href="CommandManager.html">CommandManager</a></li><li><a href="Emojis.html">Emojis</a></li><li><a href="Event.html">Event</a></li><li><a href="EventManager.html">EventManager</a></li><li><a href="InteractionManager.html">InteractionManager</a></li><li><a href="Logger.html">Logger</a></li><li><a href="MenuInteraction.html">MenuInteraction</a></li><li><a href="MenuInteractionManager.html">MenuInteractionManager</a></li><li><a href="MessageInteraction.html">MessageInteraction</a></li><li><a href="MessageInteractionManager.html">MessageInteractionManager</a></li><li><a href="ModalInteraction.html">ModalInteraction</a></li><li><a href="ModalInteractionManager.html">ModalInteractionManager</a></li><li><a href="Partner.html">Partner</a></li><li><a href="Route.html">Route</a></li><li><a href="SlashCommand.html">SlashCommand</a></li><li><a href="SlashCommandManager.html">SlashCommandManager</a></li><li><a href="TranslationManager.html">TranslationManager</a></li><li><a href="UserInteraction.html">UserInteraction</a></li><li><a href="UserInteractionManager.html">UserInteractionManager</a></li><li><a href="Utilities.html">Utilities</a></li></ul><h3><a href="global.html">Global</a></h3>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Wed Mar 09 2022 11:14:19 GMT+0100 (Mitteleuropäische Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

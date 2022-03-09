@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: structures/Base.js</title>
+    <title>JSDoc: Source: structures/Route.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: structures/Base.js</h1>
+    <h1 class="page-title">Source: structures/Route.js</h1>
 
     
 
@@ -26,29 +26,47 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const Discord = require('discord.js');
-const Errors = require('../utils/Errors');
+            <pre class="prettyprint source linenums"><code>const Base = require('./Base');
+const Discord = require('discord.js');
+const Express = require('express');
 
 /**
- * The base of all structures
+ * The base of all routers
+ * @extends {Base}
  */
-class Base {
+class Route extends Base {
 
     /**
-     * The constructor for the base class
-     * @param {Discord.Client} client 
+     * The constructor for the router class
+     * @param {Discord.Client} client
+     * @param {Express.Router} router
      */
-    constructor(client) {
+    constructor(client, router) {
 
-        if(!client instanceof Discord.Client) throw new Error(Errors.INVALID_CLIENT);
+        super(client);
 
-        this.client = client;
+        /**
+         * The router
+         * @type {Express.Router}
+         * @private
+         */
+        this._router = router;
+
+    }
+
+    /**
+     * The router
+     * @return {Express.Router}
+     */
+    get router() {
+
+        return this._router;
 
     }
 
 }
 
-module.exports = Base;</code></pre>
+module.exports = Route;</code></pre>
         </article>
     </section>
 

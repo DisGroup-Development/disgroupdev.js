@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: MessageInteraction</title>
+    <title>JSDoc: Class: ModalInteraction</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: MessageInteraction</h1>
+    <h1 class="page-title">Class: ModalInteraction</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>MessageInteraction<span class="signature">(client, data)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>ModalInteraction<span class="signature">(client, data)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">The message interaction</div>
+            <div class="class-description">The modal interaction</div>
         
     
 </header>
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="MessageInteraction"><span class="type-signature"></span>new MessageInteraction<span class="signature">(client, data)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="ModalInteraction"><span class="type-signature"></span>new ModalInteraction<span class="signature">(client, data)</span><span class="type-signature"></span></h4>
     
 
     
@@ -53,7 +53,7 @@
 
 
 <div class="description">
-    The constructor of the message interaction
+    The constructor of the modal interaction
 </div>
 
 
@@ -118,7 +118,7 @@
             <td class="type">
             
                 
-<span class="param-type"><a href="global.html#MessageInteractionData">MessageInteractionData</a></span>
+<span class="param-type"><a href="global.html#ModalInteractionData">ModalInteractionData</a></span>
 
 
             
@@ -169,7 +169,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_MessageInteraction.js.html">structures/MessageInteraction.js</a>, <a href="structures_MessageInteraction.js.html#line33">line 33</a>
+        <a href="structures_ModalInteraction.js.html">structures/ModalInteraction.js</a>, <a href="structures_ModalInteraction.js.html#line31">line 31</a>
     </li></ul></dd>
     
 
@@ -508,13 +508,75 @@
 
         
             
-<h4 class="name" id="data"><span class="type-signature">(private) </span>data<span class="type-signature"> :<a href="global.html#MessageInteractionData">MessageInteractionData</a></span></h4>
+<h4 class="name" id="customID"><span class="type-signature"></span>customID<span class="type-signature"></span></h4>
 
 
 
 
 <div class="description">
-    The raw data of the message interaction
+    Gets the custom id of the modal interaction
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="structures_ModalInteraction.js.html">structures/ModalInteraction.js</a>, <a href="structures_ModalInteraction.js.html#line55">line 55</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="data"><span class="type-signature">(private) </span>data<span class="type-signature"> :<a href="global.html#ModalInteractionData">ModalInteractionData</a></span></h4>
+
+
+
+
+<div class="description">
+    The raw data of the modal interaction
 </div>
 
 
@@ -523,7 +585,7 @@
     <ul>
         <li>
             
-<span class="param-type"><a href="global.html#MessageInteractionData">MessageInteractionData</a></span>
+<span class="param-type"><a href="global.html#ModalInteractionData">ModalInteractionData</a></span>
 
 
         </li>
@@ -567,131 +629,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_MessageInteraction.js.html">structures/MessageInteraction.js</a>, <a href="structures_MessageInteraction.js.html#line49">line 49</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="defaultEnabled"><span class="type-signature"></span>defaultEnabled<span class="type-signature"></span></h4>
-
-
-
-
-<div class="description">
-    Checks if the message interaction is enabled for @everyone
-</div>
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_MessageInteraction.js.html">structures/MessageInteraction.js</a>, <a href="structures_MessageInteraction.js.html#line57">line 57</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="deployEnabled"><span class="type-signature"></span>deployEnabled<span class="type-signature"></span></h4>
-
-
-
-
-<div class="description">
-    Checks if deploying is enabled for the message interaction
-</div>
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_MessageInteraction.js.html">structures/MessageInteraction.js</a>, <a href="structures_MessageInteraction.js.html#line68">line 68</a>
+        <a href="structures_ModalInteraction.js.html">structures/ModalInteraction.js</a>, <a href="structures_ModalInteraction.js.html#line47">line 47</a>
     </li></ul></dd>
     
 
@@ -977,13 +915,13 @@
 
         
             
-<h4 class="name" id="id"><span class="type-signature"></span>id<span class="type-signature"></span></h4>
+<h4 class="name" id="fields"><span class="type-signature"></span>fields<span class="type-signature"></span></h4>
 
 
 
 
 <div class="description">
-    Gets the id of the message interaction
+    Gets the fields of the modal interaction
 </div>
 
 
@@ -1021,7 +959,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_MessageInteraction.js.html">structures/MessageInteraction.js</a>, <a href="structures_MessageInteraction.js.html#line79">line 79</a>
+        <a href="structures_ModalInteraction.js.html">structures/ModalInteraction.js</a>, <a href="structures_ModalInteraction.js.html#line65">line 65</a>
     </li></ul></dd>
     
 
@@ -2568,161 +2506,6 @@
     <dd>
         
 <span class="param-type">Promise.&lt;(Boolean|Discord.Collection.&lt;Discord.Snowflake, Boolean>)></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="setID"><span class="type-signature">(private) </span>setID<span class="signature">(id)</span><span class="type-signature"> &rarr; {<a href="MessageInteraction.html">MessageInteraction</a>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Sets the id of the message interaction
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Discord.Snowflake</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_MessageInteraction.js.html">structures/MessageInteraction.js</a>, <a href="structures_MessageInteraction.js.html#line92">line 92</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="MessageInteraction.html">MessageInteraction</a></span>
 
 
     </dd>
