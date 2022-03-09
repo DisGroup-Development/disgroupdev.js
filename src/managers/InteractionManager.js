@@ -122,9 +122,9 @@ class InteractionManager extends Base {
 
             try {
 
-                await this.messages.deployAll();
-                await this.slashs.deployAll();
-                await this.users.deployAll();
+                await this.messages?.deployAll();
+                await this.slashs?.deployAll();
+                await this.users?.deployAll();
 
                 resolve(true);
 
@@ -197,12 +197,12 @@ class InteractionManager extends Base {
 
             try {
 
-                await this.buttons.loadAll();
-                await this.menus.loadAll();
-                await this.messages.loadAll();
-                await this.modals.loadAll();
-                await this.slashs.loadAll();
-                await this.users.loadAll();
+                await this.buttons?.loadAll();
+                await this.menus?.loadAll();
+                await this.messages?.loadAll();
+                await this.modals?.loadAll();
+                await this.slashs?.loadAll();
+                await this.users?.loadAll();
 
                 resolve(true);
 
@@ -259,12 +259,12 @@ class InteractionManager extends Base {
 
             try {
 
-                await this.buttons.reloadAll();
-                await this.menus.reloadAll();
-                await this.messages.reloadAll();
-                await this.modals.reloadAll();
-                await this.slashs.reloadAll();
-                await this.users.reloadAll();
+                await this.buttons?.reloadAll();
+                await this.menus?.reloadAll();
+                await this.messages?.reloadAll();
+                await this.modals?.reloadAll();
+                await this.slashs?.reloadAll();
+                await this.users?.reloadAll();
 
                 resolve(true);
 
@@ -310,12 +310,12 @@ class InteractionManager extends Base {
 
             try {
 
-                await this.buttons.unloadAll();
-                await this.menus.unloadAll();
-                await this.messages.unloadAll();
-                await this.modals.unloadAll();
-                await this.slashs.unloadAll();
-                await this.users.unloadAll();
+                await this.buttons?.unloadAll();
+                await this.menus?.unloadAll();
+                await this.messages?.unloadAll();
+                await this.modals?.unloadAll();
+                await this.slashs?.unloadAll();
+                await this.users?.unloadAll();
 
                 resolve(true);
 

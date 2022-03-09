@@ -9,7 +9,7 @@ class Badges extends null { }
  * @property {String} emoji The emoji
  * @property {String} id The id of the emoji
  * @property {String} name The name of the emoji
- * @property {String} url Theurl of the emoji
+ * @property {String} url The url of the emoji
  */
 
 /**

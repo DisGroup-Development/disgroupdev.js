@@ -26,8 +26,10 @@ module.exports = {
 
     Badges: require('./utils/Badges'),
     Colors: require('./utils/Colors'),
+    Emojis: require('./utils/Emojis'),
     Errors: require('./utils/Errors'),
     Logger: require('./utils/Logger'),
-    Partner: require('./utils/Partner')
+    Partner: require('./utils/Partner'),
+    Utilities: require('./utils/Utilities')
 
 }
