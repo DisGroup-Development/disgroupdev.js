@@ -46,7 +46,7 @@ client.login('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
 ---
 
 ## 📄 | Documentation
-The documentation is still 🚧 work in progress...
+The documentation to this module can be found [here](https://bit.ly/dgdjs-docs)!
 
 ---
 
