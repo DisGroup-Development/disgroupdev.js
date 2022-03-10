@@ -47,5 +47,5 @@
   },
   "type": "commonjs",
   "types": "./typings/index.d.ts",
-  "version": "1.0.6"
+  "version": "1.0.7"
 }

@@ -60,7 +60,7 @@ class SlashCommandManager extends Base {
 
                     if(!clientGuild) throw new Error(Errors.UNRESOLVABLE_GUILD)
 
-                    this.guilds.push(clientGuild);
+                    guilds.push(clientGuild);
 
                 }
 
