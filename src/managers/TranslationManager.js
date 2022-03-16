@@ -72,6 +72,10 @@ class TranslationManager {
 
         await I18Next.init({
 
+            backend: {
+                jsonIndent: 4,
+                loadPath: Path.resolve(this.options.locationTranslations, '/{{lng}}/{{ns}}.json')
+            },
             preload: totalLanguages,
             ns: namespaces,
             ...this.options.i18nextOptions
