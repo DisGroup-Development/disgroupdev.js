@@ -74,7 +74,7 @@ class TranslationManager {
 
             backend: {
                 jsonIndent: 4,
-                loadPath: Path.resolve(this.options.locationTranslations, '/{{lng}}/{{ns}}.json')
+                loadPath: Path.resolve(this.options.locationTranslations, './{{lng}}/{{ns}}.json')
             },
             preload: totalLanguages,
             ns: namespaces,
