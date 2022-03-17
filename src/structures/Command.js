@@ -32,11 +32,12 @@ class Command extends BaseCommand {
     /**
      * The constructor of the command
      * @param client {Discord.Client}
+     * @param manager {CommandManager}
      * @param data {CommandData}
      */
-    constructor(client, data = {}) {
+    constructor(client, manager, data = {}) {
 
-        super(client, data);
+        super(client, manager, data);
 
         /**
          * The raw data of the command

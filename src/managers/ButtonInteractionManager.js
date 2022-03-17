@@ -47,7 +47,7 @@ class ButtonInteractionManager extends Base {
                 /**
                  * @type {ButtonInteraction}
                  */
-                const buttonInteractionFile = new(require(path))(this.client);
+                const buttonInteractionFile = new(require(path))(this.client, this.manager);
 
                 buttonInteractionFile.setLocation(path);
 

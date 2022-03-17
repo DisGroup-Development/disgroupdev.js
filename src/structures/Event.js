@@ -19,13 +19,21 @@ class Event extends Base {
     /**
      * The constructor of the event
      * @param client {Discord.Client}
+     * @param manager {EventManager}
      * @param data {EventData}
      */
-    constructor(client, data = {}) {
+    constructor(client, manager, data = {}) {
 
         super(client);
 
         if(!this?.execute || typeof this?.execute !== 'function') throw new Error(Errors.EVENT_NEEDS_EXECUTE);
+
+        /**
+         * The event manager
+         * @type {EventManager}
+         * @private
+         */
+        this.manager = manager;
 
         /**
          * The raw data of the event

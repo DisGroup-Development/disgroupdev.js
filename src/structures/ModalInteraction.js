@@ -33,11 +33,12 @@ class ModalInteraction extends BaseInteraction {
     /**
      * The constructor of the modal interaction
      * @param client {Discord.Client}
+     * @param manager {ModalInteractionManager}
      * @param data {ModalInteractionData}
      */
-    constructor(client, data = {}) {
+    constructor(client, manager, data = {}) {
 
-        super(client, data);
+        super(client, manager, data);
 
         /**
          * The raw data of the modal interaction

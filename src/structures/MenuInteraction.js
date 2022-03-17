@@ -37,11 +37,12 @@ class MenuInteraction extends BaseInteraction {
     /**
      * The constructor of the menu interaction
      * @param client {Discord.Client}
+     * @param manager {MenuInteractionManager}
      * @param data {MenuInteractionData}
      */
-    constructor(client, data = {}) {
+    constructor(client, manager, data = {}) {
 
-        super(client, data);
+        super(client, manager, data);
 
         /**
          * The raw data of the menu interaction

@@ -47,7 +47,7 @@ class ModalInteractionManager extends Base {
                 /**
                  * @type {ModalInteraction}
                  */
-                const modalInteractionFile = new(require(path))(this.client);
+                const modalInteractionFile = new(require(path))(this.client, this.manager);
 
                 modalInteractionFile.setLocation(path);
 

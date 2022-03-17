@@ -35,11 +35,12 @@ class MessageInteraction extends BaseInteraction {
     /**
      * The constructor of the message interaction
      * @param client {Discord.Client}
+     * @param manager {MessageInteractionManager}
      * @param data {MessageInteractionData}
      */
-    constructor(client, data = {}) {
+    constructor(client, manager, data = {}) {
 
-        super(client, data);
+        super(client, manager, data);
 
         /**
          * The raw data of the message interaction

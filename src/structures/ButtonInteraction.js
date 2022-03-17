@@ -37,11 +37,12 @@ class ButtonInteraction extends BaseInteraction {
     /**
      * The constructor of the button interaction
      * @param client {Discord.Client}
+     * @param manager {ButtonInteractionManager}
      * @param data {ButtonInteractionData}
      */
-    constructor(client, data = {}) {
+    constructor(client, manager, data = {}) {
 
-        super(client, data);
+        super(client, manager, data);
 
         /**
          * The raw data of the button interaction

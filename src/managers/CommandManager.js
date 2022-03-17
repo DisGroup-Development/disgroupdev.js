@@ -101,7 +101,7 @@ class CommandManager extends Base {
                 /**
                  * @type {Command}
                  */
-                const commandFile = new(require(path))(this.client);
+                const commandFile = new(require(path))(this.client, this);
 
                 commandFile.setLocation(path);
 

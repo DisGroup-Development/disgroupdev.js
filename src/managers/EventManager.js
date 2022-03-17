@@ -97,7 +97,7 @@ class EventManager extends Base {
                 /**
                  * @type {Event}
                  */
-                const eventFile = new(require(path))(this.client);
+                const eventFile = new(require(path))(this.client, this);
 
                 eventFile.setLocation(path);
 

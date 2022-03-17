@@ -164,7 +164,7 @@ class SlashCommandManager extends Base {
                 /**
                  * @type {SlashCommand}
                  */
-                const slashCommandFile = new(require(path))(this.client);
+                const slashCommandFile = new(require(path))(this.client, this.manager);
 
                 slashCommandFile.setLocation(path);
 

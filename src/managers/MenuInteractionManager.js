@@ -47,7 +47,7 @@ class MenuInteractionManager extends Base {
                 /**
                  * @type {MenuInteraction}
                  */
-                const menuInteractionFile = new(require(path))(this.client);
+                const menuInteractionFile = new(require(path))(this.client, this.manager);
 
                 menuInteractionFile.setLocation(path);
 

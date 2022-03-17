@@ -164,7 +164,7 @@ class MessageInteractionManager extends Base {
                 /**
                  * @type {MessageInteraction}
                  */
-                const messageInteractionFile = new(require(path))(this.client);
+                const messageInteractionFile = new(require(path))(this.client, this.manager);
 
                 messageInteractionFile.setLocation(path);
 

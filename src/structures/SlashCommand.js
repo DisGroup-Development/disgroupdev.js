@@ -38,11 +38,12 @@ class SlashCommand extends BaseInteraction {
     /**
      * The constructor of the slash command
      * @param client {Discord.Client}
+     * @param manager {SlashCommandManager}
      * @param data {SlashCommandData}
      */
-    constructor(client, data = {}) {
+    constructor(client, manager, data = {}) {
 
-        super(client, data);
+        super(client, manager, data);
 
         /**
          * The raw data of the slash command
