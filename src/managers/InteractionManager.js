@@ -62,7 +62,7 @@ class InteractionManager extends Base {
          * @type {?MessageInteractionManager}
          * @private
          */
-        this._message = ( options?.locationModals ? new MessageInteractionManager(client, this) : null );
+        this._message = ( options?.locationMessages ? new MessageInteractionManager(client, this) : null );
 
         /**
          * The ModalInteractionManager

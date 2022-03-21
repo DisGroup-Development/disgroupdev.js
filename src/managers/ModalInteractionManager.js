@@ -34,6 +34,40 @@ class ModalInteractionManager extends Base {
     }
 
     /**
+     * Gets a modal interaction
+     * @param {String} name The name of the modal interaction
+     * @returns {?ModalInteraction}
+     */
+    get(name) {
+
+        const clientCommand = this._modalInteractions.get(name);
+
+        return clientCommand ?? null;
+
+    }
+
+    /**
+     * Checks if there is any modal interaction with a specific name
+     * @param {String} name The name of the modal interaction
+     * @returns {Boolean}
+     */
+    has(name) {
+
+        return this._modalInteractions.has(name);
+
+    }
+
+    /**
+     * Lists all modal interactions
+     * @returns {ModalInteraction[]}
+     */
+    list() {
+
+        return this._modalInteractions.toJSON();
+
+    }
+
+    /**
      * Load a specific modal interaction
      * @param {String} path The path of the modal interaction
      * @returns {Promise<Boolean|Error>}

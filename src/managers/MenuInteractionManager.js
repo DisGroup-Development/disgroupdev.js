@@ -34,6 +34,40 @@ class MenuInteractionManager extends Base {
     }
 
     /**
+     * Gets a menu interaction
+     * @param {String} name The name of the menu interaction
+     * @returns {?MenuInteraction}
+     */
+    get(name) {
+
+        const clientMenuInteraction = this._menuInteractions.get(name);
+
+        return clientMenuInteraction ?? null;
+
+    }
+
+    /**
+     * Checks if there is any menu interaction with a specific name
+     * @param {String} name The name of the menu interaction
+     * @returns {Boolean}
+     */
+    has(name) {
+
+        return this._menuInteractions.has(name);
+
+    }
+
+    /**
+     * Lists all menu interactions
+     * @returns {MenuInteraction[]}
+     */
+    list() {
+
+        return this._menuInteractions.toJSON();
+
+    }
+
+    /**
      * Load a specific menu interaction
      * @param {String} path The path of the menu interaction
      * @returns {Promise<Boolean|Error>}

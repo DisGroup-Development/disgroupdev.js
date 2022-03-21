@@ -11,7 +11,7 @@ const Discord = require('discord.js');
  * @property {?String} category The name of the category of the base interaction (Will be set automatically)
  * @property {?Number} cooldown The cooldown in seconds of the base interaction (Default: 5)
  * @property {?String} dirname The dirname of the base interaction (Will be set automatically)
- * @property {?Boolean} ephemeral If the base interaction is ephermeral reply only (Default: false)
+ * @property {?Boolean} ephemeral If the base interaction is ephemeral reply only (Default: false)
  * @property {?String} location The location of the base interaction (Will be set automatically)
  * @property {?Boolean} betaOnly If the base interaction is beta only (Default: false)
  * @property {?Array<Discord.TextBasedChannelTypes>} channelOnly An array of all channels which the base interaction can be executed (Default: ALL)

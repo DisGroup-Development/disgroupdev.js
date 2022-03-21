@@ -34,6 +34,40 @@ class ButtonInteractionManager extends Base {
     }
 
     /**
+     * Gets a button interaction
+     * @param {String} name The name of the button interaction
+     * @returns {?ButtonInteraction}
+     */
+    get(name) {
+
+        const clientMessageInteraction = this._buttonInteractions.get(name);
+
+        return clientMessageInteraction ?? null;
+
+    }
+
+    /**
+     * Checks if there is any button interaction with a specific name
+     * @param {String} name The name of the button interaction
+     * @returns {Boolean}
+     */
+    has(name) {
+
+        return this._buttonInteractions.has(name);
+
+    }
+
+    /**
+     * Lists all button interactions
+     * @returns {ButtonInteraction[]}
+     */
+    list() {
+
+        return this._buttonInteractions.toJSON();
+
+    }
+
+    /**
      * Load a specific button interaction
      * @param {String} path The path of the button interaction
      * @returns {Promise<Boolean|Error>}
