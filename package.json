@@ -27,8 +27,8 @@
     "node": ">=16.9.0"
   },
   "files": [
-    "src/",
-    "typings/"
+    "src",
+    "typings"
   ],
   "homepage": "https://bit.ly/dgdjs-docs",
   "keywords": [
