@@ -1,5 +1,6 @@
 module.exports = {
 
+    BackUpManager: require('./managers/BackUpManager'),
     ButtonInteractionManager: require('./managers/ButtonInteractionManager'),
     CommandManager: require('./managers/CommandManager'),
     EventManager: require('./managers/EventManager'),
@@ -8,9 +9,11 @@ module.exports = {
     MessageInteractionManager: require('./managers/MessageInteractionManager'),
     ModalInteractionManager: require('./managers/ModalInteractionManager'),
     SlashCommandManager: require('./managers/SlashCommandManager'),
+    TempChannelManager: require('./managers/TempChannelManager'),
     TranslationManager: require('./managers/TranslationManager'),
     UserInteractionManager: require('./managers/UserInteractionManager'),
 
+    BackUp: require('./structures/BackUp'),
     Base: require('./structures/Base'),
     BaseCommand: require('./structures/BaseCommand'),
     BaseInteraction: require('./structures/BaseInteraction'),
