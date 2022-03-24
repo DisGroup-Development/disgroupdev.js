@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Partner</title>
+    <title>JSDoc: Class: BackUp</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Partner</h1>
+    <h1 class="page-title">Class: BackUp</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Partner<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>BackUp<span class="signature">(client, manager, data)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Contains various color data for DisGroup Development partners</div>
+            <div class="class-description">The backup</div>
         
     
 </header>
@@ -45,19 +45,113 @@
     
 
     
-    <h4 class="name" id="Partner"><span class="type-signature"></span>new Partner<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="BackUp"><span class="type-signature"></span>new BackUp<span class="signature">(client, manager, data)</span><span class="type-signature"></span></h4>
     
 
     
 
 
 
+<div class="description">
+    The constructor for the backup
+</div>
 
 
 
 
 
 
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>client</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>manager</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">BackUpManager</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The manager of the backup</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#BackUpData">BackUpData</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The data of the backup</td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -93,7 +187,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="utils_Partner.js.html">utils/Partner.js</a>, <a href="utils_Partner.js.html#line5">line 5</a>
+        <a href="structures_BackUp.js.html">structures/BackUp.js</a>, <a href="structures_BackUp.js.html#line104">line 104</a>
     </li></ul></dd>
     
 
@@ -127,17 +221,6 @@
     </div>
 
     
-        <h3 class="subsection-title">Extends</h3>
-
-        
-
-
-    <ul>
-        <li>null</li>
-    </ul>
-
-
-    
 
     
 
@@ -154,16 +237,26 @@
 
         
             
-<h4 class="name" id=".KERNELHOST"><span class="type-signature">(static) </span>KERNELHOST<span class="type-signature"></span></h4>
+<h4 class="name" id="_data"><span class="type-signature">(private) </span>_data<span class="type-signature"> :<a href="global.html#BackUpData">BackUpData</a></span></h4>
 
 
 
 
 <div class="description">
-    KernelHost
+    The raw data of the backup
 </div>
 
 
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="global.html#BackUpData">BackUpData</a></span>
+
+
+        </li>
+    </ul>
 
 
 
@@ -198,7 +291,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="utils_Partner.js.html">utils/Partner.js</a>, <a href="utils_Partner.js.html#line44">line 44</a>
+        <a href="structures_BackUp.js.html">structures/BackUp.js</a>, <a href="structures_BackUp.js.html#line131">line 131</a>
     </li></ul></dd>
     
 
@@ -216,13 +309,13 @@
 
         
             
-<h4 class="name" id=".LARAGAMING"><span class="type-signature">(static) </span>LARAGAMING<span class="type-signature"></span></h4>
+<h4 class="name" id="client"><span class="type-signature"></span>client<span class="type-signature"></span></h4>
 
 
 
 
 <div class="description">
-    Lara_Gaming
+    The client
 </div>
 
 
@@ -260,7 +353,79 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="utils_Partner.js.html">utils/Partner.js</a>, <a href="utils_Partner.js.html#line88">line 88</a>
+        <a href="structures_BackUp.js.html">structures/BackUp.js</a>, <a href="structures_BackUp.js.html#line118">line 118</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="manager"><span class="type-signature"></span>manager<span class="type-signature"> :BackUpManager</span></h4>
+
+
+
+
+<div class="description">
+    The manager of the backup
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">BackUpManager</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="structures_BackUp.js.html">structures/BackUp.js</a>, <a href="structures_BackUp.js.html#line124">line 124</a>
     </li></ul></dd>
     
 

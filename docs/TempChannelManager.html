@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Event</title>
+    <title>JSDoc: Class: TempChannelManager</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Event</h1>
+    <h1 class="page-title">Class: TempChannelManager</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Event<span class="signature">(client, manager, data)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>TempChannelManager<span class="signature">(client)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">The base of all event</div>
+            <div class="class-description">The temp channel manager for creating and managing temporary voice channels</div>
         
     
 </header>
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="Event"><span class="type-signature"></span>new Event<span class="signature">(client, manager, data)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="TempChannelManager"><span class="type-signature"></span>new TempChannelManager<span class="signature">(client)</span><span class="type-signature"></span></h4>
     
 
     
@@ -53,7 +53,7 @@
 
 
 <div class="description">
-    The constructor of the event
+    The constructor
 </div>
 
 
@@ -94,57 +94,6 @@
 
             <td class="type">
             
-                
-<span class="param-type">Discord.Client</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>manager</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="EventManager.html">EventManager</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>data</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#EventData">EventData</a></span>
-
-
-            
             </td>
 
             
@@ -192,7 +141,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_Event.js.html">structures/Event.js</a>, <a href="structures_Event.js.html#line17">line 17</a>
+        <a href="managers_TempChannelManager.js.html">managers/TempChannelManager.js</a>, <a href="managers_TempChannelManager.js.html#line29">line 29</a>
     </li></ul></dd>
     
 
@@ -226,17 +175,6 @@
     </div>
 
     
-        <h3 class="subsection-title">Extends</h3>
-
-        
-
-
-    <ul>
-        <li><a href="Base.html">Base</a></li>
-    </ul>
-
-
-    
 
     
 
@@ -253,13 +191,13 @@
 
         
             
-<h4 class="name" id="data"><span class="type-signature">(private) </span>data<span class="type-signature"> :<a href="global.html#EventData">EventData</a></span></h4>
+<h4 class="name" id="_channels"><span class="type-signature">(private) </span>_channels<span class="type-signature"> :Array.&lt;<a href="global.html#TempChannelManagerData">TempChannelManagerData</a>></span></h4>
 
 
 
 
 <div class="description">
-    The raw data of the event
+    A map of all temp voice channels
 </div>
 
 
@@ -268,7 +206,7 @@
     <ul>
         <li>
             
-<span class="param-type"><a href="global.html#EventData">EventData</a></span>
+<span class="param-type">Array.&lt;<a href="global.html#TempChannelManagerData">TempChannelManagerData</a>></span>
 
 
         </li>
@@ -307,7 +245,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_Event.js.html">structures/Event.js</a>, <a href="structures_Event.js.html#line43">line 43</a>
+        <a href="managers_TempChannelManager.js.html">managers/TempChannelManager.js</a>, <a href="managers_TempChannelManager.js.html#line50">line 50</a>
     </li></ul></dd>
     
 
@@ -325,13 +263,13 @@
 
         
             
-<h4 class="name" id="enabled"><span class="type-signature"></span>enabled<span class="type-signature"></span></h4>
+<h4 class="name" id="client"><span class="type-signature"></span>client<span class="type-signature"></span></h4>
 
 
 
 
 <div class="description">
-    Checks if the event is enabled
+    The discord client
 </div>
 
 
@@ -369,313 +307,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_Event.js.html">structures/Event.js</a>, <a href="structures_Event.js.html#line52">line 52</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="location"><span class="type-signature"></span>location<span class="type-signature"></span></h4>
-
-
-
-
-<div class="description">
-    Gets the location of the event
-</div>
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_Event.js.html">structures/Event.js</a>, <a href="structures_Event.js.html#line63">line 63</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="manager"><span class="type-signature">(private) </span>manager<span class="type-signature"> :<a href="EventManager.html">EventManager</a></span></h4>
-
-
-
-
-<div class="description">
-    The event manager
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><a href="EventManager.html">EventManager</a></span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_Event.js.html">structures/Event.js</a>, <a href="structures_Event.js.html#line36">line 36</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="name"><span class="type-signature"></span>name<span class="type-signature"></span></h4>
-
-
-
-
-<div class="description">
-    Gets the name of the event
-</div>
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_Event.js.html">structures/Event.js</a>, <a href="structures_Event.js.html#line74">line 74</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="once"><span class="type-signature"></span>once<span class="type-signature"></span></h4>
-
-
-
-
-<div class="description">
-    Checks if the event is once
-</div>
-
-
-
-
-
-
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    
-
-<table class="props">
-    <thead>
-    <tr>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Boolean</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_Event.js.html">structures/Event.js</a>, <a href="structures_Event.js.html#line85">line 85</a>
+        <a href="managers_TempChannelManager.js.html">managers/TempChannelManager.js</a>, <a href="managers_TempChannelManager.js.html#line43">line 43</a>
     </li></ul></dd>
     
 
@@ -703,7 +335,7 @@
     
 
     
-    <h4 class="name" id="setLocation"><span class="type-signature"></span>setLocation<span class="signature">(path)</span><span class="type-signature"> &rarr; {String}</span></h4>
+    <h4 class="name" id="_handleChannelDelete"><span class="type-signature">(async, private) </span>_handleChannelDelete<span class="signature">(channel)</span><span class="type-signature"></span></h4>
     
 
     
@@ -711,7 +343,7 @@
 
 
 <div class="description">
-    Sets the location of the event
+    Handles a channel delete
 </div>
 
 
@@ -747,15 +379,10 @@
 
         <tr>
             
-                <td class="name"><code>path</code></td>
+                <td class="name"><code>channel</code></td>
             
 
             <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
             
             </td>
 
@@ -763,7 +390,7 @@
 
             
 
-            <td class="description last">The new path of the event</td>
+            <td class="description last"></td>
         </tr>
 
     
@@ -804,7 +431,312 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_Event.js.html">structures/Event.js</a>, <a href="structures_Event.js.html#line97">line 97</a>
+        <a href="managers_TempChannelManager.js.html">managers/TempChannelManager.js</a>, <a href="managers_TempChannelManager.js.html#line62">line 62</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="_handleVoiceStateUpdate"><span class="type-signature">(async, private) </span>_handleVoiceStateUpdate<span class="signature">(oldState, newState)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Handles a voice state update
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>oldState</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>newState</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="managers_TempChannelManager.js.html">managers/TempChannelManager.js</a>, <a href="managers_TempChannelManager.js.html#line90">line 90</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="register"><span class="type-signature"></span>register<span class="signature">(channelId, options)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Registers a channel
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>channelId</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#TempChannelManagerRegisterOptions">TempChannelManagerRegisterOptions</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The options for the temp create channel</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="managers_TempChannelManager.js.html">managers/TempChannelManager.js</a>, <a href="managers_TempChannelManager.js.html#line154">line 154</a>
     </li></ul></dd>
     
 
@@ -840,7 +772,160 @@
     </dt>
     <dd>
         
-<span class="param-type">String</span>
+<span class="param-type">Boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="unregister"><span class="type-signature"></span>unregister<span class="signature">(channelId)</span><span class="type-signature"> &rarr; {Boolean|null}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Unregisters a channel
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>channelId</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="managers_TempChannelManager.js.html">managers/TempChannelManager.js</a>, <a href="managers_TempChannelManager.js.html#line176">line 176</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Boolean</span>
+|
+
+<span class="param-type">null</span>
 
 
     </dd>
