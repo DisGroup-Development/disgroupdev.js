@@ -39,23 +39,188 @@ class BackUpManager extends Base {
     }
 
     /**
+     * @param {import('discord.js').Guild} guild
+     * @private
+     */
+    async _getGuildBans(guild) {
+
+        const guildBans = [];
+
+        (await guild?.bans?.fetch()).forEach((guildBan) => {
+
+            guildBans.push({ id: guildBan?.user?.id, reason: guildBan?.reason ?? ' ' });
+
+        });
+
+        return guildBans;
+
+    }
+
+    /**
+     * @param {import('discord.js').Guild} guild
+     * @param {Number} messagesPerChannel
+     * @private
+     */
+    async _getGuildChannels(guild, messagesPerChannel) {
+
+        /**
+         * @param {import('discord.js').GuildChannel} channel
+         */
+        function fetchChannelPermissions(channel) {
+
+            const channelPermissions = [];
+
+            channel.permissionOverwrites.cache.forEach // In Development @XEfnexX
+
+            return channelPermissions;
+
+        }
+
+        const guildChannelsData = { categories: [], others: [] };
+
+        (await guild?.channels?.fetch()).sort((a, b) => b.position - a.position).forEach((guildChannels) => {
+
+            if(guildChannels.type === 'GUILD_CATEGORY') {
+
+                for(const guildChannelCategorie of guildChannels) {
+
+                    const guildChannelsCategorieData = {
+
+                        children: [],
+                        name: guildChannelCategorie?.name,
+                        permissions: fetchChannelPermissions(guildChannelCategorie)
+
+                    }
+
+                    guildChannelsData.categories.push(guildChannelsCategorieData);
+
+                }
+
+            }
+
+        });
+
+        return guildChannels;
+
+    }
+
+    /**
+     * @param {import('discord.js').Guild} guild
+     * @private
+     */
+    async _getGuildEmojis(guild) {
+
+        const guildEmojis = [];
+
+        (await guild?.emojis?.fetch()).forEach((guildEmoji) => {
+
+            guildEmojis.push({ name: guildEmoji?.name, url: guildEmoji?.url });
+
+        });
+
+        return guildEmojis;
+
+    }
+
+    /**
+     * @param {import('discord.js').Guild} guild
+     * @private
+     */
+    async _getGuildRoles(guild) {
+
+        const guildRoles = [];
+
+        (await guild?.roles?.fetch()).sort((a, b) => b.position - a.position).forEach((guildRole) => {
+
+            if(guildRole.managed) return;
+
+            guildRoles.push({ color: guildRole?.hexColor, hoist: guildRole?.hoist, isEveryone: guild.id === guildRole.id, mentionable: guildRole?.mentionable, name: guildRole?.name, permissions: guildRole?.permissions?.bitfield, position: guildRole?.position });
+
+        });
+
+        return guildRoles;
+
+    }
+
+    /**
+     * @param {import('discord.js').Guild} guild
+     * @private
+     */
+    async _getGuildStickers(guild) {
+
+        const guildStickers = [];
+
+        (await guild?.stickers?.fetch()).forEach((guildSticker) => {
+
+            guildStickers.push({ description: guildSticker?.description, name: guildSticker?.name, tags: guildSticker?.tags, url: guildSticker?.url });
+
+        });
+
+        return guildStickers;
+
+    }
+
+    /**
      * @typedef {Object} BackUpCreateOptions
      * @property {?String} backupId The id of the backup (Only set if you want to overwride a existing backup)
-     * @property {?Array<String>} doNotBackup The things the backup should not include ("bans", "channels", "emojis" and "roles")
+     * @property {?Array<String>} doNotBackup The things the backup should not include ("bans", "channels", "emojis", "roles" and "stickers")
      * @property {?Number} messagesPerChannel The amount of messages that should be saved (Default: 10)
      */
 
     /**
      * Creates a backup
      * @param {import('discord.js').Guild} guild 
+     * @param {import('discord.js').User} user
      * @param {BackUpCreateOptions} options
-     * @returns {BackUp} 
+     * @returns {Promise<BackUp|Error} 
      */
-    create(guild, options = { backupId: null, doNotBackup: [], messagesPerChannel: 10 }) {
+    create(guild, user, options = { backupId: null, doNotBackup: [], messagesPerChannel: 10 }) {
 
         return new Promise(async (resolve, reject) => {
 
+            try {
 
+                const backup = new BackUp(this.client, this, {
+
+                    afk: { enabled: ( guild.afkChannelId ? true : false ), id: guild?.afkChannelId ?? ' ', name: guild.channels.resolve(guild?.afkChannelId)?.name ?? ' ', timeout: guild?.afkTimeout ?? 0 },
+                    bannerURL: guild?.bannerURL() ?? ' ',
+                    bans: options.doNotBackup.includes('bans') ? [] : await this._getGuildBans(guild),
+                    channels: options.doNotBackup.includes('channels') ? [] : await this._getGuildChannels(guild, options.messagesPerChannel),
+                    createdTimestamp: Date.now(),
+                    creatorId: user?.id ?? ' ',
+                    defaultMessageNotificationLevel: guild?.defaultMessageNotificationLevel ?? 'ONLY_MENTIONS',
+                    description: guild?.description ?? ' ',
+                    discoverySplashURL: guild?.discoverySplashURL() ?? ' ',
+                    emojis: options.doNotBackup.includes('emojis') ? [] : await this._getGuildEmojis(guild),
+                    explicitContentFilterLevel: guild?.explicitContentFilter ?? 'ALL_MEMBERS',
+                    guildId: guild?.id ?? ' ',
+                    iconURL: guild?.iconURL() ?? ' ',
+                    id: Discord.SnowflakeUtil.generate(Date.now()),
+                    isCommunity: ( guild?.features?.includes('COMMUNITY') ? true : false ),
+                    locale: guild?.preferredLocale ?? 'en-US',
+                    name: guild?.name,
+                    nsfwLevel: guild?.nsfwLevel ?? 'SAFE',
+                    progressBar: guild?.premiumProgressBarEnabled ?? false,
+                    roles: options.doNotBackup.includes('roles') ? [] : await this._getGuildRoles(guild),
+                    rulesChannel: { id: guild?.rulesChannelId ?? ' ', name: guild.channels.resolve(guild?.rulesChannelId)?.name ?? ' ' },
+                    splashURL: guild?.splashURL() ?? ' ',
+                    stickers: options.doNotBackup.includes('stickers') ? [] : await this._getGuildStickers(guild),
+                    systemChannel: { enabled: ( guild?.systemChannelId ? true : false ), flags: guild?.systemChannelFlags ?? [], id: guild?.systemChannelId ?? ' ', name: guild.channels.resolve(guild?.systemChannelId)?.name ?? ' ' },
+                    updateChannel: { id: guild?.publicUpdatesChannelId ?? ' ', name: guild.channels.resolve(guild?.publicUpdatesChannelId)?.name ?? ' ' },
+                    verificationLevel: guild?.verificationLevel ?? 'LOW',
+                    widget: { enabled: guild?.widgetEnabled ?? false, id: guild?.widgetChannelId, name: guild.channels.resolve(guild?.widgetChannelId)?.name ?? ' ' }
+
+                });
+
+                await require('node:fs').writeFile(`${this.options.backupLocations}${require('path').sep}${backup.id}`, JSON.stringify(backup.data, null, 4), 'utf-8');
+
+                resolve(backup);
+
+            } catch (err) {
+
+                reject(err);
+
+            }
 
         });
 

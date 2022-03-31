@@ -1,6 +1,6 @@
 module.exports = {
 
-    BackUpManager: require('./managers/BackUpManager'),
+    // BackUpManager: require('./managers/BackUpManager'), | In development @XEfnexX
     ButtonInteractionManager: require('./managers/ButtonInteractionManager'),
     CommandManager: require('./managers/CommandManager'),
     EventManager: require('./managers/EventManager'),
@@ -10,6 +10,7 @@ module.exports = {
     ModalInteractionManager: require('./managers/ModalInteractionManager'),
     SlashCommandManager: require('./managers/SlashCommandManager'),
     TempChannelManager: require('./managers/TempChannelManager'),
+    TextTicketManager: require('./managers/TextTicketManager'),
     TranslationManager: require('./managers/TranslationManager'),
     UserInteractionManager: require('./managers/UserInteractionManager'),
 
@@ -25,6 +26,7 @@ module.exports = {
     ModalInteraction: require('./structures/ModalInteraction'),
     Route: require('./structures/Route'),
     SlashCommand: require('./structures/SlashCommand'),
+    TextTicket: require('./structures/TextTicket'),
     UserInteraction: require('./structures/UserInteraction'),
 
     Badges: require('./utils/Badges'),

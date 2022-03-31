@@ -14,6 +14,8 @@ module.exports = {
 
     INTERACTION_NOT_EXISTS: "A interaction with that name doesn't exist",
 
+    INVALID_CATEGORY: "The category must be a guild category id",
+
     INVALID_CLIENT: "An invalid client was provided",
 
     INVALID_DATE: "An invalid date was provided",
@@ -22,7 +24,15 @@ module.exports = {
 
     INVALID_SOURCE: "An invalid source was provided",
 
+    INVALID_TICKET: "An invalid ticket was provided",
+
     LOGGER_FAILED: "There was an error while logging",
+
+    MISSING_OPTIONS: "There are options missing. Please provide all required options. For more information, see the documentation",
+
+    NOT_READY: "The instance you are trying to reach is not ready",
+
+    NOT_RESOLVABLE: "The provided value cannot be resolved",
 
     UNRESOLVABLE_GUILD: "The id of a guild is not resolvable",
 

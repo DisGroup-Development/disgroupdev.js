@@ -1,5 +1,6 @@
 /**
  * @typedef {Object} BackUpAFKData
+ * @property {Boolean} enabled If the afk channel enabled
  * @property {?import('discord.js').Snowflake} id The id of the afk channel
  * @property {?String} name The name of the afk channel
  * @property {Number} timeout The timeout for the afk channel
@@ -42,7 +43,9 @@
 
 /**
  * @typedef {Object} BackUpStickerData
+ * @property {String} description The description of the sticker
  * @property {String} name The name of the sticker
+ * @property {Array<String>} tags The tags of the sticker
  * @property {String} url The url of the sticker
  */
 
@@ -160,6 +163,17 @@ class BackUp {
     get updateChannel() { return this._data?.updateChannel }
     get verificationLevel() { return this._data?.verificationLevel }
     get widget() { return this._data?.widget }
+
+    /**
+     * Deletes the backup
+     * @returns {Promise<Boolean>}
+     */
+    delete() {
+
+        return this.manager.delete(this.id);
+
+    }
+
 }
 
 module.exports = BackUp;
