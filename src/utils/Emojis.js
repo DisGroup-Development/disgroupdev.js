@@ -139,6 +139,20 @@ Emojis.CROSS = {
 }
 
 /**
+ * The discord logo emoji
+ * @memberof Emojis
+ * @type {EmojiData}
+ */
+Emojis.DISCORD = {
+
+    emoji: "<:D_Discord:913324894941483018>",
+    id: "913324894941483018",
+    name: "D_Discord",
+    url: "https://cdn.discordapp.com/emojis/913324894941483018.webp"
+
+}
+
+/**
  * The DisGroupDev logo emoji
  * @memberof Emojis
  * @type {EmojiData}
