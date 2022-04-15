@@ -11,6 +11,10 @@ const statDirectory = require('node:util').promisify(require('node:fs').stat);
  * @property {String} locationTranslations The location of the translations
  */
 
+/**
+ * The translation manager.
+ * @class
+ */
 class TranslationManager {
 
         /**
@@ -172,4 +176,4 @@ class TranslationManager {
         }
 }
 
-export default TranslationManager;
+module.exports = TranslationManager;
