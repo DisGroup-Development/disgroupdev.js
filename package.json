@@ -1,35 +1,29 @@
 {
-  "name": "disgroupdev.js",
-  "version": "2.0.0-dev",
+  "author": "DisGroup Development",
+  "bugs": {
+    "url": "https://github.com/DisGroup-Development/disgroupdev.js/issues"
+  },
   "description": "A 🔥 powerful NodeJS module from DisGroup Development for managing data and managers.",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "engines": {
+    "node": ">=16.9.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/DisGroup-Development/disgroupdev.js.git"
-  },
+  "homepage": "https://js.disgroupdev.de",
   "keywords": [
     "disgroupdev",
     "DisGroup-Development",
     "discord"
   ],
-  "author": "DisGroup Development",
-  "bugs": {
-    "url": "https://github.com/DisGroup-Development/disgroupdev.js/issues"
+  "main": "lib/index.js",
+  "name": "disgroupdev.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DisGroup-Development/disgroupdev.js.git"
   },
-  "homepage": "https://js.disgroupdev.de",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "2.0.0-dev",
   "workspaces": [
     "packages/*"
-  ],
-  "engines": {
-    "node": ">=16.9.0"
-  },
-  "exports": {
-
-    "./translations": {
-      "require": "./packages/translations"
-    }
-
-  }
+  ]
 }

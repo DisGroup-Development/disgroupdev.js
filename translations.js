@@ -1,1 +1,0 @@
-module.exports = require('./packages/translations/src/index');
