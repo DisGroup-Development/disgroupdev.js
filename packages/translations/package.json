@@ -1,6 +1,6 @@
 {
   "name": "@disgroupdev/translations",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "A 🔥 powerful NodeJS module from DisGroup Development for managing translations.",
   "main": "./src/index.js",
   "scripts": {

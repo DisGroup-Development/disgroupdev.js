@@ -25,5 +25,12 @@
   ],
   "engines": {
     "node": ">=16.9.0"
+  },
+  "exports": {
+
+    "translations": {
+      "require": "./packages/translations"
+    }
+
   }
 }
