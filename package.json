@@ -28,7 +28,7 @@
   },
   "exports": {
 
-    "translations": {
+    "./translations": {
       "require": "./packages/translations"
     }
 
