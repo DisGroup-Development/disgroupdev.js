@@ -25,5 +25,8 @@
   "version": "2.0.0-dev",
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "i18next": "^21.6.16"
+  }
 }
