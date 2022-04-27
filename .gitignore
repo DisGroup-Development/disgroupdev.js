@@ -105,3 +105,6 @@ dist
 
 # IntelliJ IDEA
 .idea/
+
+# Auth
+auth.js

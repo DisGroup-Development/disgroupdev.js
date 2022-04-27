@@ -3,6 +3,14 @@
   "bugs": {
     "url": "https://github.com/DisGroup-Development/disgroupdev.js/issues"
   },
+  "contributors": [
+    "XEfnexX"
+  ],
+  "dependencies": {
+    "discord.js": "^13.6.0",
+    "i18next": "^21.6.16",
+    "i18next-fs-backend": "^1.1.4"
+  },
   "description": "A 🔥 powerful NodeJS module from DisGroup Development for managing data and managers.",
   "engines": {
     "node": ">=16.9.0"
@@ -22,14 +30,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "2.0.0-dev",
-  "workspaces": [
-    "packages/*"
-  ],
-  "dependencies": {
-    "discord.js": "^13.6.0",
-    "i18next": "^21.6.16",
-    "i18next-fs-backend": "^1.1.4"
-  },
-  "types": "typings/index.d.ts"
+  "types": "typings/index.d.ts",
+  "version": "2.0.0-dev"
 }
