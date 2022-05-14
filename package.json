@@ -9,7 +9,9 @@
   "dependencies": {
     "discord.js": "^13.6.0",
     "i18next": "^21.6.16",
-    "i18next-fs-backend": "^1.1.4"
+    "i18next-fs-backend": "^1.1.4",
+    "luxon": "^2.4.0",
+    "node-fetch": "^3.2.4"
   },
   "description": "A 🔥 powerful NodeJS module from DisGroup Development for managing data and managers.",
   "engines": {
