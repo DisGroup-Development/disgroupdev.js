@@ -7,7 +7,9 @@
     "XEfnexX"
   ],
   "dependencies": {
-    "discord.js": "^13.6.0",
+    "chalk": "^5.0.1",
+    "discord-api-types": "^0.32.1",
+    "discord.js": "^13.7.0",
     "i18next": "^21.6.16",
     "i18next-fs-backend": "^1.1.4",
     "luxon": "^2.4.0",
@@ -23,7 +25,7 @@
     "DisGroup-Development",
     "discord"
   ],
-  "main": "lib/index.js",
+  "main": "./lib/index.js",
   "name": "disgroupdev.js",
   "repository": {
     "type": "git",
@@ -32,6 +34,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "types": "typings/index.d.ts",
+  "types": "./typings/index.d.ts",
   "version": "2.0.0-dev"
 }
