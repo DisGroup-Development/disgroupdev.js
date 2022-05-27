@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: managers/TranslationManager.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: managers/TranslationManager.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const i18next = require('i18next');
+const i18nextBackend = require('i18next-fs-backend');
+
+const { DisGroupDevError, Messages } = require('../errors/DisGroupDevError');
+
+const readDirectory = require('node:util').promisify(require('node:fs').readdir);
+const statDirectory = require('node:util').promisify(require('node:fs').stat);
+
+/**
+ * @typedef {Object} TranslationManagerOptions
+ * @property {String} defaultLanguage The default language to use if no language is specified.
+ * @property {import('i18next').InitOptions} i18nextOptions Additional options to pass to i18next.
+ * @property {String} locationTranslations The location of the translations
+ */
+
+/**
+ * The translation manager.
+ * @class
+ */
+class TranslationManager {
+
+        /**
+         * The constructor of the TranslationManager class.
+         * @param {TranslationManagerOptions} options
+         */
+        constructor(options) {
+
+                if(!options.locationTranslations || typeof options.locationTranslations !== 'string') throw new DisGroupDevError(Messages.INVALID_LOCATION);
+
+                /**
+                 * The namespaces of the translations.
+                 * @type {?[]}
+                 * @private
+                 */
+                this._namespaces = null;
+
+                /**
+                 * The map with all translations.
+                 * @type {?Map&lt;String, Function>}
+                 * @private
+                 */
+                this._translations = null;
+
+                /**
+                 * The options of the TranslationManager.
+                 * @type {TranslationManagerOptions}
+                 * @public
+                 */
+                this.options = options;
+
+                /**
+                 * If the translations are loaded.
+                 * @type {Boolean}
+                 * @public
+                 */
+                this.isReady = false;
+
+                this._init().then(() => this.isReady = true);
+
+        }
+
+        /**
+         * Inits the TranslationManager.
+         * @returns {Promise&lt;void>}
+         * @private
+         */
+        async _init() {
+
+                const { namespaces, totalLanguages } = await this._loadAll();
+
+                i18next.use(new i18nextBackend());
+
+                await i18next.init({
+
+                        backend: {
+
+                                jsonIndent: 4,
+                                loadPath: require('node:path').resolve(this.options.locationTranslations, './{{lng}}/{{ns}}.json')
+
+                        },
+                        fallbackLng: this.options.defaultLanguage ?? 'en-US',
+                        initImmediate: false,
+                        interpolation: { escapeValue: false },
+                        load: 'all',
+                        ns: namespaces,
+                        preload: totalLanguages,
+                        ...this.options.i18nextOptions
+
+                });
+
+                this._namespaces = namespaces;
+                this._translations = new Map(totalLanguages.map(language => [language, i18next.getFixedT(language)]));
+
+        }
+
+        /**
+         * @typedef {Object} LoadAllOptions
+         * @property {String} [folderName] The name of the folder
+         * @property {String} [translationDir] The location of the translations
+         * @property {Array} [namespaces] The namespaces
+         */
+
+        /**
+         * Loads all translations
+         * @param {LoadAllOptions} options The options for loading all translations
+         * @returns {Promise&lt;Object&lt;Array&lt;Set>, Array>>}
+         * @private
+         */
+        async _loadAll(options = { folderName: '', namespaces: [], translationDir: this.options.locationTranslations }) {
+
+                const translationDirectory = await readDirectory(options.translationDir);
+
+                let totalLanguages = [];
+
+                for(const translationFile of translationDirectory) {
+
+                        const translationStat = await statDirectory(require('node:path').resolve(options.translationDir, translationFile));
+
+                        if(translationStat.isDirectory()) {
+
+                                const isLanguage = translationFile.includes('-');
+
+                                if(isLanguage) totalLanguages.push(translationFile);
+
+                                const translationFolder = await this._loadAll({
+
+                                        folderName: isLanguage ? '' : `${translationFile}/`,
+                                        namespaces: options.namespaces,
+                                        translationDir: require('node:path').join(options.translationDir, translationFile)
+
+                                });
+
+                                options.namespaces = translationFolder.namespaces;
+
+                        } else options.namespaces.push(`${options.folderName}${translationFile.substring(0, translationFile.length - 5)}`);
+
+                }
+
+                return { namespaces: [...new Set(options.namespaces)], totalLanguages };
+
+        }
+
+        /**
+         * Deletes a translation
+         * @param {String} name The name of the translation
+         * @returns {Map&lt;String, Function>|null}
+         * @public
+         */
+        delete(name) {
+
+                if(typeof name !== 'string') throw new DisGroupDevError(Messages.NOT_A_STRING(name));
+
+                if(!this._translations.has(name)) return null;
+
+                this._translations.delete(name);
+
+                return this._translations;
+
+        }
+
+        /**
+         * Gets a translation
+         * @param {String} name The name of the translation
+         * @returns {Function|null}
+         * @public
+         */
+        get(name) {
+
+                if(typeof name !== 'string') throw new DisGroupDevError(Messages.NOT_A_STRING(name));
+
+                return this._translations.get(name) ?? null;
+
+        }
+
+        /**
+         * Checks if a translation exists
+         * @param {String} name The name of the translation
+         * @returns {Boolean}
+         * @public
+         */
+        has(name) {
+
+                if(typeof name !== 'string') throw new DisGroupDevError(Messages.NOT_A_STRING(name));
+
+                return this._translations.has(name);
+
+        }
+
+        /**
+         * Lists all translations
+         * @returns {Function[]|null}
+         * @public
+         */
+        list() {
+
+                return [...this._translations.values()];
+
+        }
+
+        /**
+         * Sets a translation
+         * @param {String} name The name of the translation
+         * @param {Function} value The function of the translation (&lt;i18next>.getFixedT)
+         * @returns {?Map&lt;String, Function>}
+         * @public
+         */
+        set(name, value) {
+
+                if(typeof name !== 'string') throw new DisGroupDevError(Messages.NOT_A_STRING(name));
+                if(typeof value !== 'function') throw new DisGroupDevError(Messages.NOT_A_FUNCTION(value));
+
+                return this._translations.set(name, value);
+
+        }
+
+        /**
+         * Gets the number of translations
+         * @returns {Number}
+         * @public
+         */
+        size() {
+
+                return this._translations.size;
+
+        }
+
+        /**
+         * @typedef {Object} TranslateOptions
+         * @property {String} [language] The language
+         */
+
+        /**
+         * Translates a string
+         * @param {String} key The key
+         * @param {Object} [args={}] The args
+         * @param {TranslateOptions} options The options
+         * @returns {String|null}
+         * @public
+         */
+        translate(key, args = {}, options = { language: this.options.defaultLanguage }) {
+
+                if(!this.isReady) throw new DisGroupDevError(Messages.NOT_READY);
+
+                return this.get(options.language)(key, args) ?? null;
+
+        }
+}
+
+module.exports = TranslationManager;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Badges.html">Badges</a></li><li><a href="BaseComponent.html">BaseComponent</a></li><li><a href="BaseInteraction.html">BaseInteraction</a></li><li><a href="Colors.html">Colors</a></li><li><a href="ContextInteraction.html">ContextInteraction</a></li><li><a href="ContextInteractionManager.html">ContextInteractionManager</a></li><li><a href="DisGroupDevError.html">DisGroupDevError</a></li><li><a href="Emojis.html">Emojis</a></li><li><a href="Event.html">Event</a></li><li><a href="EventManager.html">EventManager</a></li><li><a href="InteractionManager.html">InteractionManager</a></li><li><a href="Logger.html">Logger</a></li><li><a href="Partner.html">Partner</a></li><li><a href="SlashCommand.html">SlashCommand</a></li><li><a href="SlashCommandInteractionManager.html">SlashCommandInteractionManager</a></li><li><a href="StatusPageChecker.html">StatusPageChecker</a></li><li><a href="TranslationManager.html">TranslationManager</a></li><li><a href="Utilities.html">Utilities</a></li></ul><h3>Events</h3><ul><li><a href="EventManager.html#event:eventLoad">eventLoad</a></li><li><a href="EventManager.html#event:eventReload">eventReload</a></li><li><a href="EventManager.html#event:eventUnload">eventUnload</a></li><li><a href="InteractionManager.html#event:slashCommandDeploy">slashCommandDeploy</a></li><li><a href="InteractionManager.html#event:slashCommandLoad">slashCommandLoad</a></li><li><a href="InteractionManager.html#event:slashCommandReload">slashCommandReload</a></li><li><a href="InteractionManager.html#event:slashCommandUnload">slashCommandUnload</a></li><li><a href="StatusPageChecker.html#event:heartbeat">heartbeat</a></li><li><a href="StatusPageChecker.html#event:incidentCreate">incidentCreate</a></li><li><a href="StatusPageChecker.html#event:incidentUpdate">incidentUpdate</a></li></ul><h3><a href="global.html">Global</a></h3>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Fri May 27 2022 17:37:59 GMT+0200 (Mitteleuropäische Sommerzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

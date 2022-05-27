@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: managers/interaction/ContextInteractionManager.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: managers/interaction/ContextInteractionManager.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const { Client, Collection, Guild } = require('discord.js');
+const ContextInteraction = require('../../structures/interaction/ContextInteraction');
+
+const { DisGroupDevError, Messages } = require('../../errors/DisGroupDevError');
+
+const readDirectory = require('node:util').promisify(require('node:fs').readdir);
+const statDirectory = require('node:util').promisify(require('node:fs').stat);
+
+/**
+ * The context interaction manager.
+ * @class
+ */
+class ContextInteractionManager {
+
+    /**
+     * The constructor of the context interaction manager class.
+     * @param {Client} client
+     * @param {InteractionManager} interactionManager
+     */
+    constructor(client, interactionManager) {
+
+        /**
+         * The cache with all context interactions
+         * @type {Collection&lt;String, ContextInteraction>}
+         * @public
+         */
+        this.cache = new Collection();
+
+        /**
+         * The client
+         * @type {Client}
+         * @public
+         */
+        this.client = client;
+
+        /**
+         * The interaction manager
+         * @type {InteractionManager}
+         * @public
+         */
+        this.manager = interactionManager;
+
+    }
+
+    /**
+     * Deploys one specific context interaction
+     * @param {ContextInteraction} slashCommand
+     * @returns {Promise&lt;Boolean|DisGroupDevError>}
+     * @public
+     */
+    deploy(slashCommand) {
+
+        return new Promise(async (resolve, reject) => {
+
+            if(!slashCommand instanceof SlashCommand) reject(new DisGroupDevError(Messages.NOT_INSTANCE_OF(slashCommand, SlashCommand)));
+            if(!slashCommand.deployEnabled) reject(new DisGroupDevError(Messages.NOT_ENABLED));
+
+            try {
+
+                /** @type {Guild[]} */
+                let guilds = [];
+
+                for(const guildId of this.manager.options.guildIDs) {
+
+                    const guild = this.client.guilds.resolve(guildId);
+
+                    if(!guild || !guild instanceof Guild) reject(new DisGroupDevError(Messages.UNRESOLVABLE_GUILD(guildId)));
+
+                    guilds.push(guild);
+
+                }
+
+                if(slashCommand.guildOnly) {
+
+                    for(const guild of guilds) {
+
+                        const guildCommand = await guild.commands.create({ name: slashCommand.name, description: slashCommand.description, type: "CHAT_INPUT", options: slashCommand.options, defaultPermission: slashCommand.defaultEnabled });
+
+                        slashCommand.id = guildCommand.id;
+
+                    }
+
+                } else {
+
+                    const applicationCommand = await this.client.application.commands.create({ name: slashCommand.name, description: slashCommand.description, type: "CHAT_INPUT", options: slashCommand.options, defaultPermission: slashCommand.defaultEnabled });
+
+                    slashCommand.id = applicationCommand.id;
+
+                }
+
+            } catch(e) {
+
+                reject(new DisGroupDevError(e));
+
+            }
+
+
+        });
+
+    }
+
+
+    /**
+     * Deploys all context interactions
+     * @returns {Promise&lt;Boolean|DisGroupDevError>}
+     * @public
+     */
+    deployAll() {
+
+        return new Promise(async (resolve, reject) => {
+
+            try {
+
+                for(const slashCommand of this.cache) {
+
+                    await this.deploy(slashCommand);
+
+                }
+
+                resolve(true);
+
+            } catch(e) {
+
+                reject(new DisGroupDevError(e));
+
+            }
+
+        });
+
+    }
+
+    /**
+     * Loads one specific context interaction
+     * @param {String} path
+     * @returns {Promise&lt;Boolean|DisGroupDevError>}
+     * @public
+     */
+    load(path) {
+
+        return new Promise(async (resolve, reject) => {
+
+            try {
+
+                /** @type {SlashCommand} */
+                const slashCommand = new(require(path))(this.client, this.manager);
+
+                slashCommand.location = path;
+
+                if(slashCommand.init &amp;&amp; typeof slashCommand.init === 'function') slashCommand.init();
+                if(!slashCommand.execute || typeof slashCommand.execute !== 'function') reject(new DisGroupDevError(Messages.INVALID_EXECUTE(slashCommand.name)));
+
+                this.cache.set(slashCommand.name, slashCommand);
+
+                resolve(true);
+
+
+            } catch (e) {
+
+                reject(new DisGroupDevError(e));
+
+            }
+
+        });
+
+    }
+
+    /**
+     * Loads all context interactions
+     * @returns {Promise&lt;Boolean|DisGroupDevError>}
+     * @public
+     */
+    loadAll() {
+
+        return new Promise(async (resolve, reject) => {
+
+            try {
+
+                const slashCommandDirectory = await readDirectory(this.manager.options.locationSlashCommands);
+
+                for(const slashCommandDirectoryCategoryOrFile of slashCommandDirectory) {
+
+                    const slashCommandDirectoryStat = await statDirectory(require('node:path').resolve(this.manager.options.locationSlashCommands, slashCommandDirectoryCategoryOrFile));
+
+                    if(slashCommandDirectoryStat.isDirectory()) {
+
+                        const slashCommandDirectoryCategory = await readDirectory(require('node:paht').resolve(this.manager.options.locationSlashCommands, slashCommandDirectoryCategoryOrFile));
+
+                        for(const slashCommandDirectoryCategoryFile of slashCommandDirectoryCategory) {
+
+                            await this.load(`${this.manager.options.locationSlashCommands}/${slashCommandDirectoryCategoryOrFile}/${slashCommandDirectoryCategoryFile}`);
+
+                        }
+
+                    } else if(slashCommandDirectoryStat.isFile()) {
+
+                        await this.load(`${this.manager.options.locationSlashCommands}/${slashCommandDirectoryCategoryOrFile}`);
+
+                    }
+
+                }
+
+                resolve(true);
+
+            } catch (e) {
+
+                reject(new DisGroupDevError(e));
+
+            }
+
+        });
+
+    }
+
+    /**
+     * Reloads one specific context interaction
+     * @param {String} name
+     * @returns {Promise&lt;Boolean|DisGroupDevError>}
+     * @public
+     */
+    reload(name) {
+
+        return new Promise(async (resolve, reject) => {
+
+            if(!this.cache.has(name)) reject(new DisGroupDevError(Messages.COMMAND_NOT_FOUND(name)));
+
+            const { location } = require(this.cache.get(name));
+
+            try {
+
+                await this.unload(name);
+                await this.load(location);
+
+                resolve(true);
+
+            } catch(e) {
+
+                reject(new DisGroupDevError(e));
+
+            }
+
+        });
+
+    }
+
+    /**
+     * Reloads all specific context interactions
+     * @returns {Promise&lt;Boolean|DisGroupDevError>}
+     * @public
+     */
+    reloadAll() {
+
+        return new Promise(async (resolve, reject) => {
+
+            try {
+
+                for(const slashCommand of this.cache) {
+
+                    await this.unload(slashCommand.name);
+
+                }
+
+                await this.loadAll();
+
+                resolve(true);
+
+            } catch(e) {
+
+                reject(new DisGroupDevError(e));
+
+            }
+
+        });
+
+    }
+
+    /**
+     * Unloads one specific context interaction
+     * @param {String} name
+     * @returns {Promise&lt;Boolean|DisGroupDevError>}
+     * @public
+     */
+    unload(name) {
+
+        return new Promise(async (resolve, reject) => {
+
+            if(!this.cache.has(name)) reject(new DisGroupDevError(Messages.COMMAND_NOT_FOUND(name)));
+
+            try {
+
+                delete require.cache[require.resolve(this.cache.get(name).location)];
+
+                this.cache.delete(name);
+
+                resolve(true);
+
+            } catch(e) {
+
+                reject(new DisGroupDevError(e));
+
+            }
+
+        });
+
+    }
+
+    /**
+     * Unloads all context interactions
+     * @returns {Promise&lt;Boolean|DisGroupDevError>}
+     * @public
+     */
+    unloadAll() {
+
+        return new Promise(async (resolve, reject) => {
+
+            try {
+
+                for(const slashCommand of this.cache) {
+
+                    await this.unload(slashCommand.name);
+
+                }
+
+                resolve(true);
+
+            } catch (e) {
+
+                reject(new DisGroupDevError(e));
+
+            }
+
+        });
+
+    }
+
+}
+
+module.exports = ContextInteractionManager;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Badges.html">Badges</a></li><li><a href="BaseComponent.html">BaseComponent</a></li><li><a href="BaseInteraction.html">BaseInteraction</a></li><li><a href="Colors.html">Colors</a></li><li><a href="ContextInteraction.html">ContextInteraction</a></li><li><a href="ContextInteractionManager.html">ContextInteractionManager</a></li><li><a href="DisGroupDevError.html">DisGroupDevError</a></li><li><a href="Emojis.html">Emojis</a></li><li><a href="Event.html">Event</a></li><li><a href="EventManager.html">EventManager</a></li><li><a href="InteractionManager.html">InteractionManager</a></li><li><a href="Logger.html">Logger</a></li><li><a href="Partner.html">Partner</a></li><li><a href="SlashCommand.html">SlashCommand</a></li><li><a href="SlashCommandInteractionManager.html">SlashCommandInteractionManager</a></li><li><a href="StatusPageChecker.html">StatusPageChecker</a></li><li><a href="TranslationManager.html">TranslationManager</a></li><li><a href="Utilities.html">Utilities</a></li></ul><h3>Events</h3><ul><li><a href="EventManager.html#event:eventLoad">eventLoad</a></li><li><a href="EventManager.html#event:eventReload">eventReload</a></li><li><a href="EventManager.html#event:eventUnload">eventUnload</a></li><li><a href="InteractionManager.html#event:slashCommandDeploy">slashCommandDeploy</a></li><li><a href="InteractionManager.html#event:slashCommandLoad">slashCommandLoad</a></li><li><a href="InteractionManager.html#event:slashCommandReload">slashCommandReload</a></li><li><a href="InteractionManager.html#event:slashCommandUnload">slashCommandUnload</a></li><li><a href="StatusPageChecker.html#event:heartbeat">heartbeat</a></li><li><a href="StatusPageChecker.html#event:incidentCreate">incidentCreate</a></li><li><a href="StatusPageChecker.html#event:incidentUpdate">incidentUpdate</a></li></ul><h3><a href="global.html">Global</a></h3>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Fri May 27 2022 17:37:59 GMT+0200 (Mitteleuropäische Sommerzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

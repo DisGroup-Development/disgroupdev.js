@@ -1,0 +1,2 @@
+const { InteractionManager } = require('../lib');
+
