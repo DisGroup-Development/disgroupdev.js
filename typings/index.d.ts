@@ -1,6 +1,16 @@
-import { ApplicationCommandOptionData, ApplicationCommandType, Client, Collection, PermissionString, Snowflake, TextBasedChannelTypes, Webhook } from 'discord.js';
+import {
+    ApplicationCommandOptionData,
+    ApplicationCommandType,
+    Client,
+    Collection, MessageEmbed,
+    PermissionString,
+    Snowflake,
+    TextBasedChannelTypes,
+    WebhookClient
+} from 'discord.js';
 import { LocalizationMap } from 'discord-api-types/v10';
 import { EventEmitter } from 'node:events';
+import { InitOptions } from 'i18next';
 
 export class BaseComponent {
 
@@ -125,9 +135,9 @@ export class ContextInteraction extends BaseInteraction {
     public manager: ContextInteractionManager;
     public data: ContextInteractionData;
 
-    public load(): Promise<Boolean|DisGroupDevError>;
-    public reload(): Promise<Boolean|DisGroupDevError>;
-    public unload(): Promise<Boolean|DisGroupDevError>;
+    public load(): Promise<Boolean | DisGroupDevError>;
+    public reload(): Promise<Boolean | DisGroupDevError>;
+    public unload(): Promise<Boolean | DisGroupDevError>;
 
 }
 
@@ -144,14 +154,14 @@ export class ContextInteractionManager {
     public client: Client;
     public manager: InteractionManager;
 
-    public deploy(contextInteraction: ContextInteraction): Promise<Boolean|DisGroupDevError>;
-    public deployAll(): Promise<Boolean|DisGroupDevError>;
-    public load(path: String): Promise<Boolean|DisGroupDevError>;
-    public loadAll(): Promise<Boolean|DisGroupDevError>;
-    public reload(name: String): Promise<Boolean|DisGroupDevError>;
-    public reloadAll(): Promise<Boolean|DisGroupDevError>;
-    public unload(name: String): Promise<Boolean|DisGroupDevError>;
-    public unloadAll(): Promise<Boolean|DisGroupDevError>;
+    public deploy(contextInteraction: ContextInteraction): Promise<Boolean | DisGroupDevError>;
+    public deployAll(): Promise<Boolean | DisGroupDevError>;
+    public load(path: String): Promise<Boolean | DisGroupDevError>;
+    public loadAll(): Promise<Boolean | DisGroupDevError>;
+    public reload(name: String): Promise<Boolean | DisGroupDevError>;
+    public reloadAll(): Promise<Boolean | DisGroupDevError>;
+    public unload(name: String): Promise<Boolean | DisGroupDevError>;
+    public unloadAll(): Promise<Boolean | DisGroupDevError>;
 
 }
 
@@ -165,13 +175,13 @@ export class Event {
     public data: EventData;
 
     public get enabled(): Boolean;
-    public load(): Promise<Boolean|DisGroupDevError>;
+    public load(): Promise<Boolean | DisGroupDevError>;
     public get location(): String;
     public set location(path: String);
     public get name(): String | null;
     public get once(): Boolean;
-    public reload(): Promise<Boolean|DisGroupDevError>;
-    public unload(): Promise<Boolean|DisGroupDevError>;
+    public reload(): Promise<Boolean | DisGroupDevError>;
+    public unload(): Promise<Boolean | DisGroupDevError>;
     public toJSON(): EventData;
 
 }
@@ -192,12 +202,12 @@ export class EventManager extends EventEmitter {
     public client: Client;
     public options: EventManagerOptions;
 
-    public load(path: String): Promise<Boolean|DisGroupDevError>;
-    public loadAll(): Promise<Boolean|DisGroupDevError>;
-    public reload(name: String): Promise<Boolean|DisGroupDevError>;
-    public reloadAll(): Promise<Boolean|DisGroupDevError>;
-    public unload(name: String): Promise<Boolean|DisGroupDevError>;
-    public unloadAll(): Promise<Boolean|DisGroupDevError>;
+    public load(path: String): Promise<Boolean | DisGroupDevError>;
+    public loadAll(): Promise<Boolean | DisGroupDevError>;
+    public reload(name: String): Promise<Boolean | DisGroupDevError>;
+    public reloadAll(): Promise<Boolean | DisGroupDevError>;
+    public unload(name: String): Promise<Boolean | DisGroupDevError>;
+    public unloadAll(): Promise<Boolean | DisGroupDevError>;
 
     public on<K extends keyof EventManagerEvents>(event: K, listener: (...args: EventManagerEvents[K]) => Awaitable<void>): this;
     public on<S extends string | symbol>(
@@ -250,7 +260,7 @@ export class Logger {
 
     public constructor(options: LoggerOptions);
     public options: LoggerOptions;
-    public webhooks: Webhook[];
+    public webhooks: WebhookClient[];
 
     private _getTime(date: Date): Date;
     private _log(strings: { consoleString: String, webhookString: String }): void;
@@ -278,7 +288,7 @@ export interface LoggerOptions {
 
     icons: LoggerIcons,
     name: String,
-    webhooks: Webhook[]
+    webhooks: WebhookClient[]
 
 }
 
@@ -339,16 +349,16 @@ export class SlashCommand extends BaseInteraction {
     public data: SlashCommandData;
 
     public get defaultEnabled(): Boolean;
-    public deploy(): Promise<Boolean|DisGroupDevError>;
+    public deploy(): Promise<Boolean | DisGroupDevError>;
     public get deployEnabled(): Boolean;
     public get description(): String;
     public get descriptionLocalizations(): LocalizationMap;
     public get hidden(): Boolean;
-    public load(): Promise<Boolean|DisGroupDevError>;
+    public load(): Promise<Boolean | DisGroupDevError>;
     public get options(): Array<ApplicationCommandOptionData>;
     public get usage(): String;
-    public reload(): Promise<Boolean|DisGroupDevError>;
-    public unload(): Promise<Boolean|DisGroupDevError>;
+    public reload(): Promise<Boolean | DisGroupDevError>;
+    public unload(): Promise<Boolean | DisGroupDevError>;
 
 }
 
@@ -372,14 +382,180 @@ export class SlashCommandInteractionManager {
     public client: Client;
     public manager: InteractionManager;
 
-    public deploy(slashCommand: SlashCommand): Promise<Boolean|DisGroupDevError>;
-    public deployAll(): Promise<Boolean|DisGroupDevError>;
-    public load(path: String): Promise<Boolean|DisGroupDevError>;
-    public loadAll(): Promise<Boolean|DisGroupDevError>;
-    public reload(name: String): Promise<Boolean|DisGroupDevError>;
-    public reloadAll(): Promise<Boolean|DisGroupDevError>;
-    public unload(name: String): Promise<Boolean|DisGroupDevError>;
-    public unloadAll(): Promise<Boolean|DisGroupDevError>;
+    public deploy(slashCommand: SlashCommand): Promise<Boolean | DisGroupDevError>;
+    public deployAll(): Promise<Boolean | DisGroupDevError>;
+    public load(path: String): Promise<Boolean | DisGroupDevError>;
+    public loadAll(): Promise<Boolean | DisGroupDevError>;
+    public reload(name: String): Promise<Boolean | DisGroupDevError>;
+    public reloadAll(): Promise<Boolean | DisGroupDevError>;
+    public unload(name: String): Promise<Boolean | DisGroupDevError>;
+    public unloadAll(): Promise<Boolean | DisGroupDevError>;
+
+}
+
+export class StatusPageChecker extends EventEmitter {
+
+    public constructor(options: StatusPageCheckerOptions);
+    public incidents: Collection<String, StatusPageCheckerIncidentData>;
+    public options: StatusPageCheckerOptions;
+    public webhook: WebhookClient;
+
+    private _fetch():  Promise<any>;
+    private _generateEmbed(): Promise<MessageEmbed>;
+    private _loadIncidents(): Promise<Boolean | DisGroupDevError>;
+    private _loadRawIncidents(): Promise<Array<StatusPageCheckerIncidentData>>;
+    private _save(): Boolean;
+    public check(): Promise<Boolean | DisGroupDevError>;
+    public updateIncident(incident: StatusPageCheckerIncidentDataRaw, messageId: String | null): Promise<Boolean | DisGroupDevError>;
+
+    public on<K extends keyof StatusPageCheckerEvents>(event: K, listener: (...args: StatusPageCheckerEvents[K]) => Awaitable<void>): this;
+    public on<S extends string | symbol>(
+        event: Exclude<S, keyof StatusPageCheckerEvents>,
+        listener: (...args: any[]) => Awaitable<void>,
+    ): this;
+
+    public once<K extends keyof StatusPageCheckerEvents>(event: K, listener: (...args: StatusPageCheckerEvents[K]) => Awaitable<void>): this;
+    public once<S extends string | symbol>(
+        event: Exclude<S, keyof StatusPageCheckerEvents>,
+        listener: (...args: any[]) => Awaitable<void>,
+    ): this;
+
+    public emit<K extends keyof StatusPageCheckerEvents>(event: K, ...args: StatusPageCheckerEvents[K]): boolean;
+    public emit<S extends string | symbol>(event: Exclude<S, keyof StatusPageCheckerEvents>, ...args: unknown[]): boolean;
+
+    public off<K extends keyof StatusPageCheckerEvents>(event: K, listener: (...args: StatusPageCheckerEvents[K]) => Awaitable<void>): this;
+    public off<S extends string | symbol>(
+        event: Exclude<S, keyof StatusPageCheckerEvents>,
+        listener: (...args: any[]) => Awaitable<void>,
+    ): this;
+
+    public removeAllListeners<K extends keyof StatusPageCheckerEvents>(event?: K): this;
+    public removeAllListeners<S extends string | symbol>(event?: Exclude<S, keyof StatusPageCheckerEvents>): this;
+
+}
+
+export interface StatusPageCheckerEvents {
+
+    incidentCheck: [];
+    incidentCreate: [incident: IncidentData];
+    incidentUpdate: [incidentData: IncidentData];
+
+}
+
+export interface StatusPageCheckerOptions {
+
+    checkInterval: Number;
+    colors: StatusPageCheckerOptionsColors;
+    storage: String;
+    url: String;
+    webhook: WebhookClient;
+
+}
+
+export interface StatusPageCheckerOptionsColors {
+
+    BLACK: String;
+    GREEN: String;
+    ORANGE: String;
+    RED: String;
+    YELLOW: String;
+
+}
+
+export interface StatusPageCheckerIncidentData {
+
+    id: String;
+    lastUpdate: String;
+    messageId: Snowflake | null;
+    resolved: Boolean;
+
+}
+
+export interface StatusPageCheckerIncidentDataRaw {
+
+    components: Array<StatusPageCheckerIncidentDataRawComponent>;
+    created_at: String;
+    id: String;
+    impact: 'none' | 'minor' | 'major' | 'critical';
+    incident_updates: Array<StatusPageCheckerIncidentDataRawIncidentUpdate>;
+    monitoring_at: String | null;
+    name: String;
+    page_id: String;
+    resolved_at: String | null;
+    shortlink: String;
+    started_at: String;
+    status: 'investigating' | 'identified' | 'monitoring' | 'resolved' | 'postmortem';
+    updated_at: String | null;
+
+}
+
+export interface StatusPageCheckerIncidentDataRawComponent {
+
+    created_at: String;
+    description: String;
+    group: Boolean;
+    group_id: String | null;
+    id: String;
+    only_show_if_degraded: Boolean;
+    page_id: String;
+    position: Number;
+    showcase: Boolean;
+    start_date: String | null;
+    status: String;
+    updated_at: String;
+
+}
+
+export interface StatusPageCheckerIncidentDataRawComponentUpdate {
+
+    code: String;
+    name: String;
+    new_status: String;
+    old_status: String;
+
+}
+
+export interface StatusPageCheckerIncidentDataRawUpdate {
+
+    affected_components: Array<StatusPageCheckerIncidentDataRawComponentUpdate>;
+    body: String;
+    created_at: String;
+    custom_tweet: String | null;
+    deliver_notifications: Boolean;
+    display_at: String;
+    id: String;
+    incident_id: String;
+    status: String;
+    tweet_id: String | null;
+    update_at: String;
+
+}
+
+export class TranslationManager {
+
+    public constructor(options: TranslationMangerOptions);
+    private _namespaces: Array | null;
+    private _translations: Map<String, Function> | null;
+    public options: TranslationMangerOptions;
+    public isReady: Boolean;
+
+    private _init(): void;
+    private _loadAll(options: { folderName: String, namespaces: Array, translationDir: String }): Promise<Object<Array<Set>, Array>>;
+    public delete(name: String): Map<String, Function> | DisGroupDevError | null;
+    public get(name: String): Function | null | DisGroupDevError;
+    public has(name: String): Boolean | DisGroupDevError;
+    public list(): Array<Function>;
+    public set(name: String, value: Function): Map<String, Function> | DisGroupDevError;
+    public size(): Number;
+    public translate(key: String, args: Object, options: { language: String }): String | DisGroupDevError | null;
+
+}
+
+export interface TranslationMangerOptions {
+
+    defaultLanguage: String;
+    i18nextOptions: InitOptions;
+    locationTranslations: String;
 
 }
 
