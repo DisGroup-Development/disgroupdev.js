@@ -17,7 +17,9 @@
     "tslib": "^2.4.0"
   },
   "devDependencies": {
-    "typescript": "^4.7.2"
+    "clean-jsdoc-theme": "^3.3.4",
+    "jsdoc": "^3.6.10",
+    "typescript": "^4.6.4"
   },
   "description": "A 🔥 powerful NodeJS module from DisGroup Development for managing data and managers.",
   "engines": {
@@ -41,7 +43,7 @@
     "url": "git+https://github.com/DisGroup-Development/disgroupdev.js.git"
   },
   "scripts": {
-    "docs": "jsdoc lib/ -d docs/ -p -r --readme README.md",
+    "docs": "jsdoc -c jsdoc.json -R ./README.md && node ./scripts/generateCNAME.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "types": "./typings/index.d.ts",

@@ -31,22 +31,8 @@ npm install disgroupdev.js
 
 ---
 
-## 🔨 | Setup
-```javascript
-const discord = require('discord.js');
-const disgroupdev = require('disgroupdev.js');
-
-let client = new discord.Client({ ...options });
-
-client.interactions = new disgroupdev.InteractionManager(client, { ...options });
-
-client.login('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
-```
-
----
-
 ## 📄 | Documentation
-The documentation to this module can be found [here](https://bit.ly/dgdjs-docs)!
+The documentation to this module can be found [here](https://js.disgroupdev.de)!
 
 ---
 

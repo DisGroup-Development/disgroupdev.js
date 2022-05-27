@@ -1,39 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>JSDoc: Class: SlashCommand</title>
 
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Adding favicon -->
+    
+
+    <!-- Adding meta -->
+    
+
+    <!-- Adding external script-->
+    
+
+    <!-- Adding external style-->
+    
+
+    <!-- Adding scripts-->
+    
+
+    <!-- Adding style-->
+    
+
+    <!-- Adding overlay script-->
+    
+
+    <!-- Adding overlay style-->
+    
+
+
+    <title>
+      SlashCommand
+    </title>
+
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
-</head>
-
-<body>
-
-<div id="main">
-
-    <h1 class="page-title">Class: SlashCommand</h1>
-
+    <link type="text/css" rel="stylesheet" href="styles/third-party/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/third-party/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/reset.css">
+    <link type="text/css" rel="stylesheet" href="styles/clean-jsdoc-theme-base.css">
+    <link type="text/css" rel="stylesheet" href="styles/clean-jsdoc-theme-dark.css">
     
+    <svg aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    style="display:none">
+    <defs>
+        <symbol id="copy-icon" viewbox="0 0 488.3 488.3">
+            <g>
+                <path
+                    d="M314.25,85.4h-227c-21.3,0-38.6,17.3-38.6,38.6v325.7c0,21.3,17.3,38.6,38.6,38.6h227c21.3,0,38.6-17.3,38.6-38.6V124    C352.75,102.7,335.45,85.4,314.25,85.4z M325.75,449.6c0,6.4-5.2,11.6-11.6,11.6h-227c-6.4,0-11.6-5.2-11.6-11.6V124    c0-6.4,5.2-11.6,11.6-11.6h227c6.4,0,11.6,5.2,11.6,11.6V449.6z" />
+                <path
+                    d="M401.05,0h-227c-21.3,0-38.6,17.3-38.6,38.6c0,7.5,6,13.5,13.5,13.5s13.5-6,13.5-13.5c0-6.4,5.2-11.6,11.6-11.6h227    c6.4,0,11.6,5.2,11.6,11.6v325.7c0,6.4-5.2,11.6-11.6,11.6c-7.5,0-13.5,6-13.5,13.5s6,13.5,13.5,13.5c21.3,0,38.6-17.3,38.6-38.6    V38.6C439.65,17.3,422.35,0,401.05,0z" />
+            </g>
+        </symbol>
+        <symbol id='search-icon' viewBox="0 0 512 512">
+            <g>
+                <g>
+                    <path
+                        d="M225.474,0C101.151,0,0,101.151,0,225.474c0,124.33,101.151,225.474,225.474,225.474    c124.33,0,225.474-101.144,225.474-225.474C450.948,101.151,349.804,0,225.474,0z M225.474,409.323    c-101.373,0-183.848-82.475-183.848-183.848S124.101,41.626,225.474,41.626s183.848,82.475,183.848,183.848    S326.847,409.323,225.474,409.323z" />
+                </g>
+            </g>
+            <g>
+                <g>
+                    <path
+                        d="M505.902,476.472L386.574,357.144c-8.131-8.131-21.299-8.131-29.43,0c-8.131,8.124-8.131,21.306,0,29.43l119.328,119.328    c4.065,4.065,9.387,6.098,14.715,6.098c5.321,0,10.649-2.033,14.715-6.098C514.033,497.778,514.033,484.596,505.902,476.472z" />
+                </g>
+            </g>
+        </symbol>
+        <symbol id="down-icon" viewBox="0 0 16 16">
+            <path 
+                fill-rule="evenodd" 
+                clip-rule="evenodd" 
+                d="M12.7803 6.21967C13.0732 6.51256 13.0732 6.98744 12.7803 7.28033L8.53033 11.5303C8.23744 11.8232 7.76256 11.8232 7.46967 11.5303L3.21967 7.28033C2.92678 6.98744 2.92678 6.51256 3.21967 6.21967C3.51256 5.92678 3.98744 5.92678 4.28033 6.21967L8 9.93934L11.7197 6.21967C12.0126 5.92678 12.4874 5.92678 12.7803 6.21967Z"
+            >
+            </path>
+        </symbol>
+    </defs>
+</svg>
+  </head>
+
+  <body>
+
+    <nav class="navbar" id="navbar">
+      <div class="navbar-heading" id="navbar-heading"><a href="index.html"><h2 class="navbar-heading-text">Home</h2></a></div><div class="search-box" id="search-box"><div class="search-box-input-container"><input class="search-box-input" type="text" placeholder="Search..." id="search-box-input" /><svg class="search-icon" alt="search-icon"><use xlink:href="#search-icon"></use></svg></div><div class="search-item-container" id="search-item-container"><ul class="search-item-ul" id="search-item-ul"></ul></div></div><div class="sidebar-main-content" id="sidebar-main-content"><div class="accordion collapsed" id="7964782" > <h3 class="accordion-heading">Classes<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="Badges.html">Badges</a></li><li class="accordion collapsed child" id=9584090><div class="accordion-heading child"><a href="BaseComponent.html">BaseComponent</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="BaseComponent.html#toJSON">toJSON</a></li></ul></li><li class="accordion collapsed child" id=698490><div class="accordion-heading child"><a href="BaseInteraction.html">BaseInteraction</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="BaseInteraction.html#toJSON">toJSON</a></li></ul></li><li class="accordion-list" id=""><a href="Colors.html">Colors</a></li><li class="accordion collapsed child" id=495635><div class="accordion-heading child"><a href="ContextInteraction.html">ContextInteraction</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="ContextInteraction.html#load">load</a></li><li data-type='method'><a href="ContextInteraction.html#reload">reload</a></li><li data-type='method'><a href="ContextInteraction.html#unload">unload</a></li></ul></li><li class="accordion collapsed child" id=4039899><div class="accordion-heading child"><a href="ContextInteractionManager.html">ContextInteractionManager</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="ContextInteractionManager.html#deploy">deploy</a></li><li data-type='method'><a href="ContextInteractionManager.html#deployAll">deployAll</a></li><li data-type='method'><a href="ContextInteractionManager.html#load">load</a></li><li data-type='method'><a href="ContextInteractionManager.html#loadAll">loadAll</a></li><li data-type='method'><a href="ContextInteractionManager.html#reload">reload</a></li><li data-type='method'><a href="ContextInteractionManager.html#reloadAll">reloadAll</a></li><li data-type='method'><a href="ContextInteractionManager.html#unload">unload</a></li><li data-type='method'><a href="ContextInteractionManager.html#unloadAll">unloadAll</a></li></ul></li><li class="accordion-list" id=""><a href="DisGroupDevError.html">DisGroupDevError</a></li><li class="accordion-list" id=""><a href="Emojis.html">Emojis</a></li><li class="accordion collapsed child" id=9758793><div class="accordion-heading child"><a href="Event.html">Event</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Event.html#load">load</a></li><li data-type='method'><a href="Event.html#reload">reload</a></li><li data-type='method'><a href="Event.html#toJSON">toJSON</a></li><li data-type='method'><a href="Event.html#unload">unload</a></li></ul></li><li class="accordion collapsed child" id=3061064><div class="accordion-heading child"><a href="EventManager.html">EventManager</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="EventManager.html#load">load</a></li><li data-type='method'><a href="EventManager.html#loadAll">loadAll</a></li><li data-type='method'><a href="EventManager.html#reload">reload</a></li><li data-type='method'><a href="EventManager.html#reloadAll">reloadAll</a></li><li data-type='method'><a href="EventManager.html#unload">unload</a></li><li data-type='method'><a href="EventManager.html#unloadAll">unloadAll</a></li></ul></li><li class="accordion-list" id=""><a href="InteractionManager.html">InteractionManager</a></li><li class="accordion collapsed child" id=5260143><div class="accordion-heading child"><a href="Logger.html">Logger</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Logger.html#debug">debug</a></li><li data-type='method'><a href="Logger.html#error">error</a></li><li data-type='method'><a href="Logger.html#fail">fail</a></li><li data-type='method'><a href="Logger.html#info">info</a></li><li data-type='method'><a href="Logger.html#success">success</a></li><li data-type='method'><a href="Logger.html#warn">warn</a></li></ul></li><li class="accordion-list" id=""><a href="Partner.html">Partner</a></li><li class="accordion collapsed child" id=661290><div class="accordion-heading child"><a href="SlashCommand.html">SlashCommand</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="SlashCommand.html#deploy">deploy</a></li><li data-type='method'><a href="SlashCommand.html#load">load</a></li><li data-type='method'><a href="SlashCommand.html#reload">reload</a></li><li data-type='method'><a href="SlashCommand.html#toJSON">toJSON</a></li><li data-type='method'><a href="SlashCommand.html#unload">unload</a></li></ul></li><li class="accordion collapsed child" id=6483445><div class="accordion-heading child"><a href="SlashCommandInteractionManager.html">SlashCommandInteractionManager</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="SlashCommandInteractionManager.html#deploy">deploy</a></li><li data-type='method'><a href="SlashCommandInteractionManager.html#deployAll">deployAll</a></li><li data-type='method'><a href="SlashCommandInteractionManager.html#load">load</a></li><li data-type='method'><a href="SlashCommandInteractionManager.html#loadAll">loadAll</a></li><li data-type='method'><a href="SlashCommandInteractionManager.html#reload">reload</a></li><li data-type='method'><a href="SlashCommandInteractionManager.html#reloadAll">reloadAll</a></li><li data-type='method'><a href="SlashCommandInteractionManager.html#unload">unload</a></li><li data-type='method'><a href="SlashCommandInteractionManager.html#unloadAll">unloadAll</a></li></ul></li><li class="accordion collapsed child" id=3292120><div class="accordion-heading child"><a href="StatusPageChecker.html">StatusPageChecker</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="StatusPageChecker.html#check">check</a></li><li data-type='method'><a href="StatusPageChecker.html#updateIncident">updateIncident</a></li></ul></li><li class="accordion collapsed child" id=4837091><div class="accordion-heading child"><a href="TranslationManager.html">TranslationManager</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="TranslationManager.html#delete">delete</a></li><li data-type='method'><a href="TranslationManager.html#get">get</a></li><li data-type='method'><a href="TranslationManager.html#has">has</a></li><li data-type='method'><a href="TranslationManager.html#list">list</a></li><li data-type='method'><a href="TranslationManager.html#set">set</a></li><li data-type='method'><a href="TranslationManager.html#size">size</a></li><li data-type='method'><a href="TranslationManager.html#translate">translate</a></li></ul></li><li class="accordion collapsed child" id=2463163><div class="accordion-heading child"><a href="Utilities.html">Utilities</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Utilities.html#generateProgressBar">generateProgressBar</a></li><li data-type='method'><a href="Utilities.html#getReadableTime">getReadableTime</a></li></ul></li></ul> </div><div class="accordion collapsed" id="435069" > <h3 class="accordion-heading">Events<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="EventManager.html#event:eventLoad">eventLoad</a></li><li class="accordion-list" id=""><a href="EventManager.html#event:eventReload">eventReload</a></li><li class="accordion-list" id=""><a href="EventManager.html#event:eventUnload">eventUnload</a></li><li class="accordion-list" id=""><a href="InteractionManager.html#event:slashCommandDeploy">slashCommandDeploy</a></li><li class="accordion-list" id=""><a href="InteractionManager.html#event:slashCommandLoad">slashCommandLoad</a></li><li class="accordion-list" id=""><a href="InteractionManager.html#event:slashCommandReload">slashCommandReload</a></li><li class="accordion-list" id=""><a href="InteractionManager.html#event:slashCommandUnload">slashCommandUnload</a></li><li class="accordion-list" id=""><a href="StatusPageChecker.html#event:heartbeat">heartbeat</a></li><li class="accordion-list" id=""><a href="StatusPageChecker.html#event:incidentCreate">incidentCreate</a></li><li class="accordion-list" id=""><a href="StatusPageChecker.html#event:incidentUpdate">incidentUpdate</a></li></ul> </div><div class="accordion collapsed" id="6922771" > <h3 class="accordion-heading">Global<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="global.html#BadgeData">BadgeData</a></li><li class="accordion-list" id=""><a href="global.html#BaseComponentData">BaseComponentData</a></li><li class="accordion-list" id=""><a href="global.html#BaseInteractionData">BaseInteractionData</a></li><li class="accordion-list" id=""><a href="global.html#ContextInteractionData">ContextInteractionData</a></li><li class="accordion-list" id=""><a href="global.html#EmojiData">EmojiData</a></li><li class="accordion-list" id=""><a href="global.html#EventData">EventData</a></li><li class="accordion-list" id=""><a href="global.html#EventManagerOptions">EventManagerOptions</a></li><li class="accordion-list" id=""><a href="global.html#ExperimentData">ExperimentData</a></li><li class="accordion-list" id=""><a href="global.html#IncidentData">IncidentData</a></li><li class="accordion-list" id=""><a href="global.html#IncidentDataRaw">IncidentDataRaw</a></li><li class="accordion-list" id=""><a href="global.html#IncidentDataRawComponent">IncidentDataRawComponent</a></li><li class="accordion-list" id=""><a href="global.html#IncidentDataRawComponentUpdate">IncidentDataRawComponentUpdate</a></li><li class="accordion-list" id=""><a href="global.html#IncidentDataRawUpdate">IncidentDataRawUpdate</a></li><li class="accordion-list" id=""><a href="global.html#InteractionManagerOptions">InteractionManagerOptions</a></li><li class="accordion-list" id=""><a href="global.html#LoadAllOptions">LoadAllOptions</a></li><li class="accordion-list" id=""><a href="global.html#LogData">LogData</a></li><li class="accordion-list" id=""><a href="global.html#LoggerIcons">LoggerIcons</a></li><li class="accordion-list" id=""><a href="global.html#LoggerOptions">LoggerOptions</a></li><li class="accordion-list" id=""><a href="global.html#PartnerData">PartnerData</a></li><li class="accordion-list" id=""><a href="global.html#SlashCommandData">SlashCommandData</a></li><li class="accordion-list" id=""><a href="global.html#StatusPageCheckerOptions">StatusPageCheckerOptions</a></li><li class="accordion-list" id=""><a href="global.html#StatusPageCheckerOptionsColors">StatusPageCheckerOptionsColors</a></li><li class="accordion-list" id=""><a href="global.html#TranslateOptions">TranslateOptions</a></li><li class="accordion-list" id=""><a href="global.html#TranslationData">TranslationData</a></li><li class="accordion-list" id=""><a href="global.html#TranslationManagerOptions">TranslationManagerOptions</a></li></ul> </div>
+      
+
+    </nav>
+    <div class="navbar-ham" id="navbar-ham">
+      <div>
+        <div class="first"></div>
+        <div class="second"></div>
+        <div class="third"></div>
+      </div>
+    </div>
+
+    <div id="main" class="main-content">
+      
+      <h1 id='page-title' class="page-title">
+        SlashCommand
+      </h1>
+      
+
+      
 
 
 
 
 <section>
 
+
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>SlashCommand<span class="signature">(client, manager, data)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">The slash command class.</div>
+        <h2>
+        
+        SlashCommand
+        
+        </h2>
+        
+        
+            <div class="class-description"><p>The slash command class.</p></div>
         
     
 </header>
+
 
 <article>
     <div class="container-overview">
@@ -41,31 +132,35 @@
         
 
     
-    <h2>Constructor</h2>
+        <h2>Constructor</h2>
     
 
-    
-    <h4 class="name" id="SlashCommand"><span class="type-signature"></span>new SlashCommand<span class="signature">(client, manager, data)</span><span class="type-signature"></span></h4>
-    
+    <h4 class="name" id="SlashCommand">
+        <a href="#SlashCommand">#</a>
+        <span class="type-signature"></span>new SlashCommand<span class="signature">(client, manager, data)</span><span class="type-signature"></span>
+    </h4>
 
     
-
-
-
-<div class="description">
-    The constructor of the slash command class.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
+        <p class="summary">The constructor of the slash command class.</p>
     
+
+
+
+    <div class="description">
+        <p>The constructor of the slash command class.</p>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Parameters:</strong>
+        
 
 <table class="params">
     <thead>
@@ -158,6 +253,9 @@
     </tbody>
 </table>
 
+    </div>
+
+
 
 
 
@@ -190,10 +288,12 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_SlashCommand.js.html">structures/interaction/SlashCommand.js</a>, <a href="structures_interaction_SlashCommand.js.html#line47">line 47</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_SlashCommand.js.html">structures/interaction/SlashCommand.js</a>, <a href="structures_interaction_SlashCommand.js.html#line47">line 47</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -202,8 +302,6 @@
 
     
 </dl>
-
-
 
 
 
@@ -242,9 +340,7 @@
 
     
 
-    
-
-    
+     
 
     
 
@@ -253,14 +349,21 @@
 
         
             
-<h4 class="name" id="betaOnly"><span class="type-signature"></span>betaOnly<span class="type-signature"></span></h4>
+<h4 class="name" id="betaOnly">
+    <a href="#betaOnly">#</a>
+    <span class="type-signature"></span>betaOnly<span class="type-signature"></span>
+</h4>
 
+
+<p class="summary"><p>If the base interaction is beta access only</p>.</p>
 
 
 
 <div class="description">
-    If the base interaction is beta access only
+    <p>If the base interaction is beta access only</p>
 </div>
+
+
 
 
 
@@ -277,10 +380,12 @@
     
 
     
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
-        <a href="BaseInteraction.html#betaOnly">BaseInteraction#betaOnly</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-overrides">Overrides:</dt>
+            <dd class="tag-overrides"><ul class="dummy"><li>
+                <a href="BaseInteraction.html#betaOnly">BaseInteraction#betaOnly</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -300,10 +405,12 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line76">line 76</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line76">line 76</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -318,16 +425,25 @@
 
 
 
+
+
         
             
-<h4 class="name" id="category"><span class="type-signature"></span>category<span class="type-signature"></span></h4>
+<h4 class="name" id="category">
+    <a href="#category">#</a>
+    <span class="type-signature"></span>category<span class="type-signature"></span>
+</h4>
 
+
+<p class="summary"><p>The category of the base interaction</p>.</p>
 
 
 
 <div class="description">
-    The category of the base interaction
+    <p>The category of the base interaction</p>
 </div>
+
+
 
 
 
@@ -344,10 +460,12 @@
     
 
     
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
-        <a href="BaseInteraction.html#category">BaseInteraction#category</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-overrides">Overrides:</dt>
+            <dd class="tag-overrides"><ul class="dummy"><li>
+                <a href="BaseInteraction.html#category">BaseInteraction#category</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -367,10 +485,12 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line87">line 87</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line87">line 87</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -385,16 +505,25 @@
 
 
 
+
+
         
             
-<h4 class="name" id="channelOnly"><span class="type-signature"></span>channelOnly<span class="type-signature"></span></h4>
+<h4 class="name" id="channelOnly">
+    <a href="#channelOnly">#</a>
+    <span class="type-signature"></span>channelOnly<span class="type-signature"></span>
+</h4>
 
+
+<p class="summary"><p>The types of channel the base interaction is executable in</p>.</p>
 
 
 
 <div class="description">
-    The types of channel the base interaction is executable in
+    <p>The types of channel the base interaction is executable in</p>
 </div>
+
+
 
 
 
@@ -411,10 +540,12 @@
     
 
     
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
-        <a href="BaseInteraction.html#channelOnly">BaseInteraction#channelOnly</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-overrides">Overrides:</dt>
+            <dd class="tag-overrides"><ul class="dummy"><li>
+                <a href="BaseInteraction.html#channelOnly">BaseInteraction#channelOnly</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -434,10 +565,12 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line98">line 98</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line98">line 98</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -452,93 +585,37 @@
 
 
 
+
+
         
             
-<h4 class="name" id="client"><span class="type-signature"></span>client<span class="type-signature"> :Client</span></h4>
+<h4 class="name" id="client">
+    <a href="#client">#</a>
+    <span class="type-signature"></span>client<span class="type-signature"> :Client</span>
+</h4>
 
+
+<p class="summary"><p>The client</p>.</p>
 
 
 
 <div class="description">
-    The client
+    <p>The client</p>
 </div>
 
 
 
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
+    <div class="member-item-container flex">
+        <strong>Type: </strong>
+        <ul>
+            <li>
+                
 <span class="param-type">Client</span>
 
 
-        </li>
-    </ul>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
-        <a href="BaseInteraction.html#client">BaseInteraction#client</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line53">line 53</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="clientPermissions"><span class="type-signature"></span>clientPermissions<span class="type-signature"></span></h4>
-
-
-
-
-<div class="description">
-    The required permissions for the client to execute the base interaction
-</div>
+            </li>
+        </ul>
+    </div>
 
 
 
@@ -555,10 +632,12 @@
     
 
     
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
-        <a href="BaseInteraction.html#clientPermissions">BaseInteraction#clientPermissions</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-overrides">Overrides:</dt>
+            <dd class="tag-overrides"><ul class="dummy"><li>
+                <a href="BaseInteraction.html#client">BaseInteraction#client</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -578,10 +657,12 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line109">line 109</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line53">line 53</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -596,16 +677,25 @@
 
 
 
+
+
         
             
-<h4 class="name" id="cooldown"><span class="type-signature"></span>cooldown<span class="type-signature"></span></h4>
+<h4 class="name" id="clientPermissions">
+    <a href="#clientPermissions">#</a>
+    <span class="type-signature"></span>clientPermissions<span class="type-signature"></span>
+</h4>
 
+
+<p class="summary"><p>The required permissions for the client to execute the base interaction</p>.</p>
 
 
 
 <div class="description">
-    The cooldown of the base interaction in seconds
+    <p>The required permissions for the client to execute the base interaction</p>
 </div>
+
+
 
 
 
@@ -622,10 +712,12 @@
     
 
     
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
-        <a href="BaseInteraction.html#cooldown">BaseInteraction#cooldown</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-overrides">Overrides:</dt>
+            <dd class="tag-overrides"><ul class="dummy"><li>
+                <a href="BaseInteraction.html#clientPermissions">BaseInteraction#clientPermissions</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -645,10 +737,12 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line120">line 120</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line109">line 109</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -663,105 +757,119 @@
 
 
 
+
+
         
             
-<h4 class="name" id="cooldowns"><span class="type-signature"></span>cooldowns<span class="type-signature"> :Map.&lt;Snowflake, Boolean></span></h4>
+<h4 class="name" id="cooldown">
+    <a href="#cooldown">#</a>
+    <span class="type-signature"></span>cooldown<span class="type-signature"></span>
+</h4>
 
+
+<p class="summary"><p>The cooldown of the base interaction in seconds</p>.</p>
 
 
 
 <div class="description">
-    The map with all cooldowns
+    <p>The cooldown of the base interaction in seconds</p>
 </div>
 
 
 
-    <h5>Type:</h5>
-    <ul>
-        <li>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-overrides">Overrides:</dt>
+            <dd class="tag-overrides"><ul class="dummy"><li>
+                <a href="BaseInteraction.html#cooldown">BaseInteraction#cooldown</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line120">line 120</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
             
+<h4 class="name" id="cooldowns">
+    <a href="#cooldowns">#</a>
+    <span class="type-signature"></span>cooldowns<span class="type-signature"> :Map.&lt;Snowflake, Boolean></span>
+</h4>
+
+
+<p class="summary"><p>The map with all cooldowns</p>.</p>
+
+
+
+<div class="description">
+    <p>The map with all cooldowns</p>
+</div>
+
+
+
+    <div class="member-item-container flex">
+        <strong>Type: </strong>
+        <ul>
+            <li>
+                
 <span class="param-type">Map.&lt;Snowflake, Boolean></span>
 
 
-        </li>
-    </ul>
+            </li>
+        </ul>
+    </div>
 
 
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
-        <a href="BaseInteraction.html#cooldowns">BaseInteraction#cooldowns</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line60">line 60</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="data"><span class="type-signature">(private) </span>data<span class="type-signature"> :<a href="global.html#SlashCommandData">SlashCommandData</a></span></h4>
-
-
-
-
-<div class="description">
-    The raw data of the slash command
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><a href="global.html#SlashCommandData">SlashCommandData</a></span>
-
-
-        </li>
-    </ul>
 
 
 
@@ -776,10 +884,12 @@
     
 
     
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
-        <a href="BaseInteraction.html#data">BaseInteraction#data</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-overrides">Overrides:</dt>
+            <dd class="tag-overrides"><ul class="dummy"><li>
+                <a href="BaseInteraction.html#cooldowns">BaseInteraction#cooldowns</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -799,10 +909,12 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_SlashCommand.js.html">structures/interaction/SlashCommand.js</a>, <a href="structures_interaction_SlashCommand.js.html#line71">line 71</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line60">line 60</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -817,16 +929,25 @@
 
 
 
+
+
         
             
-<h4 class="name" id="defaultEnabled"><span class="type-signature"></span>defaultEnabled<span class="type-signature"></span></h4>
+<h4 class="name" id="defaultEnabled">
+    <a href="#defaultEnabled">#</a>
+    <span class="type-signature"></span>defaultEnabled<span class="type-signature"></span>
+</h4>
 
+
+<p class="summary"><p>If the slash command is enabled by default</p>.</p>
 
 
 
 <div class="description">
-    If the slash command is enabled by default
+    <p>If the slash command is enabled by default</p>
 </div>
+
+
 
 
 
@@ -861,10 +982,12 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_SlashCommand.js.html">structures/interaction/SlashCommand.js</a>, <a href="structures_interaction_SlashCommand.js.html#line80">line 80</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_SlashCommand.js.html">structures/interaction/SlashCommand.js</a>, <a href="structures_interaction_SlashCommand.js.html#line80">line 80</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -879,16 +1002,25 @@
 
 
 
+
+
         
             
-<h4 class="name" id="defer"><span class="type-signature"></span>defer<span class="type-signature"></span></h4>
+<h4 class="name" id="defer">
+    <a href="#defer">#</a>
+    <span class="type-signature"></span>defer<span class="type-signature"></span>
+</h4>
 
+
+<p class="summary"><p>If the base interaction should be deferred</p>.</p>
 
 
 
 <div class="description">
-    If the base interaction should be deferred
+    <p>If the base interaction should be deferred</p>
 </div>
+
+
 
 
 
@@ -905,10 +1037,12 @@
     
 
     
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
-        <a href="BaseInteraction.html#defer">BaseInteraction#defer</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-overrides">Overrides:</dt>
+            <dd class="tag-overrides"><ul class="dummy"><li>
+                <a href="BaseInteraction.html#defer">BaseInteraction#defer</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -928,72 +1062,12 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line131">line 131</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="deployEnabled"><span class="type-signature"></span>deployEnabled<span class="type-signature"></span></h4>
-
-
-
-
-<div class="description">
-    If deploying is enabled for the slash command
-</div>
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_SlashCommand.js.html">structures/interaction/SlashCommand.js</a>, <a href="structures_interaction_SlashCommand.js.html#line102">line 102</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line131">line 131</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -1008,16 +1082,25 @@
 
 
 
+
+
         
             
-<h4 class="name" id="description"><span class="type-signature"></span>description<span class="type-signature"></span></h4>
+<h4 class="name" id="deployEnabled">
+    <a href="#deployEnabled">#</a>
+    <span class="type-signature"></span>deployEnabled<span class="type-signature"></span>
+</h4>
 
+
+<p class="summary"><p>If deploying is enabled for the slash command</p>.</p>
 
 
 
 <div class="description">
-    The description of the slash command
+    <p>If deploying is enabled for the slash command</p>
 </div>
+
+
 
 
 
@@ -1052,10 +1135,12 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_SlashCommand.js.html">structures/interaction/SlashCommand.js</a>, <a href="structures_interaction_SlashCommand.js.html#line113">line 113</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_SlashCommand.js.html">structures/interaction/SlashCommand.js</a>, <a href="structures_interaction_SlashCommand.js.html#line102">line 102</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -1070,16 +1155,25 @@
 
 
 
+
+
         
             
-<h4 class="name" id="descriptionLocalizations"><span class="type-signature"></span>descriptionLocalizations<span class="type-signature"></span></h4>
+<h4 class="name" id="description">
+    <a href="#description">#</a>
+    <span class="type-signature"></span>description<span class="type-signature"></span>
+</h4>
 
+
+<p class="summary"><p>The description of the slash command</p>.</p>
 
 
 
 <div class="description">
-    The localization descriptions of the slash command
+    <p>The description of the slash command</p>
 </div>
+
+
 
 
 
@@ -1114,10 +1208,12 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_SlashCommand.js.html">structures/interaction/SlashCommand.js</a>, <a href="structures_interaction_SlashCommand.js.html#line123">line 123</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_SlashCommand.js.html">structures/interaction/SlashCommand.js</a>, <a href="structures_interaction_SlashCommand.js.html#line113">line 113</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -1132,418 +1228,25 @@
 
 
 
-        
-            
-<h4 class="name" id="devOnly"><span class="type-signature"></span>devOnly<span class="type-signature"></span></h4>
-
-
-
-
-<div class="description">
-    If the base interaction can only be executed by developers
-</div>
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
-        <a href="BaseInteraction.html#devOnly">BaseInteraction#devOnly</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line142">line 142</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
 
 
         
             
-<h4 class="name" id="dirname"><span class="type-signature"></span>dirname<span class="type-signature"></span></h4>
+<h4 class="name" id="descriptionLocalizations">
+    <a href="#descriptionLocalizations">#</a>
+    <span class="type-signature"></span>descriptionLocalizations<span class="type-signature"></span>
+</h4>
 
 
-
-
-<div class="description">
-    The dirname of the saved location of the base interaction
-</div>
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
-        <a href="BaseInteraction.html#dirname">BaseInteraction#dirname</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line153">line 153</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="enabled"><span class="type-signature"></span>enabled<span class="type-signature"></span></h4>
-
+<p class="summary"><p>The localization descriptions of the slash command</p>.</p>
 
 
 
 <div class="description">
-    If the base interaction is enabled
+    <p>The localization descriptions of the slash command</p>
 </div>
 
 
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
-        <a href="BaseInteraction.html#enabled">BaseInteraction#enabled</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line164">line 164</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="ephemeral"><span class="type-signature"></span>ephemeral<span class="type-signature"></span></h4>
-
-
-
-
-<div class="description">
-    If the response is ephemeral
-</div>
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
-        <a href="BaseInteraction.html#ephemeral">BaseInteraction#ephemeral</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line175">line 175</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="experiment"><span class="type-signature"></span>experiment<span class="type-signature"></span></h4>
-
-
-
-
-<div class="description">
-    The experiment data of the base interaction
-</div>
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
-        <a href="BaseInteraction.html#experiment">BaseInteraction#experiment</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line186">line 186</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="guildOnly"><span class="type-signature"></span>guildOnly<span class="type-signature"></span></h4>
-
-
-
-
-<div class="description">
-    If the base interaction is only executable in guilds
-</div>
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
-        <a href="BaseInteraction.html#guildOnly">BaseInteraction#guildOnly</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line197">line 197</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="hidden"><span class="type-signature"></span>hidden<span class="type-signature"></span></h4>
-
-
-
-
-<div class="description">
-    If the slash command should be hidden in the list
-</div>
 
 
 
@@ -1578,10 +1281,12 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_SlashCommand.js.html">structures/interaction/SlashCommand.js</a>, <a href="structures_interaction_SlashCommand.js.html#line134">line 134</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_SlashCommand.js.html">structures/interaction/SlashCommand.js</a>, <a href="structures_interaction_SlashCommand.js.html#line123">line 123</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -1596,16 +1301,25 @@
 
 
 
+
+
         
             
-<h4 class="name" id="id"><span class="type-signature"></span>id<span class="type-signature"></span></h4>
+<h4 class="name" id="devOnly">
+    <a href="#devOnly">#</a>
+    <span class="type-signature"></span>devOnly<span class="type-signature"></span>
+</h4>
 
+
+<p class="summary"><p>If the base interaction can only be executed by developers</p>.</p>
 
 
 
 <div class="description">
-    The id of the base interaction
+    <p>If the base interaction can only be executed by developers</p>
 </div>
+
+
 
 
 
@@ -1622,10 +1336,12 @@
     
 
     
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
-        <a href="BaseInteraction.html#id">BaseInteraction#id</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-overrides">Overrides:</dt>
+            <dd class="tag-overrides"><ul class="dummy"><li>
+                <a href="BaseInteraction.html#devOnly">BaseInteraction#devOnly</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -1645,10 +1361,12 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line208">line 208</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line142">line 142</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -1663,16 +1381,25 @@
 
 
 
+
+
         
             
-<h4 class="name" id="location"><span class="type-signature"></span>location<span class="type-signature"></span></h4>
+<h4 class="name" id="dirname">
+    <a href="#dirname">#</a>
+    <span class="type-signature"></span>dirname<span class="type-signature"></span>
+</h4>
 
+
+<p class="summary"><p>The dirname of the saved location of the base interaction</p>.</p>
 
 
 
 <div class="description">
-    The location of the base interaction
+    <p>The dirname of the saved location of the base interaction</p>
 </div>
+
+
 
 
 
@@ -1689,10 +1416,12 @@
     
 
     
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
-        <a href="BaseInteraction.html#location">BaseInteraction#location</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-overrides">Overrides:</dt>
+            <dd class="tag-overrides"><ul class="dummy"><li>
+                <a href="BaseInteraction.html#dirname">BaseInteraction#dirname</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -1712,10 +1441,12 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line230">line 230</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line153">line 153</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -1730,28 +1461,592 @@
 
 
 
+
+
         
             
-<h4 class="name" id="manager"><span class="type-signature"></span>manager<span class="type-signature"> :<a href="SlashCommandInteractionManager.html">SlashCommandInteractionManager</a></span></h4>
+<h4 class="name" id="enabled">
+    <a href="#enabled">#</a>
+    <span class="type-signature"></span>enabled<span class="type-signature"></span>
+</h4>
 
+
+<p class="summary"><p>If the base interaction is enabled</p>.</p>
 
 
 
 <div class="description">
-    The slash command manager
+    <p>If the base interaction is enabled</p>
 </div>
 
 
 
-    <h5>Type:</h5>
-    <ul>
-        <li>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-overrides">Overrides:</dt>
+            <dd class="tag-overrides"><ul class="dummy"><li>
+                <a href="BaseInteraction.html#enabled">BaseInteraction#enabled</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line164">line 164</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
             
+<h4 class="name" id="ephemeral">
+    <a href="#ephemeral">#</a>
+    <span class="type-signature"></span>ephemeral<span class="type-signature"></span>
+</h4>
+
+
+<p class="summary"><p>If the response is ephemeral</p>.</p>
+
+
+
+<div class="description">
+    <p>If the response is ephemeral</p>
+</div>
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-overrides">Overrides:</dt>
+            <dd class="tag-overrides"><ul class="dummy"><li>
+                <a href="BaseInteraction.html#ephemeral">BaseInteraction#ephemeral</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line175">line 175</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="experiment">
+    <a href="#experiment">#</a>
+    <span class="type-signature"></span>experiment<span class="type-signature"></span>
+</h4>
+
+
+<p class="summary"><p>The experiment data of the base interaction</p>.</p>
+
+
+
+<div class="description">
+    <p>The experiment data of the base interaction</p>
+</div>
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-overrides">Overrides:</dt>
+            <dd class="tag-overrides"><ul class="dummy"><li>
+                <a href="BaseInteraction.html#experiment">BaseInteraction#experiment</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line186">line 186</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="guildOnly">
+    <a href="#guildOnly">#</a>
+    <span class="type-signature"></span>guildOnly<span class="type-signature"></span>
+</h4>
+
+
+<p class="summary"><p>If the base interaction is only executable in guilds</p>.</p>
+
+
+
+<div class="description">
+    <p>If the base interaction is only executable in guilds</p>
+</div>
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-overrides">Overrides:</dt>
+            <dd class="tag-overrides"><ul class="dummy"><li>
+                <a href="BaseInteraction.html#guildOnly">BaseInteraction#guildOnly</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line197">line 197</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="hidden">
+    <a href="#hidden">#</a>
+    <span class="type-signature"></span>hidden<span class="type-signature"></span>
+</h4>
+
+
+<p class="summary"><p>If the slash command should be hidden in the list</p>.</p>
+
+
+
+<div class="description">
+    <p>If the slash command should be hidden in the list</p>
+</div>
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_SlashCommand.js.html">structures/interaction/SlashCommand.js</a>, <a href="structures_interaction_SlashCommand.js.html#line134">line 134</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="id">
+    <a href="#id">#</a>
+    <span class="type-signature"></span>id<span class="type-signature"></span>
+</h4>
+
+
+<p class="summary"><p>The id of the base interaction</p>.</p>
+
+
+
+<div class="description">
+    <p>The id of the base interaction</p>
+</div>
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-overrides">Overrides:</dt>
+            <dd class="tag-overrides"><ul class="dummy"><li>
+                <a href="BaseInteraction.html#id">BaseInteraction#id</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line208">line 208</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="location">
+    <a href="#location">#</a>
+    <span class="type-signature"></span>location<span class="type-signature"></span>
+</h4>
+
+
+<p class="summary"><p>The location of the base interaction</p>.</p>
+
+
+
+<div class="description">
+    <p>The location of the base interaction</p>
+</div>
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-overrides">Overrides:</dt>
+            <dd class="tag-overrides"><ul class="dummy"><li>
+                <a href="BaseInteraction.html#location">BaseInteraction#location</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line230">line 230</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="manager">
+    <a href="#manager">#</a>
+    <span class="type-signature"></span>manager<span class="type-signature"> :<a href="SlashCommandInteractionManager.html">SlashCommandInteractionManager</a></span>
+</h4>
+
+
+<p class="summary"><p>The slash command manager</p>.</p>
+
+
+
+<div class="description">
+    <p>The slash command manager</p>
+</div>
+
+
+
+    <div class="member-item-container flex">
+        <strong>Type: </strong>
+        <ul>
+            <li>
+                
 <span class="param-type"><a href="SlashCommandInteractionManager.html">SlashCommandInteractionManager</a></span>
 
 
-        </li>
-    </ul>
+            </li>
+        </ul>
+    </div>
+
+
 
 
 
@@ -1784,10 +2079,12 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_SlashCommand.js.html">structures/interaction/SlashCommand.js</a>, <a href="structures_interaction_SlashCommand.js.html#line64">line 64</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_SlashCommand.js.html">structures/interaction/SlashCommand.js</a>, <a href="structures_interaction_SlashCommand.js.html#line64">line 64</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -1796,6 +2093,8 @@
 
     
 </dl>
+
+
 
 
 
@@ -1804,14 +2103,21 @@
 
         
             
-<h4 class="name" id="name"><span class="type-signature"></span>name<span class="type-signature"></span></h4>
+<h4 class="name" id="name">
+    <a href="#name">#</a>
+    <span class="type-signature"></span>name<span class="type-signature"></span>
+</h4>
 
+
+<p class="summary"><p>The name of the base interaction</p>.</p>
 
 
 
 <div class="description">
-    The name of the base interaction
+    <p>The name of the base interaction</p>
 </div>
+
+
 
 
 
@@ -1828,10 +2134,12 @@
     
 
     
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
-        <a href="BaseInteraction.html#name">BaseInteraction#name</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-overrides">Overrides:</dt>
+            <dd class="tag-overrides"><ul class="dummy"><li>
+                <a href="BaseInteraction.html#name">BaseInteraction#name</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -1851,10 +2159,12 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line251">line 251</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line251">line 251</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -1863,6 +2173,8 @@
 
     
 </dl>
+
+
 
 
 
@@ -1871,14 +2183,21 @@
 
         
             
-<h4 class="name" id="nameLocalizations"><span class="type-signature"></span>nameLocalizations<span class="type-signature"></span></h4>
+<h4 class="name" id="nameLocalizations">
+    <a href="#nameLocalizations">#</a>
+    <span class="type-signature"></span>nameLocalizations<span class="type-signature"></span>
+</h4>
 
+
+<p class="summary"><p>The localization names of the base interaction</p>.</p>
 
 
 
 <div class="description">
-    The localization names of the base interaction
+    <p>The localization names of the base interaction</p>
 </div>
+
+
 
 
 
@@ -1895,10 +2214,12 @@
     
 
     
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
-        <a href="BaseInteraction.html#nameLocalizations">BaseInteraction#nameLocalizations</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-overrides">Overrides:</dt>
+            <dd class="tag-overrides"><ul class="dummy"><li>
+                <a href="BaseInteraction.html#nameLocalizations">BaseInteraction#nameLocalizations</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -1918,10 +2239,12 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line262">line 262</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line262">line 262</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -1930,6 +2253,8 @@
 
     
 </dl>
+
+
 
 
 
@@ -1938,14 +2263,21 @@
 
         
             
-<h4 class="name" id="nsfw"><span class="type-signature"></span>nsfw<span class="type-signature"></span></h4>
+<h4 class="name" id="nsfw">
+    <a href="#nsfw">#</a>
+    <span class="type-signature"></span>nsfw<span class="type-signature"></span>
+</h4>
 
+
+<p class="summary"><p>If the base interaction is nsfw</p>.</p>
 
 
 
 <div class="description">
-    If the base interaction is nsfw
+    <p>If the base interaction is nsfw</p>
 </div>
+
+
 
 
 
@@ -1962,10 +2294,12 @@
     
 
     
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
-        <a href="BaseInteraction.html#nsfw">BaseInteraction#nsfw</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-overrides">Overrides:</dt>
+            <dd class="tag-overrides"><ul class="dummy"><li>
+                <a href="BaseInteraction.html#nsfw">BaseInteraction#nsfw</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -1985,10 +2319,12 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line273">line 273</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line273">line 273</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -1997,6 +2333,8 @@
 
     
 </dl>
+
+
 
 
 
@@ -2005,14 +2343,21 @@
 
         
             
-<h4 class="name" id="options"><span class="type-signature"></span>options<span class="type-signature"></span></h4>
+<h4 class="name" id="options">
+    <a href="#options">#</a>
+    <span class="type-signature"></span>options<span class="type-signature"></span>
+</h4>
 
+
+<p class="summary"><p>The options of the slash command</p>.</p>
 
 
 
 <div class="description">
-    The options of the slash command
+    <p>The options of the slash command</p>
 </div>
+
+
 
 
 
@@ -2047,10 +2392,12 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_SlashCommand.js.html">structures/interaction/SlashCommand.js</a>, <a href="structures_interaction_SlashCommand.js.html#line156">line 156</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_SlashCommand.js.html">structures/interaction/SlashCommand.js</a>, <a href="structures_interaction_SlashCommand.js.html#line156">line 156</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -2059,6 +2406,8 @@
 
     
 </dl>
+
+
 
 
 
@@ -2067,14 +2416,21 @@
 
         
             
-<h4 class="name" id="ownerOnly"><span class="type-signature"></span>ownerOnly<span class="type-signature"></span></h4>
+<h4 class="name" id="ownerOnly">
+    <a href="#ownerOnly">#</a>
+    <span class="type-signature"></span>ownerOnly<span class="type-signature"></span>
+</h4>
 
+
+<p class="summary"><p>If the base interaction is owner access only</p>.</p>
 
 
 
 <div class="description">
-    If the base interaction is owner access only
+    <p>If the base interaction is owner access only</p>
 </div>
+
+
 
 
 
@@ -2091,10 +2447,12 @@
     
 
     
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
-        <a href="BaseInteraction.html#ownerOnly">BaseInteraction#ownerOnly</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-overrides">Overrides:</dt>
+            <dd class="tag-overrides"><ul class="dummy"><li>
+                <a href="BaseInteraction.html#ownerOnly">BaseInteraction#ownerOnly</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -2114,10 +2472,12 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line284">line 284</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line284">line 284</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -2126,6 +2486,8 @@
 
     
 </dl>
+
+
 
 
 
@@ -2134,14 +2496,21 @@
 
         
             
-<h4 class="name" id="premiumOnly"><span class="type-signature"></span>premiumOnly<span class="type-signature"></span></h4>
+<h4 class="name" id="premiumOnly">
+    <a href="#premiumOnly">#</a>
+    <span class="type-signature"></span>premiumOnly<span class="type-signature"></span>
+</h4>
 
+
+<p class="summary"><p>If the base interaction is premium access only</p>.</p>
 
 
 
 <div class="description">
-    If the base interaction is premium access only
+    <p>If the base interaction is premium access only</p>
 </div>
+
+
 
 
 
@@ -2158,10 +2527,12 @@
     
 
     
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
-        <a href="BaseInteraction.html#premiumOnly">BaseInteraction#premiumOnly</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-overrides">Overrides:</dt>
+            <dd class="tag-overrides"><ul class="dummy"><li>
+                <a href="BaseInteraction.html#premiumOnly">BaseInteraction#premiumOnly</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -2181,10 +2552,12 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line295">line 295</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line295">line 295</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -2193,6 +2566,8 @@
 
     
 </dl>
+
+
 
 
 
@@ -2201,14 +2576,21 @@
 
         
             
-<h4 class="name" id="type"><span class="type-signature"></span>type<span class="type-signature"></span></h4>
+<h4 class="name" id="type">
+    <a href="#type">#</a>
+    <span class="type-signature"></span>type<span class="type-signature"></span>
+</h4>
 
+
+<p class="summary"><p>The type of the base interaction</p>.</p>
 
 
 
 <div class="description">
-    The type of the base interaction
+    <p>The type of the base interaction</p>
 </div>
+
+
 
 
 
@@ -2225,10 +2607,12 @@
     
 
     
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
-        <a href="BaseInteraction.html#type">BaseInteraction#type</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-overrides">Overrides:</dt>
+            <dd class="tag-overrides"><ul class="dummy"><li>
+                <a href="BaseInteraction.html#type">BaseInteraction#type</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -2248,10 +2632,12 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line306">line 306</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line306">line 306</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -2260,6 +2646,8 @@
 
     
 </dl>
+
+
 
 
 
@@ -2268,14 +2656,21 @@
 
         
             
-<h4 class="name" id="usage"><span class="type-signature"></span>usage<span class="type-signature"></span></h4>
+<h4 class="name" id="usage">
+    <a href="#usage">#</a>
+    <span class="type-signature"></span>usage<span class="type-signature"></span>
+</h4>
 
+
+<p class="summary"><p>The usage of the slash command with all arguments</p>.</p>
 
 
 
 <div class="description">
-    The usage of the slash command with all arguments
+    <p>The usage of the slash command with all arguments</p>
 </div>
+
+
 
 
 
@@ -2310,10 +2705,12 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_SlashCommand.js.html">structures/interaction/SlashCommand.js</a>, <a href="structures_interaction_SlashCommand.js.html#line167">line 167</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_SlashCommand.js.html">structures/interaction/SlashCommand.js</a>, <a href="structures_interaction_SlashCommand.js.html#line167">line 167</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -2322,6 +2719,8 @@
 
     
 </dl>
+
+
 
 
 
@@ -2330,14 +2729,21 @@
 
         
             
-<h4 class="name" id="userPermissions"><span class="type-signature"></span>userPermissions<span class="type-signature"></span></h4>
+<h4 class="name" id="userPermissions">
+    <a href="#userPermissions">#</a>
+    <span class="type-signature"></span>userPermissions<span class="type-signature"></span>
+</h4>
 
+
+<p class="summary"><p>The required permissions for the user to execute the base interaction</p>.</p>
 
 
 
 <div class="description">
-    The required permissions for the user to execute the base interaction
+    <p>The required permissions for the user to execute the base interaction</p>
 </div>
+
+
 
 
 
@@ -2354,10 +2760,12 @@
     
 
     
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
-        <a href="BaseInteraction.html#userPermissions">BaseInteraction#userPermissions</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-overrides">Overrides:</dt>
+            <dd class="tag-overrides"><ul class="dummy"><li>
+                <a href="BaseInteraction.html#userPermissions">BaseInteraction#userPermissions</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -2377,10 +2785,12 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line317">line 317</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line317">line 317</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -2389,6 +2799,8 @@
 
     
 </dl>
+
+
 
 
 
@@ -2406,17 +2818,22 @@
 
     
 
-    
-    <h4 class="name" id="deploy"><span class="type-signature"></span>deploy<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;(Boolean|<a href="DisGroupDevError.html">DisGroupDevError</a>)>}</span></h4>
-    
+    <h4 class="name" id="deploy">
+        <a href="#deploy">#</a>
+        <span class="type-signature"></span>deploy<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;(Boolean|<a href="DisGroupDevError.html">DisGroupDevError</a>)>}</span>
+    </h4>
 
     
+        <p class="summary"><p>Deploys the slash command</p>.</p>
+    
 
 
 
-<div class="description">
-    Deploys the slash command
-</div>
+    <div class="description">
+        <p>Deploys the slash command</p>
+    </div>
+
+
 
 
 
@@ -2457,10 +2874,12 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_SlashCommand.js.html">structures/interaction/SlashCommand.js</a>, <a href="structures_interaction_SlashCommand.js.html#line91">line 91</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_SlashCommand.js.html">structures/interaction/SlashCommand.js</a>, <a href="structures_interaction_SlashCommand.js.html#line91">line 91</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -2484,12 +2903,13 @@
 
 
 
-<h5>Returns:</h5>
-
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
         
+            
 
 
-<dl>
+<dl class="param-type">
     <dt>
         Type
     </dt>
@@ -2501,8 +2921,8 @@
     </dd>
 </dl>
 
-    
-
+            
+    </div>
 
 
 
@@ -2512,17 +2932,22 @@
 
     
 
-    
-    <h4 class="name" id="load"><span class="type-signature"></span>load<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;(Boolean|<a href="DisGroupDevError.html">DisGroupDevError</a>)>}</span></h4>
-    
+    <h4 class="name" id="load">
+        <a href="#load">#</a>
+        <span class="type-signature"></span>load<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;(Boolean|<a href="DisGroupDevError.html">DisGroupDevError</a>)>}</span>
+    </h4>
 
     
+        <p class="summary"><p>Loads the slash command</p>.</p>
+    
 
 
 
-<div class="description">
-    Loads the slash command
-</div>
+    <div class="description">
+        <p>Loads the slash command</p>
+    </div>
+
+
 
 
 
@@ -2563,10 +2988,12 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_SlashCommand.js.html">structures/interaction/SlashCommand.js</a>, <a href="structures_interaction_SlashCommand.js.html#line145">line 145</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_SlashCommand.js.html">structures/interaction/SlashCommand.js</a>, <a href="structures_interaction_SlashCommand.js.html#line145">line 145</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -2590,12 +3017,13 @@
 
 
 
-<h5>Returns:</h5>
-
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
         
+            
 
 
-<dl>
+<dl class="param-type">
     <dt>
         Type
     </dt>
@@ -2607,8 +3035,8 @@
     </dd>
 </dl>
 
-    
-
+            
+    </div>
 
 
 
@@ -2618,17 +3046,22 @@
 
     
 
-    
-    <h4 class="name" id="reload"><span class="type-signature"></span>reload<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;(Boolean|<a href="DisGroupDevError.html">DisGroupDevError</a>)>}</span></h4>
-    
+    <h4 class="name" id="reload">
+        <a href="#reload">#</a>
+        <span class="type-signature"></span>reload<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;(Boolean|<a href="DisGroupDevError.html">DisGroupDevError</a>)>}</span>
+    </h4>
 
     
+        <p class="summary"><p>Reloads the slash command</p>.</p>
+    
 
 
 
-<div class="description">
-    Reloads the slash command
-</div>
+    <div class="description">
+        <p>Reloads the slash command</p>
+    </div>
+
+
 
 
 
@@ -2669,10 +3102,12 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_SlashCommand.js.html">structures/interaction/SlashCommand.js</a>, <a href="structures_interaction_SlashCommand.js.html#line178">line 178</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_SlashCommand.js.html">structures/interaction/SlashCommand.js</a>, <a href="structures_interaction_SlashCommand.js.html#line178">line 178</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -2696,12 +3131,13 @@
 
 
 
-<h5>Returns:</h5>
-
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
         
+            
 
 
-<dl>
+<dl class="param-type">
     <dt>
         Type
     </dt>
@@ -2713,8 +3149,8 @@
     </dd>
 </dl>
 
-    
-
+            
+    </div>
 
 
 
@@ -2724,17 +3160,22 @@
 
     
 
-    
-    <h4 class="name" id="toJSON"><span class="type-signature"></span>toJSON<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#BaseInteractionData">BaseInteractionData</a>}</span></h4>
-    
+    <h4 class="name" id="toJSON">
+        <a href="#toJSON">#</a>
+        <span class="type-signature"></span>toJSON<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#BaseInteractionData">BaseInteractionData</a>}</span>
+    </h4>
 
     
+        <p class="summary"><p>The full data of the base interaction</p>.</p>
+    
 
 
 
-<div class="description">
-    The full data of the base interaction
-</div>
+    <div class="description">
+        <p>The full data of the base interaction</p>
+    </div>
+
+
 
 
 
@@ -2757,10 +3198,12 @@
     
 
     
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
-        <a href="BaseInteraction.html#toJSON">BaseInteraction#toJSON</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-overrides">Overrides:</dt>
+            <dd class="tag-overrides"><ul class="dummy"><li>
+                <a href="BaseInteraction.html#toJSON">BaseInteraction#toJSON</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -2780,10 +3223,12 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line328">line 328</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_BaseInteraction.js.html">structures/interaction/BaseInteraction.js</a>, <a href="structures_interaction_BaseInteraction.js.html#line328">line 328</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -2807,12 +3252,13 @@
 
 
 
-<h5>Returns:</h5>
-
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
         
+            
 
 
-<dl>
+<dl class="param-type">
     <dt>
         Type
     </dt>
@@ -2824,8 +3270,8 @@
     </dd>
 </dl>
 
-    
-
+            
+    </div>
 
 
 
@@ -2835,17 +3281,22 @@
 
     
 
-    
-    <h4 class="name" id="unload"><span class="type-signature"></span>unload<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;(Boolean|<a href="DisGroupDevError.html">DisGroupDevError</a>)>}</span></h4>
-    
+    <h4 class="name" id="unload">
+        <a href="#unload">#</a>
+        <span class="type-signature"></span>unload<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;(Boolean|<a href="DisGroupDevError.html">DisGroupDevError</a>)>}</span>
+    </h4>
 
     
+        <p class="summary"><p>Unloads the slash command</p>.</p>
+    
 
 
 
-<div class="description">
-    Unloads the slash command
-</div>
+    <div class="description">
+        <p>Unloads the slash command</p>
+    </div>
+
+
 
 
 
@@ -2886,10 +3337,12 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="structures_interaction_SlashCommand.js.html">structures/interaction/SlashCommand.js</a>, <a href="structures_interaction_SlashCommand.js.html#line189">line 189</a>
-    </li></ul></dd>
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_SlashCommand.js.html">structures/interaction/SlashCommand.js</a>, <a href="structures_interaction_SlashCommand.js.html#line189">line 189</a>
+            </li></ul></dd>
+        </div>
     
 
     
@@ -2913,12 +3366,13 @@
 
 
 
-<h5>Returns:</h5>
-
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
         
+            
 
 
-<dl>
+<dl class="param-type">
     <dt>
         Type
     </dt>
@@ -2930,8 +3384,8 @@
     </dd>
 </dl>
 
-    
-
+            
+    </div>
 
 
 
@@ -2949,19 +3403,37 @@
 
 
 
-</div>
+    </div>
 
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Badges.html">Badges</a></li><li><a href="BaseComponent.html">BaseComponent</a></li><li><a href="BaseInteraction.html">BaseInteraction</a></li><li><a href="Colors.html">Colors</a></li><li><a href="ContextInteraction.html">ContextInteraction</a></li><li><a href="ContextInteractionManager.html">ContextInteractionManager</a></li><li><a href="DisGroupDevError.html">DisGroupDevError</a></li><li><a href="Emojis.html">Emojis</a></li><li><a href="Event.html">Event</a></li><li><a href="EventManager.html">EventManager</a></li><li><a href="InteractionManager.html">InteractionManager</a></li><li><a href="Logger.html">Logger</a></li><li><a href="Partner.html">Partner</a></li><li><a href="SlashCommand.html">SlashCommand</a></li><li><a href="SlashCommandInteractionManager.html">SlashCommandInteractionManager</a></li><li><a href="StatusPageChecker.html">StatusPageChecker</a></li><li><a href="TranslationManager.html">TranslationManager</a></li><li><a href="Utilities.html">Utilities</a></li></ul><h3>Events</h3><ul><li><a href="EventManager.html#event:eventLoad">eventLoad</a></li><li><a href="EventManager.html#event:eventReload">eventReload</a></li><li><a href="EventManager.html#event:eventUnload">eventUnload</a></li><li><a href="InteractionManager.html#event:slashCommandDeploy">slashCommandDeploy</a></li><li><a href="InteractionManager.html#event:slashCommandLoad">slashCommandLoad</a></li><li><a href="InteractionManager.html#event:slashCommandReload">slashCommandReload</a></li><li><a href="InteractionManager.html#event:slashCommandUnload">slashCommandUnload</a></li><li><a href="StatusPageChecker.html#event:heartbeat">heartbeat</a></li><li><a href="StatusPageChecker.html#event:incidentCreate">incidentCreate</a></li><li><a href="StatusPageChecker.html#event:incidentUpdate">incidentUpdate</a></li></ul><h3><a href="global.html">Global</a></h3>
-</nav>
+    <footer class="footer" id="footer">
+      
+    </footer>
 
-<br class="clear">
+    <script src="scripts/third-party/prettify.js"></script>
+    <script src="scripts/third-party/lang-css.js"></script>
+    <script type="text/javascript" src="scripts/misc.js"></script>
 
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Fri May 27 2022 17:37:59 GMT+0200 (Mitteleuropäische Sommerzeit)
-</footer>
+    <script>prettyPrint();</script>
+    <script src="scripts/linenumber.js"></script>
+    <script src="scripts/fix-code-block.js"></script>
+    <script src="scripts/fix-navbar.js"></script>
+    
+      <script src="scripts/search.js"></script>
+      <script src="scripts/third-party/fuse.js"></script>
+      <script>
+        var list = [{"title":"Badges","link":"<a href=\"Badges.html\">Badges</a>"},{"title":"BaseComponent","link":"<a href=\"BaseComponent.html\">BaseComponent</a>"},{"title":"BaseComponent#toJSON","link":"<a href=\"BaseComponent.html#toJSON\">BaseComponent &rtrif; toJSON</a>"},{"title":"BaseInteraction","link":"<a href=\"BaseInteraction.html\">BaseInteraction</a>"},{"title":"BaseInteraction#toJSON","link":"<a href=\"BaseInteraction.html#toJSON\">BaseInteraction &rtrif; toJSON</a>"},{"title":"Colors","link":"<a href=\"Colors.html\">Colors</a>"},{"title":"ContextInteraction","link":"<a href=\"ContextInteraction.html\">ContextInteraction</a>"},{"title":"ContextInteraction#load","link":"<a href=\"ContextInteraction.html#load\">ContextInteraction &rtrif; load</a>"},{"title":"ContextInteraction#reload","link":"<a href=\"ContextInteraction.html#reload\">ContextInteraction &rtrif; reload</a>"},{"title":"ContextInteraction#unload","link":"<a href=\"ContextInteraction.html#unload\">ContextInteraction &rtrif; unload</a>"},{"title":"ContextInteractionManager","link":"<a href=\"ContextInteractionManager.html\">ContextInteractionManager</a>"},{"title":"ContextInteractionManager#deploy","link":"<a href=\"ContextInteractionManager.html#deploy\">ContextInteractionManager &rtrif; deploy</a>"},{"title":"ContextInteractionManager#deployAll","link":"<a href=\"ContextInteractionManager.html#deployAll\">ContextInteractionManager &rtrif; deployAll</a>"},{"title":"ContextInteractionManager#load","link":"<a href=\"ContextInteractionManager.html#load\">ContextInteractionManager &rtrif; load</a>"},{"title":"ContextInteractionManager#loadAll","link":"<a href=\"ContextInteractionManager.html#loadAll\">ContextInteractionManager &rtrif; loadAll</a>"},{"title":"ContextInteractionManager#reload","link":"<a href=\"ContextInteractionManager.html#reload\">ContextInteractionManager &rtrif; reload</a>"},{"title":"ContextInteractionManager#reloadAll","link":"<a href=\"ContextInteractionManager.html#reloadAll\">ContextInteractionManager &rtrif; reloadAll</a>"},{"title":"ContextInteractionManager#unload","link":"<a href=\"ContextInteractionManager.html#unload\">ContextInteractionManager &rtrif; unload</a>"},{"title":"ContextInteractionManager#unloadAll","link":"<a href=\"ContextInteractionManager.html#unloadAll\">ContextInteractionManager &rtrif; unloadAll</a>"},{"title":"DisGroupDevError","link":"<a href=\"DisGroupDevError.html\">DisGroupDevError</a>"},{"title":"Emojis","link":"<a href=\"Emojis.html\">Emojis</a>"},{"title":"Event","link":"<a href=\"Event.html\">Event</a>"},{"title":"Event#load","link":"<a href=\"Event.html#load\">Event &rtrif; load</a>"},{"title":"Event#reload","link":"<a href=\"Event.html#reload\">Event &rtrif; reload</a>"},{"title":"Event#toJSON","link":"<a href=\"Event.html#toJSON\">Event &rtrif; toJSON</a>"},{"title":"Event#unload","link":"<a href=\"Event.html#unload\">Event &rtrif; unload</a>"},{"title":"EventManager","link":"<a href=\"EventManager.html\">EventManager</a>"},{"title":"EventManager#load","link":"<a href=\"EventManager.html#load\">EventManager &rtrif; load</a>"},{"title":"EventManager#loadAll","link":"<a href=\"EventManager.html#loadAll\">EventManager &rtrif; loadAll</a>"},{"title":"EventManager#reload","link":"<a href=\"EventManager.html#reload\">EventManager &rtrif; reload</a>"},{"title":"EventManager#reloadAll","link":"<a href=\"EventManager.html#reloadAll\">EventManager &rtrif; reloadAll</a>"},{"title":"EventManager#unload","link":"<a href=\"EventManager.html#unload\">EventManager &rtrif; unload</a>"},{"title":"EventManager#unloadAll","link":"<a href=\"EventManager.html#unloadAll\">EventManager &rtrif; unloadAll</a>"},{"title":"InteractionManager","link":"<a href=\"InteractionManager.html\">InteractionManager</a>"},{"title":"Logger","link":"<a href=\"Logger.html\">Logger</a>"},{"title":"Logger#debug","link":"<a href=\"Logger.html#debug\">Logger &rtrif; debug</a>"},{"title":"Logger#error","link":"<a href=\"Logger.html#error\">Logger &rtrif; error</a>"},{"title":"Logger#fail","link":"<a href=\"Logger.html#fail\">Logger &rtrif; fail</a>"},{"title":"Logger#info","link":"<a href=\"Logger.html#info\">Logger &rtrif; info</a>"},{"title":"Logger#success","link":"<a href=\"Logger.html#success\">Logger &rtrif; success</a>"},{"title":"Logger#warn","link":"<a href=\"Logger.html#warn\">Logger &rtrif; warn</a>"},{"title":"Partner","link":"<a href=\"Partner.html\">Partner</a>"},{"title":"SlashCommand","link":"<a href=\"SlashCommand.html\">SlashCommand</a>"},{"title":"SlashCommand#deploy","link":"<a href=\"SlashCommand.html#deploy\">SlashCommand &rtrif; deploy</a>"},{"title":"SlashCommand#load","link":"<a href=\"SlashCommand.html#load\">SlashCommand &rtrif; load</a>"},{"title":"SlashCommand#reload","link":"<a href=\"SlashCommand.html#reload\">SlashCommand &rtrif; reload</a>"},{"title":"SlashCommand#toJSON","link":"<a href=\"SlashCommand.html#toJSON\">SlashCommand &rtrif; toJSON</a>"},{"title":"SlashCommand#unload","link":"<a href=\"SlashCommand.html#unload\">SlashCommand &rtrif; unload</a>"},{"title":"SlashCommandInteractionManager","link":"<a href=\"SlashCommandInteractionManager.html\">SlashCommandInteractionManager</a>"},{"title":"SlashCommandInteractionManager#deploy","link":"<a href=\"SlashCommandInteractionManager.html#deploy\">SlashCommandInteractionManager &rtrif; deploy</a>"},{"title":"SlashCommandInteractionManager#deployAll","link":"<a href=\"SlashCommandInteractionManager.html#deployAll\">SlashCommandInteractionManager &rtrif; deployAll</a>"},{"title":"SlashCommandInteractionManager#load","link":"<a href=\"SlashCommandInteractionManager.html#load\">SlashCommandInteractionManager &rtrif; load</a>"},{"title":"SlashCommandInteractionManager#loadAll","link":"<a href=\"SlashCommandInteractionManager.html#loadAll\">SlashCommandInteractionManager &rtrif; loadAll</a>"},{"title":"SlashCommandInteractionManager#reload","link":"<a href=\"SlashCommandInteractionManager.html#reload\">SlashCommandInteractionManager &rtrif; reload</a>"},{"title":"SlashCommandInteractionManager#reloadAll","link":"<a href=\"SlashCommandInteractionManager.html#reloadAll\">SlashCommandInteractionManager &rtrif; reloadAll</a>"},{"title":"SlashCommandInteractionManager#unload","link":"<a href=\"SlashCommandInteractionManager.html#unload\">SlashCommandInteractionManager &rtrif; unload</a>"},{"title":"SlashCommandInteractionManager#unloadAll","link":"<a href=\"SlashCommandInteractionManager.html#unloadAll\">SlashCommandInteractionManager &rtrif; unloadAll</a>"},{"title":"StatusPageChecker","link":"<a href=\"StatusPageChecker.html\">StatusPageChecker</a>"},{"title":"StatusPageChecker#check","link":"<a href=\"StatusPageChecker.html#check\">StatusPageChecker &rtrif; check</a>"},{"title":"StatusPageChecker#updateIncident","link":"<a href=\"StatusPageChecker.html#updateIncident\">StatusPageChecker &rtrif; updateIncident</a>"},{"title":"TranslationManager","link":"<a href=\"TranslationManager.html\">TranslationManager</a>"},{"title":"TranslationManager#delete","link":"<a href=\"TranslationManager.html#delete\">TranslationManager &rtrif; delete</a>"},{"title":"TranslationManager#get","link":"<a href=\"TranslationManager.html#get\">TranslationManager &rtrif; get</a>"},{"title":"TranslationManager#has","link":"<a href=\"TranslationManager.html#has\">TranslationManager &rtrif; has</a>"},{"title":"TranslationManager#list","link":"<a href=\"TranslationManager.html#list\">TranslationManager &rtrif; list</a>"},{"title":"TranslationManager#set","link":"<a href=\"TranslationManager.html#set\">TranslationManager &rtrif; set</a>"},{"title":"TranslationManager#size","link":"<a href=\"TranslationManager.html#size\">TranslationManager &rtrif; size</a>"},{"title":"TranslationManager#translate","link":"<a href=\"TranslationManager.html#translate\">TranslationManager &rtrif; translate</a>"},{"title":"Utilities","link":"<a href=\"Utilities.html\">Utilities</a>"},{"title":"Utilities#generateProgressBar","link":"<a href=\"Utilities.html#generateProgressBar\">Utilities &rtrif; generateProgressBar</a>"},{"title":"Utilities#getReadableTime","link":"<a href=\"Utilities.html#getReadableTime\">Utilities &rtrif; getReadableTime</a>"},{"title":"eventLoad","link":"<a href=\"EventManager.html#event:eventLoad\">eventLoad</a>"},{"title":"eventReload","link":"<a href=\"EventManager.html#event:eventReload\">eventReload</a>"},{"title":"eventUnload","link":"<a href=\"EventManager.html#event:eventUnload\">eventUnload</a>"},{"title":"slashCommandDeploy","link":"<a href=\"InteractionManager.html#event:slashCommandDeploy\">slashCommandDeploy</a>"},{"title":"slashCommandLoad","link":"<a href=\"InteractionManager.html#event:slashCommandLoad\">slashCommandLoad</a>"},{"title":"slashCommandReload","link":"<a href=\"InteractionManager.html#event:slashCommandReload\">slashCommandReload</a>"},{"title":"slashCommandUnload","link":"<a href=\"InteractionManager.html#event:slashCommandUnload\">slashCommandUnload</a>"},{"title":"heartbeat","link":"<a href=\"StatusPageChecker.html#event:heartbeat\">heartbeat</a>"},{"title":"incidentCreate","link":"<a href=\"StatusPageChecker.html#event:incidentCreate\">incidentCreate</a>"},{"title":"incidentUpdate","link":"<a href=\"StatusPageChecker.html#event:incidentUpdate\">incidentUpdate</a>"},{"title":"BadgeData","link":"<a href=\"global.html#BadgeData\">BadgeData</a>"},{"title":"BaseComponentData","link":"<a href=\"global.html#BaseComponentData\">BaseComponentData</a>"},{"title":"BaseInteractionData","link":"<a href=\"global.html#BaseInteractionData\">BaseInteractionData</a>"},{"title":"ContextInteractionData","link":"<a href=\"global.html#ContextInteractionData\">ContextInteractionData</a>"},{"title":"EmojiData","link":"<a href=\"global.html#EmojiData\">EmojiData</a>"},{"title":"EventData","link":"<a href=\"global.html#EventData\">EventData</a>"},{"title":"EventManagerOptions","link":"<a href=\"global.html#EventManagerOptions\">EventManagerOptions</a>"},{"title":"ExperimentData","link":"<a href=\"global.html#ExperimentData\">ExperimentData</a>"},{"title":"IncidentData","link":"<a href=\"global.html#IncidentData\">IncidentData</a>"},{"title":"IncidentDataRaw","link":"<a href=\"global.html#IncidentDataRaw\">IncidentDataRaw</a>"},{"title":"IncidentDataRawComponent","link":"<a href=\"global.html#IncidentDataRawComponent\">IncidentDataRawComponent</a>"},{"title":"IncidentDataRawComponentUpdate","link":"<a href=\"global.html#IncidentDataRawComponentUpdate\">IncidentDataRawComponentUpdate</a>"},{"title":"IncidentDataRawUpdate","link":"<a href=\"global.html#IncidentDataRawUpdate\">IncidentDataRawUpdate</a>"},{"title":"InteractionManagerOptions","link":"<a href=\"global.html#InteractionManagerOptions\">InteractionManagerOptions</a>"},{"title":"LoadAllOptions","link":"<a href=\"global.html#LoadAllOptions\">LoadAllOptions</a>"},{"title":"LogData","link":"<a href=\"global.html#LogData\">LogData</a>"},{"title":"LoggerIcons","link":"<a href=\"global.html#LoggerIcons\">LoggerIcons</a>"},{"title":"LoggerOptions","link":"<a href=\"global.html#LoggerOptions\">LoggerOptions</a>"},{"title":"PartnerData","link":"<a href=\"global.html#PartnerData\">PartnerData</a>"},{"title":"SlashCommandData","link":"<a href=\"global.html#SlashCommandData\">SlashCommandData</a>"},{"title":"StatusPageCheckerOptions","link":"<a href=\"global.html#StatusPageCheckerOptions\">StatusPageCheckerOptions</a>"},{"title":"StatusPageCheckerOptionsColors","link":"<a href=\"global.html#StatusPageCheckerOptionsColors\">StatusPageCheckerOptionsColors</a>"},{"title":"TranslateOptions","link":"<a href=\"global.html#TranslateOptions\">TranslateOptions</a>"},{"title":"TranslationData","link":"<a href=\"global.html#TranslationData\">TranslationData</a>"},{"title":"TranslationManagerOptions","link":"<a href=\"global.html#TranslationManagerOptions\">TranslationManagerOptions</a>"}];
+        var options = 
+          setupSearch(list, options)
+      </script>
+    
 
-<script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"> </script>
-</body>
+    
+
+    
+
+    
+
+
+  </body>
+
 </html>
