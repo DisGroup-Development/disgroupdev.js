@@ -1,0 +1,24 @@
+name: ✨ Feature Request
+description: Request a new feature for disgroupdev.js
+labels: [✨ Enhancement]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: ✨ Feature
+      description: Please provide a detailed description of what this feature is about.
+      placeholder: Maybe add a file which only redirects to Rick Roll...
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: 💡 Ideal Solution or Implementation
+      description: Please provide a description of what you want to happen.
+    validations:
+      required: true
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: 📝 Other Information
+      description: Any other information (e.g. Screenshots) that help us understand and improve your feature request.

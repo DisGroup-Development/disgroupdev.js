@@ -1,0 +1,60 @@
+name: 🐞 Bug Report
+description: Report incorrect or unexpected behavior of disgroupdev.js
+labels: [🐞 Bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Visit our Discord Server for questions: https://discord.gg/xRveKFVUuG
+  - type: textarea
+    id: description
+    attributes:
+      label: 📝 Issue Description
+      description: |
+        Please describe the issue as detailed as possible.
+    validations:
+      required: true
+  - type: textarea
+    id: codesample
+    attributes:
+      label: 💻 Code Sample
+      description: Please provide your code so we can reproduce the issue.
+      render: typescript
+      placeholder: |
+        const { InteractionManager } = require('disgroupdev.js');
+        const { Client } = require('discord.js');
+        
+        const client = new Client({ ... });
+        
+        client.interactions = new InteractionManager(client, { ... });
+        
+        client.interactions.loadAll();
+        
+        client.login('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+  - type: input
+    id: pkg-version
+    attributes:
+      label: 💠 Package Version
+      description: Which version are you using? Run `npm list <Package>` in your project.
+      placeholder: We no longer provide support for version 1
+    validations:
+      required: true
+  - type: input
+    id: node-version
+    attributes:
+      label: 💠 NodeJS Version
+      description: |
+        Which version of Node.js are you using? Run `node --version` in your project directory.
+      placeholder: Node.js version 16.9+ is required for version 2.0.0+
+    validations:
+      required: true
+  - type: dropdown
+      id: os
+      attributes:
+        label: 💠 Operating System
+        description: Please select your operating system.
+        options:
+          - Linux
+          - Windows
+          - macOS
+          - Other

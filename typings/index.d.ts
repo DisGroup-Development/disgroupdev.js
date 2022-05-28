@@ -346,6 +346,10 @@ export interface InteractionManagerEvents {
     modalInteractionReload: [modalInteraction: ModalInteraction];
     modalInteractionUnload: [name: String];
 
+    selectMenuInteractionLoad: [selectMenuInteraction: SelectMenuInteraction];
+    selectMenuInteractionReload: [selectMenuInteraction: SelectMenuInteraction];
+    selectMenuInteractionUnload: [name: String];
+
     slashCommandDeploy: [slashComand: SlashCommand];
     slashCommandLoad: [slashComand: SlashCommand];
     slashCommandReload: [slashComand: SlashCommand];
@@ -369,7 +373,10 @@ export class ModalInteraction extends BaseComponent {
 
     public buildModal(): Modal | DisGroupDevError;
     public get components(): Array<MessageActionRowComponentResolvable>;
+    public load(): Promise<Boolean | DisGroupDevError>;
     public get title(): String;
+    public reload(): Promise<Boolean | DisGroupDevError>;
+    public unload(): Promise<Boolean | DisGroupDevError>;
 
 }
 
@@ -393,6 +400,24 @@ export class ModalInteractionManager {
     public reloadAll(): Promise<Boolean | DisGroupDevError>;
     public unload(name: String): Promise<Boolean | DisGroupDevError>;
     public unloadAll(): Promise<Boolean | DisGroupDevError>;
+
+}
+
+export class SelectMenuInteraction extends BaseComponent {
+
+
+
+}
+
+export interface SelectMenuInteractionData extends BaseComponentData {
+
+
+
+}
+
+export class SelectMenuInteractionManager {
+
+    
 
 }
 
@@ -532,7 +557,7 @@ export interface StatusPageCheckerIncidentDataRaw {
     created_at: String;
     id: String;
     impact: 'none' | 'minor' | 'major' | 'critical';
-    incident_updates: Array<StatusPageCheckerIncidentDataRawIncidentUpdate>;
+    incident_updates: Array<StatusPageCheckerIncidentDataRawUpdate>;
     monitoring_at: String | null;
     name: String;
     page_id: String;
