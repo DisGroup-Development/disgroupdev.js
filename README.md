@@ -4,9 +4,9 @@
     </p>
     <br/>
     <p>
-        <a href="https://discord.gg/xRveKFVUuG"><img src="https://img.shields.io/discord/719506936810438667?color=5865F2&logo=discord&logoColor=white" alt="Discord-Server"/></a>
-        <a href="https://npmjs.com/package/disgroupdev.js"><img src="https://img.shields.io/npm/dt/disgroupdev.js.svg?maxAge=3600" alt="NPM Downloads"/></a>    
-        <a href="https://npmjs.com/package/disgroupdev.js"><img src="https://img.shields.io/npm/v/disgroupdev.js.svg?maxAge=3600" alt="NPM Version"/></a>
+        <a href="https://discord.gg/xRveKFVUuG"><img src="https://img.shields.io/discord/719506936810438667?color=5865F2&logo=discord&logoColor=white&style=for-the-badge" alt="Discord-Server"/></a>
+        <a href="https://npmjs.com/package/disgroupdev.js"><img src="https://img.shields.io/npm/dt/disgroupdev.js.svg?maxAge=3600&style=for-the-badge" alt="NPM Downloads"/></a>    
+        <a href="https://npmjs.com/package/disgroupdev.js"><img src="https://img.shields.io/npm/v/disgroupdev.js.svg?maxAge=3600&style=for-the-badge" alt="NPM Version"/></a>
     </p>
 </div>
 

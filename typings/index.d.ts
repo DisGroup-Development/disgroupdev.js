@@ -337,6 +337,10 @@ export interface InteractionManagerEvents {
     contextInteractionReload: [contextInteraction: ContextInteraction];
     contextInteractionUnload: [name: String];
 
+    modalInteractionLoad: [modalInteraction: ModalInteraction];
+    modalInteractionReload: [modalInteraction: ModalInteraction];
+    modalInteractionUnload: [name: String];
+
     slashCommandDeploy: [slashComand: SlashCommand];
     slashCommandLoad: [slashComand: SlashCommand];
     slashCommandReload: [slashComand: SlashCommand];
