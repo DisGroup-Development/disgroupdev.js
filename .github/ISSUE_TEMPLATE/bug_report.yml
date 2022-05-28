@@ -49,14 +49,14 @@ body:
     validations:
       required: true
   - type: dropdown
-      id: os
-      attributes:
-        label: 💠 Operating System
-        description: Please select your operating system.
-        options:
-          - Linux
-          - Windows
-          - macOS
-          - Other
+    id: os
+    attributes:
+      label: 💠 Operating System
+      description: Please select your operating system.
+      options:
+        - Linux
+        - Windows
+        - macOS
+        - Other
     validations:
       required: true
