@@ -135,6 +135,9 @@ export class ContextInteraction extends BaseInteraction {
     public manager: ContextInteractionManager;
     public data: ContextInteractionData;
 
+    public get defaultEnabled(): Boolean;
+    public deploy(): Promise<Boolean | DisGroupDevError>;
+    public get deployEnabled(): Boolean;
     public load(): Promise<Boolean | DisGroupDevError>;
     public reload(): Promise<Boolean | DisGroupDevError>;
     public unload(): Promise<Boolean | DisGroupDevError>;
@@ -143,6 +146,8 @@ export class ContextInteraction extends BaseInteraction {
 
 export interface ContextInteractionData extends BaseInteractionData {
 
+    defaultEnabled: Boolean;
+    deployEnabled: Boolean;
     type: ApplicationCommandType;
 
 }
@@ -327,16 +332,21 @@ export class InteractionManager extends EventEmitter {
 
 export interface InteractionManagerEvents {
 
-    slashCommandDeploy: [slashComand: SlashCommand],
-    slashCommandLoad: [slashComand: SlashCommand],
-    slashCommandReload: [slashComand: SlashCommand],
-    slashCommandUnload: [name: String],
+    contextInteractionDeploy: [contextInteraction: ContextInteraction];
+    contextInteractionLoad: [contextInteraction: ContextInteraction];
+    contextInteractionReload: [contextInteraction: ContextInteraction];
+    contextInteractionUnload: [name: String];
+
+    slashCommandDeploy: [slashComand: SlashCommand];
+    slashCommandLoad: [slashComand: SlashCommand];
+    slashCommandReload: [slashComand: SlashCommand];
+    slashCommandUnload: [name: String];
 
 }
 
 export interface InteractionManagerOptions {
 
-    guildIDs: Snowflake[],
+    guildIDs: Snowflake[];
     locationSlashCommands: String | null;
 
 }
