@@ -31,7 +31,7 @@
 
 
     <title>
-      utils/Utilities.js
+      structures/interaction/SelectMenuInteraction.js
     </title>
 
     <!--[if lt IE 9]>
@@ -98,7 +98,7 @@
     <div id="main" class="main-content">
       
       <h1 id='page-title' class="page-title">
-        utils/Utilities.js
+        structures/interaction/SelectMenuInteraction.js
       </h1>
       
 
@@ -109,98 +109,194 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const { FormattingPatterns } = require('discord-api-types/v10');
+            <pre class="prettyprint source linenums"><code>const { Client, MessageSelectMenu, MessageSelectOptionData, PermissionString, TextBasedChannelTypes } = require('discord.js');
+const BaseComponent = require('./BaseComponent');
 
-const { DisGroupDevError, Messages } = require('../errors/DisGroupDevError');
+const { DisGroupDevError, Messages } = require('../../errors/DisGroupDevError');
 
 /**
- * Utilities class.
+ * @typedef {Object} ExperimentData
+ * @property {Boolean} required If the experiment is required to execute the select menu interaction
+ * @property {Number} id The id of the experiment
+ */
+
+/**
+ * @typedef {Object} SelectMenuInteractionData
+ * @property {String} name The name of the select menu interaction
+ * @property {Boolean} enabled If the select menu interaction is enabled (default: false)
+ * @property {Array&lt;PermissionString>} clientPermissions The permissions required for the client to execute the select menu interaction (default: [])
+ * @property {Array&lt;PermissionString>} userPermissions The permissions required for the user to execute the select menu interaction (default: [])
+ * @property {String} category The category of the select menu interaction (Will be set automatically. default: "Other")
+ * @property {Number} cooldown The cooldown of the select menu interaction in seconds (default: 5)
+ * @property {String} customId The custom id of the select menu interaction
+ * @property {Boolean} defer If the select menu interaction should be deferred (default: true)
+ * @property {String} dirname The dirname of the select menu interaction (Will be set automatically)
+ * @property {Boolean} disabled If the select menu is disabled (default: false)
+ * @property {Boolean} ephemeral If the response is ephemeral (default: false)
+ * @property {ExperimentData} experiment If the select menu interaction is an experiment (default: { required: false, id: null })
+ * @property {String} location The location of the select menu interaction (Will be set automatically)
+ * @property {Number} maxValues The maximum amount of values the user can choose from the select menu (default: 1)
+ * @property {Number} minValues The minimum amount of values the user can choose from the select menu (default: 1)
+ * @property {MessageSelectOptionData[]} options The options of the select menu
+ * @property {String} placeholder The placeholder of the select menu
+ * @property {Boolean} betaOnly If the command is only available in beta (default: false)
+ * @property {Array&lt;TextBasedChannelTypes>} channelOnly An array of all channel types the select menu interaction is available in (default: ALL)
+ * @property {Boolean} devOnly If the select menu interaction can only be executed by developers (default: false)
+ * @property {Boolean} guildOnly If the select menu interaction can only be executed in guilds (default: true)
+ * @property {Boolean} ownerOnly If the select menu interaction can only be executed by the owner of the bot (default: true)
+ * @property {Boolean} premiumOnly If the select menu interaction can only be executed by guilds who have premium perks (default: false)
+ * @property {Boolean} nsfw If the select menu interaction can only be executed in NSFW channels (default: false)
+ */
+
+/**
+ * The select menu interaction class.
  * @class
  */
-class Utilities {
+class SelectMenuInteraction extends BaseComponent {
 
-    constructor() {
+    /**
+     * The constructor of the select menu interaction class.
+     * @param {Client} client
+     * @param {SelectMenuInteractionManager} manager
+     * @param {SelectMenuInteractionData} data
+     */
+    constructor(client, manager, data = {}) {
 
-        this.REGEXES = {
+        super(client, data);
 
-            Channel: FormattingPatterns.Channel,
-            ChannelMention: new RegExp('/^&lt;#(?&lt;id>\d{17,19})>$/'),
-            ChannelMessageMention: new RegExp('/^(?&lt;channelId>\d{17,19})-(?&lt;messageId>\d{17,19})$/'),
-            DiscordHostname: new RegExp('/(?&lt;subdomain>\w+)\.?(?&lt;hostname>dis(?:cord)?(?:app|merch|status)?)\.(?&lt;tld>com|g(?:d|g|ift)|(?:de(?:sign|v))|media|new|store|net)/i'),
-            DiscordInvite: new RegExp('/^(?:https?:\/\/)?(?:www\.)?(?:discord\.gg\/|discord(?:app)?\.com\/invite\/)?(?&lt;code>[\w\d-]{2,})$/i'),
-            Emoji: FormattingPatterns.Emoji,
-            EmojiAnimated: FormattingPatterns.AnimatedEmoji,
-            EmojiStatic: FormattingPatterns.StaticEmoji,
-            Http: new RegExp('/^https?:\/\//'),
-            MessageLink: new RegExp('/^(?:https:\/\/)?(?:ptb\.|canary\.)?discord(?:app)?\.com\/channels\/(?&lt;guildId>(?:\d{17,19}|@me))\/(?&lt;channelId>\d{17,19})\/(?&lt;messageId>\d{17,19})$/'),
-            Role: FormattingPatterns.Role,
-            RoleMention: new RegExp('/^&lt;@&amp;(?&lt;id>\d{17,19})>$/'),
-            Snowflake: new RegExp('/^(?&lt;id>\d{17,19})$/'),
-            Timestamp: FormattingPatterns.Timestamp,
-            TimestampStyled: FormattingPatterns.StyledTimestamp,
-            Token: new RegExp('/(?&lt;mfaToken>mfa\.[a-z0-9_-]{20,})|(?&lt;basicToken>[a-z0-9_-]{23,28}\.[a-z0-9_-]{6,7}\.[a-z0-9_-]{27})/i'),
-            User: FormattingPatterns.User,
-            UserOrMemberMention: new RegExp('/^&lt;@!?(?&lt;id>\d{17,19})>$/'),
-            UserWithNickname: FormattingPatterns.UserWithNickname,
-            UserWithOptionalNickname: FormattingPatterns.UserWithOptionalNickname,
-            Webhook: new RegExp('/(?&lt;url>^https:\/\/(?:(?:canary|ptb).)?discord(?:app)?.com\/api(?:\/v\d+)?\/webhooks\/(?&lt;id>\d+)\/(?&lt;token>[\w-]+)\/?$)/'),
-            Websocket: new RegExp('/^wss?:\/\//'),
+        /**
+         * The select menu interaction manager
+         * @type {SelectMenuInteractionManager}
+         * @public
+         */
+        this.manager = manager;
+
+        /**
+         * The raw data of the select menu interaction
+         * @type {SelectMenuInteractionData}
+         * @private
+         */
+        this.data = data;
+
+    }
+
+    /**
+     * Builds the select menu
+     * @returns {MessageSelectMenu|DisGroupDevError}
+     * @public
+     */
+    buildSelectMenu() {
+
+        try {
+
+            const selectMenu = new MessageSelectMenu()
+                .setCustomId(this.customId)
+                .setDisabled(this.disabled)
+                .setMaxValues(this.maxValues)
+                .setMinValues(this.minValues)
+                .setOptions(this.options)
+                .setPlaceholder(this.placeholder)
+
+            return selectMenu;
+
+        } catch (e) {
+
+            throw new DisGroupDevError(e);
 
         }
 
     }
 
     /**
-     * Generate a progress bar for example for a player
-     * @param {Number} current Where it currently is (ms)
-     * @param {Number} all Where the end is (Ms)
-     * @param {Object} options The options for generating the progress bar
-     * @returns {String}
+     * If the select menu is disabled
+     * @returns {Boolean}
      * @public
      */
-    generateProgressBar(current, all, options = { current: '🔘', length: 40, line: '▬' }) {
+    get disabled() {
 
-        const time = current / all;
-        const currentProgress = Math.round(options.length * time);
-        const emptyBar = Math.round(options.length - currentProgress);
-        const barText = options.line.repeat(currentProgress).replace(/.$/, options.current);
-        const emptyBarText = options.line.repeat(emptyBar);
-
-        return barText + emptyBarText;
+        return this.data.disabled ?? false;
 
     }
 
     /**
-     * Gets you a readable date in hh.mm.ss
-     * @param {Date} date
-     * @returns {String}
+     * Reloads the select menu interaction
+     * @returns {Promise&lt;Boolean|DisGroupDevError>}
      * @public
      */
-    getReadableTime(date) {
+    load() {
 
-        if(Object.prototype.toString.call(date) !== '[object Date]') throw new DisGroupDevError(Messages.INVALID_DATE);
+        return this.manager.load(this.location);
 
-        function fT(d, t) {
+    }
 
-            let _t = t;
+    /**
+     * The max values of the select menu
+     * @returns {Number}
+     * @public
+     */
+    get maxValues() {
 
-            while(_t.toString().length &lt; d) {
+        return this.data.maxValues ?? 1;
 
-                _t = '0' + _t;
+    }
 
-            }
+    /**
+     * The min values of the select menu
+     * @returns {Number}
+     * @public
+     */
+    get minValues() {
 
-            return _t;
+        return this.data.minValues ?? 1;
 
-        }
+    }
 
-        return (fT(2, date.getHours()) + ':' + fT(2, date.getMinutes()) + ':' + fT(2, date.getSeconds()));
+    /**
+     * The options of the select menu
+     * @returns {MessageSelectOptionData[]}
+     * @public
+     */
+    get options() {
+
+        return this.data.options ?? [];
+
+    }
+
+    /**
+     * The placeholder of the select menu
+     * @returns {String|null}
+     */
+    get placeholder() {
+
+        return this.data.placeholder ?? null;
+
+    }
+
+    /**
+     * Reloads the select menu interaction
+     * @returns {Promise&lt;Boolean|DisGroupDevError>}
+     * @public
+     */
+    reload() {
+
+        return this.manager.reload(this.name);
+
+    }
+
+    /**
+     * Unloads the select menu interaction
+     * @returns {Promise&lt;Boolean|DisGroupDevError>}
+     * @public
+     */
+    unload() {
+
+        return this.manager.unload(this.name);
 
     }
 
 }
 
-module.exports = Utilities;</code></pre>
+module.exports = SelectMenuInteraction;</code></pre>
         </article>
     </section>
 

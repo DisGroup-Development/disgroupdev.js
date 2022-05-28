@@ -417,7 +417,7 @@ export interface SelectMenuInteractionData extends BaseComponentData {
 
 export class SelectMenuInteractionManager {
 
-    
+
 
 }
 

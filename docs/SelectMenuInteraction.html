@@ -31,7 +31,7 @@
 
 
     <title>
-      utils/Utilities.js
+      SelectMenuInteraction
     </title>
 
     <!--[if lt IE 9]>
@@ -98,7 +98,7 @@
     <div id="main" class="main-content">
       
       <h1 id='page-title' class="page-title">
-        utils/Utilities.js
+        SelectMenuInteraction
       </h1>
       
 
@@ -106,103 +106,1138 @@
 
 
 
+
+<section>
+
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>const { FormattingPatterns } = require('discord-api-types/v10');
+        
+        <h2>
+        
+        SelectMenuInteraction
+        
+        </h2>
+        
+        
+            <div class="class-description"><p>The select menu interaction class.</p></div>
+        
+    
+</header>
 
-const { DisGroupDevError, Messages } = require('../errors/DisGroupDevError');
 
-/**
- * Utilities class.
- * @class
- */
-class Utilities {
+<article>
+    <div class="container-overview">
+    
+        
 
-    constructor() {
+    
+        <h2>Constructor</h2>
+    
 
-        this.REGEXES = {
+    <h4 class="name" id="SelectMenuInteraction">
+        <a href="#SelectMenuInteraction">#</a>
+        <span class="type-signature"></span>new SelectMenuInteraction<span class="signature">(client, manager, data)</span><span class="type-signature"></span>
+    </h4>
 
-            Channel: FormattingPatterns.Channel,
-            ChannelMention: new RegExp('/^&lt;#(?&lt;id>\d{17,19})>$/'),
-            ChannelMessageMention: new RegExp('/^(?&lt;channelId>\d{17,19})-(?&lt;messageId>\d{17,19})$/'),
-            DiscordHostname: new RegExp('/(?&lt;subdomain>\w+)\.?(?&lt;hostname>dis(?:cord)?(?:app|merch|status)?)\.(?&lt;tld>com|g(?:d|g|ift)|(?:de(?:sign|v))|media|new|store|net)/i'),
-            DiscordInvite: new RegExp('/^(?:https?:\/\/)?(?:www\.)?(?:discord\.gg\/|discord(?:app)?\.com\/invite\/)?(?&lt;code>[\w\d-]{2,})$/i'),
-            Emoji: FormattingPatterns.Emoji,
-            EmojiAnimated: FormattingPatterns.AnimatedEmoji,
-            EmojiStatic: FormattingPatterns.StaticEmoji,
-            Http: new RegExp('/^https?:\/\//'),
-            MessageLink: new RegExp('/^(?:https:\/\/)?(?:ptb\.|canary\.)?discord(?:app)?\.com\/channels\/(?&lt;guildId>(?:\d{17,19}|@me))\/(?&lt;channelId>\d{17,19})\/(?&lt;messageId>\d{17,19})$/'),
-            Role: FormattingPatterns.Role,
-            RoleMention: new RegExp('/^&lt;@&amp;(?&lt;id>\d{17,19})>$/'),
-            Snowflake: new RegExp('/^(?&lt;id>\d{17,19})$/'),
-            Timestamp: FormattingPatterns.Timestamp,
-            TimestampStyled: FormattingPatterns.StyledTimestamp,
-            Token: new RegExp('/(?&lt;mfaToken>mfa\.[a-z0-9_-]{20,})|(?&lt;basicToken>[a-z0-9_-]{23,28}\.[a-z0-9_-]{6,7}\.[a-z0-9_-]{27})/i'),
-            User: FormattingPatterns.User,
-            UserOrMemberMention: new RegExp('/^&lt;@!?(?&lt;id>\d{17,19})>$/'),
-            UserWithNickname: FormattingPatterns.UserWithNickname,
-            UserWithOptionalNickname: FormattingPatterns.UserWithOptionalNickname,
-            Webhook: new RegExp('/(?&lt;url>^https:\/\/(?:(?:canary|ptb).)?discord(?:app)?.com\/api(?:\/v\d+)?\/webhooks\/(?&lt;id>\d+)\/(?&lt;token>[\w-]+)\/?$)/'),
-            Websocket: new RegExp('/^wss?:\/\//'),
+    
 
-        }
 
-    }
 
-    /**
-     * Generate a progress bar for example for a player
-     * @param {Number} current Where it currently is (ms)
-     * @param {Number} all Where the end is (Ms)
-     * @param {Object} options The options for generating the progress bar
-     * @returns {String}
-     * @public
-     */
-    generateProgressBar(current, all, options = { current: '🔘', length: 40, line: '▬' }) {
+    <div class="description">
+        <p>The constructor of the select menu interaction class.</p>
+    </div>
 
-        const time = current / all;
-        const currentProgress = Math.round(options.length * time);
-        const emptyBar = Math.round(options.length - currentProgress);
-        const barText = options.line.repeat(currentProgress).replace(/.$/, options.current);
-        const emptyBarText = options.line.repeat(emptyBar);
 
-        return barText + emptyBarText;
 
-    }
 
-    /**
-     * Gets you a readable date in hh.mm.ss
-     * @param {Date} date
-     * @returns {String}
-     * @public
-     */
-    getReadableTime(date) {
 
-        if(Object.prototype.toString.call(date) !== '[object Date]') throw new DisGroupDevError(Messages.INVALID_DATE);
 
-        function fT(d, t) {
 
-            let _t = t;
 
-            while(_t.toString().length &lt; d) {
 
-                _t = '0' + _t;
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Parameters:</strong>
+        
 
-            }
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
 
-            return _t;
+        <th>Type</th>
 
-        }
+        
 
-        return (fT(2, date.getHours()) + ':' + fT(2, date.getMinutes()) + ':' + fT(2, date.getSeconds()));
+        
 
-    }
+        <th class="last">Description</th>
+    </tr>
+    </thead>
 
-}
+    <tbody>
+    
 
-module.exports = Utilities;</code></pre>
-        </article>
-    </section>
+        <tr>
+            
+                <td class="name"><code>client</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Client</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>manager</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="SelectMenuInteractionManager.html">SelectMenuInteractionManager</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#SelectMenuInteractionData">SelectMenuInteractionData</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_SelectMenuInteraction.js.html">structures/interaction/SelectMenuInteraction.js</a>, <a href="structures_interaction_SelectMenuInteraction.js.html#line44">line 44</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="disabled">
+    <a href="#disabled">#</a>
+    <span class="type-signature"></span>disabled<span class="type-signature"></span>
+</h4>
+
+
+
+
+<div class="description">
+    <p>If the select menu is disabled</p>
+</div>
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_SelectMenuInteraction.js.html">structures/interaction/SelectMenuInteraction.js</a>, <a href="structures_interaction_SelectMenuInteraction.js.html#line104">line 104</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="manager">
+    <a href="#manager">#</a>
+    <span class="type-signature"></span>manager<span class="type-signature"> :<a href="SelectMenuInteractionManager.html">SelectMenuInteractionManager</a></span>
+</h4>
+
+
+
+
+<div class="description">
+    <p>The select menu interaction manager</p>
+</div>
+
+
+
+    <div class="member-item-container flex">
+        <strong>Type: </strong>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="SelectMenuInteractionManager.html">SelectMenuInteractionManager</a></span>
+
+
+            </li>
+        </ul>
+    </div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_SelectMenuInteraction.js.html">structures/interaction/SelectMenuInteraction.js</a>, <a href="structures_interaction_SelectMenuInteraction.js.html#line61">line 61</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="maxValues">
+    <a href="#maxValues">#</a>
+    <span class="type-signature"></span>maxValues<span class="type-signature"></span>
+</h4>
+
+
+
+
+<div class="description">
+    <p>The max values of the select menu</p>
+</div>
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_SelectMenuInteraction.js.html">structures/interaction/SelectMenuInteraction.js</a>, <a href="structures_interaction_SelectMenuInteraction.js.html#line126">line 126</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="minValues">
+    <a href="#minValues">#</a>
+    <span class="type-signature"></span>minValues<span class="type-signature"></span>
+</h4>
+
+
+
+
+<div class="description">
+    <p>The min values of the select menu</p>
+</div>
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_SelectMenuInteraction.js.html">structures/interaction/SelectMenuInteraction.js</a>, <a href="structures_interaction_SelectMenuInteraction.js.html#line137">line 137</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="options">
+    <a href="#options">#</a>
+    <span class="type-signature"></span>options<span class="type-signature"></span>
+</h4>
+
+
+
+
+<div class="description">
+    <p>The options of the select menu</p>
+</div>
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_SelectMenuInteraction.js.html">structures/interaction/SelectMenuInteraction.js</a>, <a href="structures_interaction_SelectMenuInteraction.js.html#line148">line 148</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="placeholder">
+    <a href="#placeholder">#</a>
+    <span class="type-signature"></span>placeholder<span class="type-signature"></span>
+</h4>
+
+
+
+
+<div class="description">
+    <p>The placeholder of the select menu</p>
+</div>
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_SelectMenuInteraction.js.html">structures/interaction/SelectMenuInteraction.js</a>, <a href="structures_interaction_SelectMenuInteraction.js.html#line158">line 158</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="buildSelectMenu">
+        <a href="#buildSelectMenu">#</a>
+        <span class="type-signature"></span>buildSelectMenu<span class="signature">()</span><span class="type-signature"> &rarr; {MessageSelectMenu|<a href="DisGroupDevError.html">DisGroupDevError</a>}</span>
+    </h4>
+
+    
+
+
+
+    <div class="description">
+        <p>Builds the select menu</p>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_SelectMenuInteraction.js.html">structures/interaction/SelectMenuInteraction.js</a>, <a href="structures_interaction_SelectMenuInteraction.js.html#line77">line 77</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">MessageSelectMenu</span>
+|
+
+<span class="param-type"><a href="DisGroupDevError.html">DisGroupDevError</a></span>
+
+
+    </dd>
+</dl>
+
+            
+    </div>
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="load">
+        <a href="#load">#</a>
+        <span class="type-signature"></span>load<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;(Boolean|<a href="DisGroupDevError.html">DisGroupDevError</a>)>}</span>
+    </h4>
+
+    
+
+
+
+    <div class="description">
+        <p>Reloads the select menu interaction</p>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_SelectMenuInteraction.js.html">structures/interaction/SelectMenuInteraction.js</a>, <a href="structures_interaction_SelectMenuInteraction.js.html#line115">line 115</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;(Boolean|<a href="DisGroupDevError.html">DisGroupDevError</a>)></span>
+
+
+    </dd>
+</dl>
+
+            
+    </div>
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="reload">
+        <a href="#reload">#</a>
+        <span class="type-signature"></span>reload<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;(Boolean|<a href="DisGroupDevError.html">DisGroupDevError</a>)>}</span>
+    </h4>
+
+    
+
+
+
+    <div class="description">
+        <p>Reloads the select menu interaction</p>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_SelectMenuInteraction.js.html">structures/interaction/SelectMenuInteraction.js</a>, <a href="structures_interaction_SelectMenuInteraction.js.html#line169">line 169</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;(Boolean|<a href="DisGroupDevError.html">DisGroupDevError</a>)></span>
+
+
+    </dd>
+</dl>
+
+            
+    </div>
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="unload">
+        <a href="#unload">#</a>
+        <span class="type-signature"></span>unload<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;(Boolean|<a href="DisGroupDevError.html">DisGroupDevError</a>)>}</span>
+    </h4>
+
+    
+
+
+
+    <div class="description">
+        <p>Unloads the select menu interaction</p>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_SelectMenuInteraction.js.html">structures/interaction/SelectMenuInteraction.js</a>, <a href="structures_interaction_SelectMenuInteraction.js.html#line180">line 180</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;(Boolean|<a href="DisGroupDevError.html">DisGroupDevError</a>)></span>
+
+
+    </dd>
+</dl>
+
+            
+    </div>
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

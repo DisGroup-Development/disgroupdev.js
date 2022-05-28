@@ -31,7 +31,7 @@
 
 
     <title>
-      utils/Utilities.js
+      managers/interaction/SelectMenuInteractionManager.js
     </title>
 
     <!--[if lt IE 9]>
@@ -98,7 +98,7 @@
     <div id="main" class="main-content">
       
       <h1 id='page-title' class="page-title">
-        utils/Utilities.js
+        managers/interaction/SelectMenuInteractionManager.js
       </h1>
       
 
@@ -109,98 +109,281 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const { FormattingPatterns } = require('discord-api-types/v10');
+            <pre class="prettyprint source linenums"><code>const { Client, Collection, Guild } = require('discord.js');
+const SelectMenuInteraction = require('../../structures/interaction/SelectMenuInteraction');
 
-const { DisGroupDevError, Messages } = require('../errors/DisGroupDevError');
+const { DisGroupDevError, Messages } = require('../../errors/DisGroupDevError');
+
+const readDirectory = require('node:util').promisify(require('node:fs').readdir);
+const statDirectory = require('node:util').promisify(require('node:fs').stat);
 
 /**
- * Utilities class.
+ * The select menu interaction manager.
  * @class
  */
-class Utilities {
+class SelectMenuInteractionManager {
 
-    constructor() {
+    /**
+     * The constructor of the select menu interaction manager class.
+     * @param {Client} client
+     * @param {InteractionManager} interactionManager
+     */
+    constructor(client, interactionManager) {
 
-        this.REGEXES = {
+        /**
+         * The cache with all select menu interactions
+         * @type {Collection&lt;String, SelectMenuInteraction>}
+         * @public
+         */
+        this.cache = new Collection();
 
-            Channel: FormattingPatterns.Channel,
-            ChannelMention: new RegExp('/^&lt;#(?&lt;id>\d{17,19})>$/'),
-            ChannelMessageMention: new RegExp('/^(?&lt;channelId>\d{17,19})-(?&lt;messageId>\d{17,19})$/'),
-            DiscordHostname: new RegExp('/(?&lt;subdomain>\w+)\.?(?&lt;hostname>dis(?:cord)?(?:app|merch|status)?)\.(?&lt;tld>com|g(?:d|g|ift)|(?:de(?:sign|v))|media|new|store|net)/i'),
-            DiscordInvite: new RegExp('/^(?:https?:\/\/)?(?:www\.)?(?:discord\.gg\/|discord(?:app)?\.com\/invite\/)?(?&lt;code>[\w\d-]{2,})$/i'),
-            Emoji: FormattingPatterns.Emoji,
-            EmojiAnimated: FormattingPatterns.AnimatedEmoji,
-            EmojiStatic: FormattingPatterns.StaticEmoji,
-            Http: new RegExp('/^https?:\/\//'),
-            MessageLink: new RegExp('/^(?:https:\/\/)?(?:ptb\.|canary\.)?discord(?:app)?\.com\/channels\/(?&lt;guildId>(?:\d{17,19}|@me))\/(?&lt;channelId>\d{17,19})\/(?&lt;messageId>\d{17,19})$/'),
-            Role: FormattingPatterns.Role,
-            RoleMention: new RegExp('/^&lt;@&amp;(?&lt;id>\d{17,19})>$/'),
-            Snowflake: new RegExp('/^(?&lt;id>\d{17,19})$/'),
-            Timestamp: FormattingPatterns.Timestamp,
-            TimestampStyled: FormattingPatterns.StyledTimestamp,
-            Token: new RegExp('/(?&lt;mfaToken>mfa\.[a-z0-9_-]{20,})|(?&lt;basicToken>[a-z0-9_-]{23,28}\.[a-z0-9_-]{6,7}\.[a-z0-9_-]{27})/i'),
-            User: FormattingPatterns.User,
-            UserOrMemberMention: new RegExp('/^&lt;@!?(?&lt;id>\d{17,19})>$/'),
-            UserWithNickname: FormattingPatterns.UserWithNickname,
-            UserWithOptionalNickname: FormattingPatterns.UserWithOptionalNickname,
-            Webhook: new RegExp('/(?&lt;url>^https:\/\/(?:(?:canary|ptb).)?discord(?:app)?.com\/api(?:\/v\d+)?\/webhooks\/(?&lt;id>\d+)\/(?&lt;token>[\w-]+)\/?$)/'),
-            Websocket: new RegExp('/^wss?:\/\//'),
+        /**
+         * The client
+         * @type {Client}
+         * @public
+         */
+        this.client = client;
 
-        }
+        /**
+         * The interaction manager
+         * @type {InteractionManager}
+         * @public
+         */
+        this.manager = interactionManager;
 
     }
 
     /**
-     * Generate a progress bar for example for a player
-     * @param {Number} current Where it currently is (ms)
-     * @param {Number} all Where the end is (Ms)
-     * @param {Object} options The options for generating the progress bar
-     * @returns {String}
+     * Loads one specific select menu interaction
+     * @param {String} path
+     * @returns {Promise&lt;Boolean|DisGroupDevError>}
      * @public
      */
-    generateProgressBar(current, all, options = { current: '🔘', length: 40, line: '▬' }) {
+    load(path) {
 
-        const time = current / all;
-        const currentProgress = Math.round(options.length * time);
-        const emptyBar = Math.round(options.length - currentProgress);
-        const barText = options.line.repeat(currentProgress).replace(/.$/, options.current);
-        const emptyBarText = options.line.repeat(emptyBar);
+        return new Promise(async (resolve, reject) => {
 
-        return barText + emptyBarText;
+            try {
 
-    }
+                /** @type {SelectMenuInteraction} */
+                const selectMenuInteraction = new(require(path))(this.client, this.manager);
 
-    /**
-     * Gets you a readable date in hh.mm.ss
-     * @param {Date} date
-     * @returns {String}
-     * @public
-     */
-    getReadableTime(date) {
+                selectMenuInteraction.location = path;
 
-        if(Object.prototype.toString.call(date) !== '[object Date]') throw new DisGroupDevError(Messages.INVALID_DATE);
+                if(selectMenuInteraction.init &amp;&amp; typeof selectMenuInteraction.init === 'function') selectMenuInteraction.init();
+                if(!selectMenuInteraction.execute || typeof selectMenuInteraction.execute !== 'function') reject(new DisGroupDevError(Messages.INVALID_EXECUTE(selectMenuInteraction.name)));
 
-        function fT(d, t) {
+                this.cache.set(selectMenuInteraction.name, selectMenuInteraction);
 
-            let _t = t;
+                /**
+                 * Emitted when a select menu interaction is loaded.
+                 * @event InteractionManager#selectMenuInteractionLoad
+                 * @param {SelectMenuInteraction} selectMenuInteraction The select menu interaction
+                 * @public
+                 */
+                this.manager.emit('selectMenuInteractionLoad', selectMenuInteraction);
 
-            while(_t.toString().length &lt; d) {
+                resolve(true);
 
-                _t = '0' + _t;
+            } catch (e) {
+
+                reject(new DisGroupDevError(e));
 
             }
 
-            return _t;
+        });
 
-        }
+    }
 
-        return (fT(2, date.getHours()) + ':' + fT(2, date.getMinutes()) + ':' + fT(2, date.getSeconds()));
+    /**
+     * Loads all select menu interactions
+     * @returns {Promise&lt;Boolean|DisGroupDevError>}
+     * @public
+     */
+    loadAll() {
+
+        return new Promise(async (resolve, reject) => {
+
+            try {
+
+                const selectMenuInteractionDirectory = await readDirectory(this.manager.options.locationSelectMenuInteractions);
+
+                for(const selectMenuInteractionDirectoryCategoryOrFile of selectMenuInteractionDirectory) {
+
+                    const selectMenuInteractionDirectoryStat = await statDirectory(require('node:path').resolve(this.manager.options.locationSelectMenuInteractions, selectMenuInteractionDirectoryCategoryOrFile));
+
+                    if(selectMenuInteractionDirectoryStat.isDirectory()) {
+
+                        const selectMenuInteractionDirectoryCategory = await readDirectory(require('node:paht').resolve(this.manager.options.locationSelectMenuInteractions, selectMenuInteractionDirectoryCategoryOrFile));
+
+                        for(const selectMenuInteractionDirectoryCategoryFile of selectMenuInteractionDirectoryCategory) {
+
+                            await this.load(`${this.manager.options.locationSelectMenuInteractions}/${selectMenuInteractionDirectoryCategoryOrFile}/${selectMenuInteractionDirectoryCategoryFile}`);
+
+                        }
+
+                    } else if(selectMenuInteractionDirectoryStat.isFile()) {
+
+                        await this.load(`${this.manager.options.locationSelectMenuInteractions}/${selectMenuInteractionDirectoryCategoryOrFile}`);
+
+                    }
+
+                }
+
+                resolve(true);
+
+            } catch (e) {
+
+                reject(new DisGroupDevError(e));
+
+            }
+
+        });
+
+    }
+
+    /**
+     * Reloads one specific select menu interaction
+     * @param {String} name
+     * @returns {Promise&lt;Boolean|DisGroupDevError>}
+     * @public
+     */
+    reload(name) {
+
+        return new Promise(async (resolve, reject) => {
+
+            if(!this.cache.has(name)) reject(new DisGroupDevError(Messages.SELECT_MENU_INTERACTION_NOT_FOUND(name)));
+
+            const { location } = require(this.cache.get(name));
+
+            try {
+
+                await this.unload(name);
+                await this.load(location);
+
+                const selectMenuInteraction = this.cache.get(name);
+
+                /**
+                 * Emitted when a select menu interaction is reloaded.
+                 * @event InteractionManager#selectMenuInteractionReload
+                 * @param {SelectMenuInteraction} selectMenuInteraction The select menu interaction
+                 * @public
+                 */
+                this.manager.emit('selectMenuInteractionReload', selectMenuInteraction);
+
+                resolve(true);
+
+            } catch(e) {
+
+                reject(new DisGroupDevError(e));
+
+            }
+
+        });
+
+    }
+
+    /**
+     * Reloads all select menu interactions
+     * @returns {Promise&lt;Boolean|DisGroupDevError>}
+     * @public
+     */
+    reloadAll() {
+
+        return new Promise(async (resolve, reject) => {
+
+            try {
+
+                for(const selectMenuInteraction of this.cache) {
+
+                    await this.unload(selectMenuInteraction.name);
+
+                }
+
+                await this.loadAll();
+
+                resolve(true);
+
+            } catch(e) {
+
+                reject(new DisGroupDevError(e));
+
+            }
+
+        });
+
+    }
+
+    /**
+     * Unloads one specific select menu interaction
+     * @param {String} name
+     * @returns {Promise&lt;Boolean|DisGroupDevError>}
+     * @public
+     */
+    unload(name) {
+
+        return new Promise(async (resolve, reject) => {
+
+            if(!this.cache.has(name)) reject(new DisGroupDevError(Messages.SELECT_MENU_INTERACTION_NOT_FOUND(name)));
+
+            try {
+
+                delete require.cache[require.resolve(this.cache.get(name).location)];
+
+                this.cache.delete(name);
+
+                /**
+                 * Emitted when a select menu interaction is unloaded.
+                 * @event InteractionManager#selectMenuInteractionUnload
+                 * @param {String} name The name of the select menu interaction
+                 * @public
+                 */
+                this.manager.emit('selectMenuInteractionUnload', name);
+
+                resolve(true);
+
+            } catch(e) {
+
+                reject(new DisGroupDevError(e));
+
+            }
+
+        });
+
+    }
+
+    /**
+     * Unloads all select menu interactions
+     * @returns {Promise&lt;Boolean|DisGroupDevError>}
+     * @public
+     */
+    unloadAll() {
+
+        return new Promise(async (resolve, reject) => {
+
+            try {
+
+                for(const selectMenuInteraction of this.cache) {
+
+                    await this.unload(selectMenuInteraction.name);
+
+                }
+
+                resolve(true);
+
+            } catch (e) {
+
+                reject(new DisGroupDevError(e));
+
+            }
+
+        });
 
     }
 
 }
 
-module.exports = Utilities;</code></pre>
+module.exports = SelectMenuInteractionManager;</code></pre>
         </article>
     </section>
 
