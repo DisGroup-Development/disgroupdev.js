@@ -2,7 +2,10 @@ import {
     ApplicationCommandOptionData,
     ApplicationCommandType,
     Client,
-    Collection, MessageEmbed,
+    Collection,
+    MessageActionRowComponentResolvable,
+    MessageEmbed,
+    Modal,
     PermissionString,
     Snowflake,
     TextBasedChannelTypes,
@@ -302,6 +305,8 @@ export class InteractionManager extends EventEmitter {
     public constructor(client: Client, options: InteractionManagerOptions);
     public client: Client;
     public options: InteractionManagerOptions;
+    public context: ContextInteractionManager | null;
+    public modal: ModalInteractionManager | null;
     public slash: SlashCommandInteractionManager | null;
 
     public on<K extends keyof InteractionManagerEvents>(event: K, listener: (...args: InteractionManagerEvents[K]) => Awaitable<void>): this;
@@ -352,6 +357,42 @@ export interface InteractionManagerOptions {
 
     guildIDs: Snowflake[];
     locationSlashCommands: String | null;
+
+}
+
+export class ModalInteraction extends BaseComponent {
+
+    public constructor(client: Client, manager: ModalInteractionManager, data: ModalInteractionData);
+    public client: Client;
+    public manager: ModalInteractionManager;
+    public data: ModalInteractionData;
+
+    public buildModal(): Modal | DisGroupDevError;
+    public get components(): Array<MessageActionRowComponentResolvable>;
+    public get title(): String;
+
+}
+
+export interface ModalInteractionData extends BaseComponentData {
+
+    components: MessageActionRowComponentResolvable[];
+    title: String;
+
+}
+
+export class ModalInteractionManager {
+
+    public constructor(client: Client, interactionManager: InteractionManager);
+    public cache: Collection<String, ModalInteraction>;
+    public client: Client;
+    public manager: InteractionManager;
+
+    public load(path: String): Promise<Boolean | DisGroupDevError>;
+    public loadAll(): Promise<Boolean | DisGroupDevError>;
+    public reload(name: String): Promise<Boolean | DisGroupDevError>;
+    public reloadAll(): Promise<Boolean | DisGroupDevError>;
+    public unload(name: String): Promise<Boolean | DisGroupDevError>;
+    public unloadAll(): Promise<Boolean | DisGroupDevError>;
 
 }
 

@@ -31,7 +31,7 @@
 
 
     <title>
-      structures/interaction/BaseInteraction.js
+      ModalInteraction
     </title>
 
     <!--[if lt IE 9]>
@@ -98,7 +98,7 @@
     <div id="main" class="main-content">
       
       <h1 id='page-title' class="page-title">
-        structures/interaction/BaseInteraction.js
+        ModalInteraction
       </h1>
       
 
@@ -106,347 +106,1179 @@
 
 
 
+
+<section>
+
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>const { ApplicationCommandType, Client, PermissionString, Snowflake, TextBasedChannelTypes } = require('discord.js');
-const { LocalizationMap } = require('discord-api-types/v10');
-
-/**
- * @typedef {Object} ExperimentData
- * @property {Boolean} required If the experiment is required to execute the base interaction
- * @property {Number} id The id of the experiment
- */
-
-/**
- * @typedef {Object} BaseInteractionData
- * @property {String} name The name of the base interaction
- * @property {LocalizationMap} nameLocalizations The localization names of the base interaction
- * @property {Boolean} enabled If the base interaction is enabled (default: false)
- * @property {Array&lt;PermissionString>} clientPermissions The permissions required for the client to execute the base interaction (default: [])
- * @property {Array&lt;PermissionString>} userPermissions The permissions required for the user to execute the base interaction (default: [])
- * @property {String} category The category of the base interaction (Will be set automatically. default: "Other")
- * @property {Number} cooldown The cooldown of the base interaction in seconds (default: 5)
- * @property {Boolean} defer If the base interaction should be deferred (default: true)
- * @property {String} dirname The dirname of the base interaction (Will be set automatically)
- * @property {Boolean} ephemeral If the response is ephemeral (default: false)
- * @property {ExperimentData} experiment If the base interaction is an experiment (default: { required: false, id: null })
- * @property {Snowflake} id The id of the base interaction
- * @property {String} location The location of the base interaction (Will be set automatically)
- * @property {ApplicationCommandType} type The type of the base interaction (Only required for context interactions: "MESSAGE" or "USER")
- * @property {Boolean} betaOnly If the command is only available in beta (default: false)
- * @property {Array&lt;TextBasedChannelTypes>} channelOnly An array of all channel types the base interaction is available in (default: ALL)
- * @property {Boolean} devOnly If the base interaction can only be executed by developers (default: false)
- * @property {Boolean} guildOnly If the base interaction can only be executed in guilds (default: true)
- * @property {Boolean} ownerOnly If the base interaction can only be executed by the owner of the bot (default: true)
- * @property {Boolean} premiumOnly If the base interaction can only be executed by guilds who have premium perks (default: false)
- * @property {Boolean} nsfw If the base interaction can only be executed in NSFW channels (default: false)
- */
-
-/**
- * The base interaction class.
- * @class
- */
-class BaseInteraction {
-
-    /**
-     * The constructor of the base interaction class.
-     * @param {Client} client
-     * @param {BaseInteractionData} data
-     */
-    constructor(client, data = {}) {
-
-        /**
-         * The client
-         * @type {Client}
-         * @public
-         */
-        this.client = client;
-
-        /**
-         * The map with all cooldowns
-         * @type {Map&lt;Snowflake, Boolean>}
-         * @public
-         */
-        this.cooldowns = new Map();
-
-        /**
-         * The raw data of the base interaction
-         * @type {BaseInteractionData}
-         * @private
-         */
-        this.data = data;
-
-    }
-
-    /**
-     * If the base interaction is beta access only
-     * @returns {Boolean}
-     * @public
-     */
-    get betaOnly() {
-
-        return this.data.betaOnly ?? false;
-
-    }
-
-    /**
-     * The category of the base interaction
-     * @returns {String}
-     * @public
-     */
-    get category() {
-
-        return this.dirname ? this.dirname.split(require('path').sep)[parseInt(this.dirname.split(require('path').sep).length - 1, 10)] : 'Other';
-
-    }
-
-    /**
-     * The types of channel the base interaction is executable in
-     * @returns {Array&lt;TextBasedChannelTypes>}
-     * @public
-     */
-    get channelOnly() {
-
-        return this.data.channelOnly ?? ['DM', 'GUILD_NEWS', 'GUILD_TEXT', 'GUILD_NEWS_THREAD', 'GUILD_PUBLIC_THREAD', 'GUILD_PRIVATE_THREAD'];
+        
+        <h2>
+        
+        ModalInteraction
+        
+        </h2>
+        
+        
+            <div class="class-description"><p>The modal interaction class.</p></div>
+        
+    
+</header>
 
-    }
 
-    /**
-     * The required permissions for the client to execute the base interaction
-     * @returns {Array&lt;PermissionString>}
-     * @public
-     */
-    get clientPermissions() {
+<article>
+    <div class="container-overview">
+    
+        
 
-        return this.data.clientPermissions ?? [];
+    
+        <h2>Constructor</h2>
+    
 
-    }
+    <h4 class="name" id="ModalInteraction">
+        <a href="#ModalInteraction">#</a>
+        <span class="type-signature"></span>new ModalInteraction<span class="signature">(client, manager, data)</span><span class="type-signature"></span>
+    </h4>
 
-    /**
-     * The cooldown of the base interaction in seconds
-     * @returns {Number}
-     * @public
-     */
-    get cooldown() {
+    
 
-        return this.data.cooldown ?? 5;
 
-    }
 
-    /**
-     * If the base interaction should be deferred
-     * @returns {Boolean}
-     * @public
-     */
-    get defer() {
+    <div class="description">
+        <p>The constructor of the modal interaction class.</p>
+    </div>
 
-        return this.data.defer ?? true;
 
-    }
 
-    /**
-     * If the base interaction can only be executed by developers
-     * @returns {Boolean}
-     * @public
-     */
-    get devOnly() {
 
-        return this.data.devOnly ?? false;
 
-    }
 
-    /**
-     * The dirname of the saved location of the base interaction
-     * @returns {String}
-     * @public
-     */
-    get dirname() {
 
-        return this.data.dirname ?? __dirname;
 
-    }
 
-    /**
-     * If the base interaction is enabled
-     * @returns {Boolean}
-     * @public
-     */
-    get enabled() {
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Parameters:</strong>
+        
 
-        return this.data.enabled ?? false;
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
 
-    }
+        <th>Type</th>
 
-    /**
-     * If the response is ephemeral
-     * @returns {Boolean}
-     * @public
-     */
-    get ephemeral() {
+        
 
-        return this.data.ephemeral ?? false;
+        
 
-    }
+        <th class="last">Description</th>
+    </tr>
+    </thead>
 
-    /**
-     * The experiment data of the base interaction
-     * @returns {ExperimentData}
-     * @public
-     */
-    get experiment() {
+    <tbody>
+    
 
-        return this.data.experiment ?? { required: false, id: null };
+        <tr>
+            
+                <td class="name"><code>client</code></td>
+            
 
-    }
+            <td class="type">
+            
+                
+<span class="param-type">Client</span>
 
-    /**
-     * If the base interaction is only executable in guilds
-     * @returns {Boolean}
-     * @public
-     */
-    get guildOnly() {
 
-        return this.data.guildOnly ?? true;
+            
+            </td>
 
-    }
+            
 
-    /**
-     * The id of the base interaction
-     * @returns {Snowflake|null}
-     * @public
-     */
-    get id() {
+            
 
-        return this.data.id ?? null;
+            <td class="description last"></td>
+        </tr>
 
-    }
+    
 
-    /**
-     * Sets the id of the base interaction
-     * @param {Snowflake} id
-     * @private
-     */
-    set id(id) {
+        <tr>
+            
+                <td class="name"><code>manager</code></td>
+            
 
-        this.data.id = id;
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ModalInteractionManager.html">ModalInteractionManager</a></span>
 
-    }
 
-    /**
-     * The location of the base interaction
-     * @returns {String}
-     * @public
-     */
-    get location() {
+            
+            </td>
 
-        return this.data.location ?? this.dirname;
+            
 
-    }
+            
 
-    /**
-     * Sets the location of the base interaction
-     * @param  path
-     * @public
-     */
-    set location(path) {
+            <td class="description last"></td>
+        </tr>
 
-        this.data.location = path;
-    }
+    
 
-    /**
-     * The name of the base interaction
-     * @returns {String|null}
-     * @public
-     */
-    get name() {
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
 
-        return this.data.name ?? null;
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#ModalInteractionData">ModalInteractionData</a></span>
 
-    }
 
-    /**
-     * The localization names of the base interaction
-     * @returns {LocalizationMap|null}
-     * @public
-     */
-    get nameLocalizations() {
+            
+            </td>
 
-        return this.data.nameLocalizations ?? null
+            
 
-    }
+            
 
-    /**
-     * If the base interaction is nsfw
-     * @returns {Boolean}
-     * @public
-     */
-    get nsfw() {
+            <td class="description last"></td>
+        </tr>
 
-        return this.data.nsfw ?? false;
+    
+    </tbody>
+</table>
 
-    }
+    </div>
 
-    /**
-     * If the base interaction is owner access only
-     * @returns {Boolean}
-     * @public
-     */
-    get ownerOnly() {
 
-        return this.data.ownerOnly ?? true;
 
-    }
 
-    /**
-     * If the base interaction is premium access only
-     * @returns {Boolean}
-     * @public
-     */
-    get premiumOnly() {
 
-        return this.data.premiumOnly ?? false;
 
-    }
 
-    /**
-     * The type of the base interaction
-     * @returns {ApplicationCommandType|null}
-     * @public
-     */
-    get type() {
+<dl class="details">
 
-        return this.data.type ?? null;
+    
 
-    }
+    
 
-    /**
-     * The required permissions for the user to execute the base interaction
-     * @returns {Array&lt;PermissionString>}
-     * @public
-     */
-    get userPermissions() {
+    
 
-        return this.data.userPermissions ?? [];
+    
 
-    }
+    
 
-    /**
-     * The full data of the base interaction
-     * @returns {BaseInteractionData}
-     * @public
-     */
-    toJSON() {
+    
 
-        return { ...this.data };
+    
 
-    }
+    
 
-}
+    
 
-module.exports = BaseInteraction;</code></pre>
-        </article>
-    </section>
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_ModalInteraction.js.html">structures/interaction/ModalInteraction.js</a>, <a href="structures_interaction_ModalInteraction.js.html#line41">line 41</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="components">
+    <a href="#components">#</a>
+    <span class="type-signature"></span>components<span class="type-signature"></span>
+</h4>
+
+
+
+
+<div class="description">
+    <p>The components of the modal</p>
+</div>
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_ModalInteraction.js.html">structures/interaction/ModalInteraction.js</a>, <a href="structures_interaction_ModalInteraction.js.html#line100">line 100</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="defaultEnabled">
+    <a href="#defaultEnabled">#</a>
+    <span class="type-signature"></span>defaultEnabled<span class="type-signature"></span>
+</h4>
+
+
+
+
+<div class="description">
+    <p>If the modal interaction is enabled by default</p>
+</div>
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_ModalInteraction.js.html">structures/interaction/ModalInteraction.js</a>, <a href="structures_interaction_ModalInteraction.js.html#line111">line 111</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="deployEnabled">
+    <a href="#deployEnabled">#</a>
+    <span class="type-signature"></span>deployEnabled<span class="type-signature"></span>
+</h4>
+
+
+
+
+<div class="description">
+    <p>If deploying is enabled for the modal interaction</p>
+</div>
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_ModalInteraction.js.html">structures/interaction/ModalInteraction.js</a>, <a href="structures_interaction_ModalInteraction.js.html#line133">line 133</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="manager">
+    <a href="#manager">#</a>
+    <span class="type-signature"></span>manager<span class="type-signature"> :<a href="ModalInteractionManager.html">ModalInteractionManager</a></span>
+</h4>
+
+
+
+
+<div class="description">
+    <p>The modal interaction manager</p>
+</div>
+
+
+
+    <div class="member-item-container flex">
+        <strong>Type: </strong>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="ModalInteractionManager.html">ModalInteractionManager</a></span>
+
+
+            </li>
+        </ul>
+    </div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_ModalInteraction.js.html">structures/interaction/ModalInteraction.js</a>, <a href="structures_interaction_ModalInteraction.js.html#line58">line 58</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="title">
+    <a href="#title">#</a>
+    <span class="type-signature"></span>title<span class="type-signature"></span>
+</h4>
+
+
+
+
+<div class="description">
+    <p>The title of the modal</p>
+</div>
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_ModalInteraction.js.html">structures/interaction/ModalInteraction.js</a>, <a href="structures_interaction_ModalInteraction.js.html#line166">line 166</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="buildModal">
+        <a href="#buildModal">#</a>
+        <span class="type-signature"></span>buildModal<span class="signature">()</span><span class="type-signature"> &rarr; {Modal|<a href="DisGroupDevError.html">DisGroupDevError</a>}</span>
+    </h4>
+
+    
+
+
+
+    <div class="description">
+        <p>Builds the modal</p>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_ModalInteraction.js.html">structures/interaction/ModalInteraction.js</a>, <a href="structures_interaction_ModalInteraction.js.html#line74">line 74</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Modal</span>
+|
+
+<span class="param-type"><a href="DisGroupDevError.html">DisGroupDevError</a></span>
+
+
+    </dd>
+</dl>
+
+            
+    </div>
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="deploy">
+        <a href="#deploy">#</a>
+        <span class="type-signature"></span>deploy<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;(Boolean|<a href="DisGroupDevError.html">DisGroupDevError</a>)>}</span>
+    </h4>
+
+    
+
+
+
+    <div class="description">
+        <p>Deploys the modal interaction</p>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_ModalInteraction.js.html">structures/interaction/ModalInteraction.js</a>, <a href="structures_interaction_ModalInteraction.js.html#line122">line 122</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;(Boolean|<a href="DisGroupDevError.html">DisGroupDevError</a>)></span>
+
+
+    </dd>
+</dl>
+
+            
+    </div>
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="load">
+        <a href="#load">#</a>
+        <span class="type-signature"></span>load<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;(Boolean|<a href="DisGroupDevError.html">DisGroupDevError</a>)>}</span>
+    </h4>
+
+    
+
+
+
+    <div class="description">
+        <p>Reloads the modal interaction</p>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_ModalInteraction.js.html">structures/interaction/ModalInteraction.js</a>, <a href="structures_interaction_ModalInteraction.js.html#line144">line 144</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;(Boolean|<a href="DisGroupDevError.html">DisGroupDevError</a>)></span>
+
+
+    </dd>
+</dl>
+
+            
+    </div>
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="reload">
+        <a href="#reload">#</a>
+        <span class="type-signature"></span>reload<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;(Boolean|<a href="DisGroupDevError.html">DisGroupDevError</a>)>}</span>
+    </h4>
+
+    
+
+
+
+    <div class="description">
+        <p>Reloads the modal interaction</p>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_ModalInteraction.js.html">structures/interaction/ModalInteraction.js</a>, <a href="structures_interaction_ModalInteraction.js.html#line155">line 155</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;(Boolean|<a href="DisGroupDevError.html">DisGroupDevError</a>)></span>
+
+
+    </dd>
+</dl>
+
+            
+    </div>
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="unload">
+        <a href="#unload">#</a>
+        <span class="type-signature"></span>unload<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;(Boolean|<a href="DisGroupDevError.html">DisGroupDevError</a>)>}</span>
+    </h4>
+
+    
+
+
+
+    <div class="description">
+        <p>Unloads the modal interaction</p>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_interaction_ModalInteraction.js.html">structures/interaction/ModalInteraction.js</a>, <a href="structures_interaction_ModalInteraction.js.html#line177">line 177</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;(Boolean|<a href="DisGroupDevError.html">DisGroupDevError</a>)></span>
+
+
+    </dd>
+</dl>
+
+            
+    </div>
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 
