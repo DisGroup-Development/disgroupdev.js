@@ -31,7 +31,7 @@
 
 
     <title>
-      utils/Partner.js
+      BaseTicket
     </title>
 
     <!--[if lt IE 9]>
@@ -98,7 +98,7 @@
     <div id="main" class="main-content">
       
       <h1 id='page-title' class="page-title">
-        utils/Partner.js
+        BaseTicket
       </h1>
       
 
@@ -106,139 +106,1121 @@
 
 
 
+
+<section>
+
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/**
- * Partner class.
- * @extends {null}
- * @class
- */
-class Partner extends null {}
+        
+        <h2>
+        
+        BaseTicket
+        
+        </h2>
+        
+        
+            <div class="class-description"><p>The base ticket class.</p></div>
+        
+    
+</header>
 
-/**
- * The data of all emojis
- * @typedef {Object} EmojiData
- * @property {String} emoji The emoji
- * @property {String} id The id of the emoji
- * @property {String} name The name of the emoji
- * @property {String} url The url of the emoji
- */
 
-/**
- * The data of all partners
- * @typedef {Object} PartnerData
- * @property {String} name The name of the partner
- * @property {TranslationData} longDescription The long description of the partner
- * @property {TranslationData} shortDescription The short description of the partner
- * @property {EmojiData} emoji The emoji of the partner
- * @property {String} owner The owner id of the partner
- * @property {TranslationData} type The type of the partner
- * @property {?String} bannerURL The banner URL of the partner
- * @property {String} iconURL The icon URL of the partner
- * @property {?String} discordURL The discord URL of the partner
- * @property {?String} instagramURL The instagram URL of the partner
- * @property {?String} twitterURL The twitter URL of the partner
- * @property {?String} websiteURL The website URL of the partner
- */
+<article>
+    <div class="container-overview">
+    
+        
 
-/**
- * The data of all translations
- * @typedef {Object} TranslationData
- * @property {String} language The language of the string
- */
+    
+        <h2>Constructor</h2>
+    
 
-/**
- * KernelHost
- * @memberof Partner
- * @returns {PartnerData}
- */
-Partner.KERNELHOST = {
+    <h4 class="name" id="BaseTicket">
+        <a href="#BaseTicket">#</a>
+        <span class="type-signature"></span>new BaseTicket<span class="signature">(client, manager, data)</span><span class="type-signature"></span>
+    </h4>
 
-    name: "KernelHost",
-    longDescription: {
+    
 
-        'de-DE': 'KernelHost ist ein prepaid Server-Hoster, welcher Server mit **starker** ⚡ Performance zu einem sehr guten Preis 💸 bereitstellt. Du kannst dir KMV-Server, Minecraft-Server, Web-Server und viele weitere mieten. Die Administration 🔐 der Server ist sehr einfach, dank des schönen und übersichtlichen Dashboards. Der Support 🎧 ist sehr schnell und hilfreich.',
-        'en-US': 'KernelHost is a prepaid server hoster, which offers servers with **strong** ⚡ performance at a very good price 💸. You can rent KVM servers, Minecraft servers, web servers and much more. The administration 🔐 of the servers is very easy thanks to the beautiful and clear dashboard. The support 🎧 is very fast and reliable.'
 
-    },
-    shortDescription: {
 
-        'de-DE': "KernelHost ist unser starker ⚡ Server-Hoster",
-        'en-US': "KernelHost is our strong ⚡ Hosting Service"
+    <div class="description">
+        <p>The constructor of the base ticket class.</p>
+    </div>
 
-    },
-    emoji: {
 
-        emoji: "&lt;:D_Partner_KernelHost:933714792621940778>",
-        id: "933714792621940778",
-        name: "D_Partner_KernelHost",
-        url: "https://cdn.discordapp.com/emojis/933714792621940778.webp"
 
-    },
-    owner: "180969555055607808",
-    type: {
 
-        'de-DE': 'Server-Hoster',
-        'en-US': 'Server Hoster'
 
-    },
-    bannerURL: "https://www.kernelhost.com/images/logo.png",
-    iconURL: "https://www.kernelhost.com/images/favicon.png",
-    discordURL: "https://discord.gg/Chr8ZDgexb",
-    instagramURL: "https://instagram.com/kernelhost/",
-    twitterURL: "https://twitter.com/kernelhost",
-    websiteURL: "https://kernelhost.com"
 
-}
 
-/**
- * Lara_Gaming
- * @memberof Partner
- * @returns {PartnerData}
- */
-Partner.LARAGAMING = {
 
-    name: "Lara_Gaming",
-    longDescription: {
 
-        'de-DE': 'Diese Beschreibung kommt bald...',
-        'en-US': 'This description is coming soon...'
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Parameters:</strong>
+        
 
-    },
-    shortDescription: {
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
 
-        'de-DE': 'Lara_Gaming ist ein Content-Creator 🎥',
-        'en-US': 'Lara_Gaming is a content creator 🎥'
+        <th>Type</th>
 
-    },
-    emoji: {
+        
 
-        emoji: "&lt;:D_Partner_LaraGaming:912978738071871520>",
-        id: "912978738071871520",
-        name: "D_Partner_LaraGaming",
-        url: "https://cdn.discordapp.com/emojis/912978738071871520.webp"
+        
 
-    },
-    owner: "426764022650634250",
-    type: {
+        <th class="last">Description</th>
+    </tr>
+    </thead>
 
-        'de-DE': 'Content-Creator',
-        'en-US': 'Content Creator'
+    <tbody>
+    
 
-    },
-    bannerURL: "https://images-ext-1.discordapp.net/external/UwmWAgNuyi3qNFufhLnDLe2CvpEOu0hxc3NC0KvoERc/https/i.ibb.co/xXNWNNM/channels4-banner-1.jpg?width=429&amp;height=71",
-    iconURL: "https://images-ext-2.discordapp.net/external/-Xa5MZbf1XNcwTOhikaRotlUyW8FMMINh4YuiLeCzog/https/i.ibb.co/CHp0jZB/32d6d1297954b76dfae70f046937240d-modified.png?width=86&amp;height=86",
-    discordURL: "https://discord.gg/2hk86UGXxF",
-    instagramURL: "https://instagram.com/lara.gaygirl/",
-    twitterURL: "https://twitter.com/laragaming1003",
-    websiteURL: "https://www.youtube.com/channel/UCvQn5GB7zNUP_CSZkBXDkZg"
+        <tr>
+            
+                <td class="name"><code>client</code></td>
+            
 
-}
+            <td class="type">
+            
+                
+<span class="param-type">Client</span>
 
-module.exports = Partner;</code></pre>
-        </article>
-    </section>
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>manager</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="BaseTicketManager.html">BaseTicketManager</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#TicketDataRaw">TicketDataRaw</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_BaseTicket.js.html">structures/BaseTicket.js</a>, <a href="structures_BaseTicket.js.html#line31">line 31</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="channelId">
+    <a href="#channelId">#</a>
+    <span class="type-signature"></span>channelId<span class="type-signature"></span>
+</h4>
+
+
+
+
+<div class="description">
+    <p>The channel id of the ticket</p>
+</div>
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_BaseTicket.js.html">structures/BaseTicket.js</a>, <a href="structures_BaseTicket.js.html#line69">line 69</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="client">
+    <a href="#client">#</a>
+    <span class="type-signature"></span>client<span class="type-signature"> :Client</span>
+</h4>
+
+
+
+
+<div class="description">
+    <p>The client</p>
+</div>
+
+
+
+    <div class="member-item-container flex">
+        <strong>Type: </strong>
+        <ul>
+            <li>
+                
+<span class="param-type">Client</span>
+
+
+            </li>
+        </ul>
+    </div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_BaseTicket.js.html">structures/BaseTicket.js</a>, <a href="structures_BaseTicket.js.html#line46">line 46</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="guild">
+    <a href="#guild">#</a>
+    <span class="type-signature"></span>guild<span class="type-signature"></span>
+</h4>
+
+
+
+
+<div class="description">
+    <p>The guild of the ticket</p>
+</div>
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_BaseTicket.js.html">structures/BaseTicket.js</a>, <a href="structures_BaseTicket.js.html#line80">line 80</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="guildId">
+    <a href="#guildId">#</a>
+    <span class="type-signature"></span>guildId<span class="type-signature"></span>
+</h4>
+
+
+
+
+<div class="description">
+    <p>The guild id of the ticket</p>
+</div>
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_BaseTicket.js.html">structures/BaseTicket.js</a>, <a href="structures_BaseTicket.js.html#line91">line 91</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="manager">
+    <a href="#manager">#</a>
+    <span class="type-signature"></span>manager<span class="type-signature"> :<a href="BaseTicketManager.html">BaseTicketManager</a></span>
+</h4>
+
+
+
+
+<div class="description">
+    <p>The manager of the ticket</p>
+</div>
+
+
+
+    <div class="member-item-container flex">
+        <strong>Type: </strong>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="BaseTicketManager.html">BaseTicketManager</a></span>
+
+
+            </li>
+        </ul>
+    </div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_BaseTicket.js.html">structures/BaseTicket.js</a>, <a href="structures_BaseTicket.js.html#line53">line 53</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="member">
+    <a href="#member">#</a>
+    <span class="type-signature"></span>member<span class="type-signature"></span>
+</h4>
+
+
+
+
+<div class="description">
+    <p>The guild member of the ticket creator</p>
+</div>
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_BaseTicket.js.html">structures/BaseTicket.js</a>, <a href="structures_BaseTicket.js.html#line102">line 102</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="number">
+    <a href="#number">#</a>
+    <span class="type-signature"></span>number<span class="type-signature"></span>
+</h4>
+
+
+
+
+<div class="description">
+    <p>The number of the ticket</p>
+</div>
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_BaseTicket.js.html">structures/BaseTicket.js</a>, <a href="structures_BaseTicket.js.html#line113">line 113</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="participants">
+    <a href="#participants">#</a>
+    <span class="type-signature"></span>participants<span class="type-signature"></span>
+</h4>
+
+
+
+
+<div class="description">
+    <p>The participants of the ticket</p>
+</div>
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_BaseTicket.js.html">structures/BaseTicket.js</a>, <a href="structures_BaseTicket.js.html#line124">line 124</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="status">
+    <a href="#status">#</a>
+    <span class="type-signature"></span>status<span class="type-signature"></span>
+</h4>
+
+
+
+
+<div class="description">
+    <p>The status of the ticket</p>
+</div>
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_BaseTicket.js.html">structures/BaseTicket.js</a>, <a href="structures_BaseTicket.js.html#line135">line 135</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="type">
+    <a href="#type">#</a>
+    <span class="type-signature"></span>type<span class="type-signature"></span>
+</h4>
+
+
+
+
+<div class="description">
+    <p>The type of the ticket</p>
+</div>
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_BaseTicket.js.html">structures/BaseTicket.js</a>, <a href="structures_BaseTicket.js.html#line146">line 146</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="user">
+    <a href="#user">#</a>
+    <span class="type-signature"></span>user<span class="type-signature"></span>
+</h4>
+
+
+
+
+<div class="description">
+    <p>The user of the ticket creator</p>
+</div>
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_BaseTicket.js.html">structures/BaseTicket.js</a>, <a href="structures_BaseTicket.js.html#line157">line 157</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="userId">
+    <a href="#userId">#</a>
+    <span class="type-signature"></span>userId<span class="type-signature"></span>
+</h4>
+
+
+
+
+<div class="description">
+    <p>The user id of the creator of the ticket</p>
+</div>
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="structures_BaseTicket.js.html">structures/BaseTicket.js</a>, <a href="structures_BaseTicket.js.html#line167">line 167</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

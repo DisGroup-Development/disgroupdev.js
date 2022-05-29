@@ -31,7 +31,7 @@
 
 
     <title>
-      utils/Partner.js
+      managers/BaseTicketManager.js
     </title>
 
     <!--[if lt IE 9]>
@@ -98,7 +98,7 @@
     <div id="main" class="main-content">
       
       <h1 id='page-title' class="page-title">
-        utils/Partner.js
+        managers/BaseTicketManager.js
       </h1>
       
 
@@ -109,134 +109,181 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * Partner class.
- * @extends {null}
+            <pre class="prettyprint source linenums"><code>const { Client, GuildResolvable, Snowflake } = require('discord.js');
+const EventEmitter = require('node:events');
+const FileSystem = require('node:fs');
+
+const TextTicket = require('../structures/TextTicket');
+
+const { DisGroupDevError, Messages } = require('../errors/DisGroupDevError');
+
+/**
+ * @typedef {Object} BaseTicketManagerOptions
+ * @property {Array&lt;Snowflake>} staffRoles The IDs of the staff roles
+ * @property {String} storage The json file to save the tickets to
+ */
+
+/**
+ * @typedef {Object} TicketDataRaw
+ * @property {Snowflake} channelId The id of the ticket channel or thread
+ * @property {Snowflake} guildId The id of the guild
+ * @property {Number} number The number of the ticket
+ * @property {Array&lt;Snowflake>} participants The array with all ids of participants
+ * @property {TicketDataStatus} status The status of the ticket
+ * @property {TicketDataType} type The type of the ticket
+ * @property {Snowflake} userId The id of the user
+ */
+
+/**
+ * @typedef {String} TicketDataStatus
+ * * "CLOSED"
+ * * "OPEN"
+ */
+
+/**
+ * @typedef {String} TicketDataType
+ * * "DM"
+ * * "CHANNEL"
+ * * "THREAD"
+ */
+
+/**
+ * The base ticket manager class.
  * @class
  */
-class Partner extends null {}
+class BaseTicketManager extends EventEmitter {
 
-/**
- * The data of all emojis
- * @typedef {Object} EmojiData
- * @property {String} emoji The emoji
- * @property {String} id The id of the emoji
- * @property {String} name The name of the emoji
- * @property {String} url The url of the emoji
- */
+    /**
+     * The constructor of the base ticket manager class.
+     * @param {Client} client
+     * @param {BaseTicketManagerOptions} options
+     */
+    constructor(client, options) {
 
-/**
- * The data of all partners
- * @typedef {Object} PartnerData
- * @property {String} name The name of the partner
- * @property {TranslationData} longDescription The long description of the partner
- * @property {TranslationData} shortDescription The short description of the partner
- * @property {EmojiData} emoji The emoji of the partner
- * @property {String} owner The owner id of the partner
- * @property {TranslationData} type The type of the partner
- * @property {?String} bannerURL The banner URL of the partner
- * @property {String} iconURL The icon URL of the partner
- * @property {?String} discordURL The discord URL of the partner
- * @property {?String} instagramURL The instagram URL of the partner
- * @property {?String} twitterURL The twitter URL of the partner
- * @property {?String} websiteURL The website URL of the partner
- */
+        super();
 
-/**
- * The data of all translations
- * @typedef {Object} TranslationData
- * @property {String} language The language of the string
- */
+        /**
+         * The client
+         * @type {Client}
+         * @public
+         */
+        this.client = client;
 
-/**
- * KernelHost
- * @memberof Partner
- * @returns {PartnerData}
- */
-Partner.KERNELHOST = {
+        /**
+         * The options of the base ticket manager
+         * @type {BaseTicketManagerOptions}
+         * @public
+         */
+        this.options = options;
 
-    name: "KernelHost",
-    longDescription: {
+        /**
+         * The raw tickets
+         * @type {Array&lt;TicketDataRaw>}
+         * @private
+         */
+        this._rawTickets = new Array();
 
-        'de-DE': 'KernelHost ist ein prepaid Server-Hoster, welcher Server mit **starker** ⚡ Performance zu einem sehr guten Preis 💸 bereitstellt. Du kannst dir KMV-Server, Minecraft-Server, Web-Server und viele weitere mieten. Die Administration 🔐 der Server ist sehr einfach, dank des schönen und übersichtlichen Dashboards. Der Support 🎧 ist sehr schnell und hilfreich.',
-        'en-US': 'KernelHost is a prepaid server hoster, which offers servers with **strong** ⚡ performance at a very good price 💸. You can rent KVM servers, Minecraft servers, web servers and much more. The administration 🔐 of the servers is very easy thanks to the beautiful and clear dashboard. The support 🎧 is very fast and reliable.'
+        /**
+         * If the tickets are loaded.
+         * @type {Boolean}
+         * @public
+         */
+        this.isReady = false;
 
-    },
-    shortDescription: {
+    }
 
-        'de-DE': "KernelHost ist unser starker ⚡ Server-Hoster",
-        'en-US': "KernelHost is our strong ⚡ Hosting Service"
+    /**
+     * Gets the raw ticket data from the json file
+     * @returns {Array&lt;TicketDataRaw>|DisGroupDevError}
+     * @private
+     */
+    async _getTickets() {
 
-    },
-    emoji: {
+        const storage = FileSystem.existsSync(this.options.storage);
 
-        emoji: "&lt;:D_Partner_KernelHost:933714792621940778>",
-        id: "933714792621940778",
-        name: "D_Partner_KernelHost",
-        url: "https://cdn.discordapp.com/emojis/933714792621940778.webp"
+        if(!storage) {
 
-    },
-    owner: "180969555055607808",
-    type: {
+            await FileSystem.writeFileSync(this.options.storage, JSON.stringify(new Array(), null, 4), { encoding: 'utf-8' });
 
-        'de-DE': 'Server-Hoster',
-        'en-US': 'Server Hoster'
+            return new Array();
 
-    },
-    bannerURL: "https://www.kernelhost.com/images/logo.png",
-    iconURL: "https://www.kernelhost.com/images/favicon.png",
-    discordURL: "https://discord.gg/Chr8ZDgexb",
-    instagramURL: "https://instagram.com/kernelhost/",
-    twitterURL: "https://twitter.com/kernelhost",
-    websiteURL: "https://kernelhost.com"
+        } else {
+
+            const storageContent = FileSystem.readFileSync(this.options.storage, { encoding: 'utf-8' });
+
+            try {
+
+                const ticketArray = await JSON.parse(storageContent.toString());
+
+                if(Array.isArray(ticketArray)) {
+
+                    return ticketArray;
+
+                } else {
+
+                    throw new DisGroupDevError(Messages.INVALID_JSON);
+
+                }
+
+            } catch(e) {
+
+                throw new DisGroupDevError(e);
+
+            }
+
+        }
+
+    }
+
+    /**
+     * Saves the ticket to the json file
+     * @returns {Boolean|DisGroupDevError}
+     * @private
+     */
+    async _save() {
+
+        try {
+
+            await FileSystem.writeFileSync(this.options.storage, JSON.stringify(this._rawTickets, null, 4), { encoding: 'utf-8' });
+
+            return true;
+
+        } catch(e) {
+
+            throw new DisGroupDevError(e);
+
+        }
+
+    }
+
+    /**
+     * Checks if a user has multiple tickets
+     * @param {Snowflake} guildId
+     * @param {Snowflake} userId
+     * @returns {Promise&lt;Boolean>}
+     * @public
+     */
+    async checkDoubleTickets(guildId, userId) {
+
+        return !!this._rawTickets.find(ticket => ticket.guildId === guildId &amp;&amp; ticket.userId === userId);
+
+    }
+
+    /**
+     * Resolves a guild
+     * @param {GuildResolvable} guild
+     * @returns {Guild}
+     * @public
+     */
+    async resolveGuild(guild) {
+
+        return this.client.guilds.resolve(guild);
+
+    }
 
 }
 
-/**
- * Lara_Gaming
- * @memberof Partner
- * @returns {PartnerData}
- */
-Partner.LARAGAMING = {
-
-    name: "Lara_Gaming",
-    longDescription: {
-
-        'de-DE': 'Diese Beschreibung kommt bald...',
-        'en-US': 'This description is coming soon...'
-
-    },
-    shortDescription: {
-
-        'de-DE': 'Lara_Gaming ist ein Content-Creator 🎥',
-        'en-US': 'Lara_Gaming is a content creator 🎥'
-
-    },
-    emoji: {
-
-        emoji: "&lt;:D_Partner_LaraGaming:912978738071871520>",
-        id: "912978738071871520",
-        name: "D_Partner_LaraGaming",
-        url: "https://cdn.discordapp.com/emojis/912978738071871520.webp"
-
-    },
-    owner: "426764022650634250",
-    type: {
-
-        'de-DE': 'Content-Creator',
-        'en-US': 'Content Creator'
-
-    },
-    bannerURL: "https://images-ext-1.discordapp.net/external/UwmWAgNuyi3qNFufhLnDLe2CvpEOu0hxc3NC0KvoERc/https/i.ibb.co/xXNWNNM/channels4-banner-1.jpg?width=429&amp;height=71",
-    iconURL: "https://images-ext-2.discordapp.net/external/-Xa5MZbf1XNcwTOhikaRotlUyW8FMMINh4YuiLeCzog/https/i.ibb.co/CHp0jZB/32d6d1297954b76dfae70f046937240d-modified.png?width=86&amp;height=86",
-    discordURL: "https://discord.gg/2hk86UGXxF",
-    instagramURL: "https://instagram.com/lara.gaygirl/",
-    twitterURL: "https://twitter.com/laragaming1003",
-    websiteURL: "https://www.youtube.com/channel/UCvQn5GB7zNUP_CSZkBXDkZg"
-
-}
-
-module.exports = Partner;</code></pre>
+module.exports = BaseTicketManager;</code></pre>
         </article>
     </section>
 

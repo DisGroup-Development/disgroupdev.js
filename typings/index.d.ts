@@ -4,6 +4,8 @@ import {
     Client,
     Collection,
     EmojiIdentifierResolvable,
+    Guild,
+    GuildResolvable,
     MessageActionRowComponentResolvable,
     MessageButton,
     MessageButtonStyle,
@@ -25,7 +27,7 @@ export class BaseComponent {
     public constructor(client: Client, data: BaseComponentData);
     public client: Client;
     public cooldowns: Map<Snowflake, Boolean>;
-    public data: BaseComponentData;
+    private data: BaseComponentData;
 
     public get betaOnly(): Boolean;
     public get category(): String;
@@ -80,7 +82,7 @@ export class BaseInteraction {
     public constructor(client: Client, data: BaseInteractionData);
     public client: Client;
     public cooldowns: Map<Snowflake, Boolean>;
-    public data: BaseInteractionData;
+    private data: BaseInteractionData;
 
     public get betaOnly(): Boolean;
     public get category(): String;
@@ -136,12 +138,35 @@ export interface BaseInteractionData {
 
 }
 
+export class BaseTicketManager extends EventEmitter {
+
+    public constructor(client: Client, data: BaseTicketManagerOptions);
+    public client: Client;
+    public options: BaseTicketManagerOptions;
+    private _rawTickets: Array<TicketDataRaw>;
+    public isReady: Boolean;
+
+    private _getTickets(): Array<TicketDataRaw> | DisGroupDevError;
+    private _save(): Boolean | DisGroupDevError;
+
+    public checkDoubleTickets(guildId: Snowflake, userId: Snowflake): Boolean;
+    public resolveGuild(guild: GuildResolvable): Guild;
+
+}
+
+export interface BaseTicketManagerOptions {
+
+    staffRoles: Array<Snowflake>;
+    storage: String;
+
+}
+
 export class ButtonInteraction extends BaseComponent {
 
     public constructor(client: Client, manager: InteractionManager, data: ButtonInteractionData);
     public client: Client;
     public manager: ButtonInteractionManager;
-    public data: ButtonInteractionData;
+    private data: ButtonInteractionData;
 
     public buildButton(): MessageButton | DisGroupDevError;
     public get disabled(): Boolean;
@@ -183,7 +208,7 @@ export class ContextInteraction extends BaseInteraction {
     public constructor(client: Client, manager: ContextInteractionManager, data: ContextInteractionData);
     public client: Client;
     public manager: ContextInteractionManager;
-    public data: ContextInteractionData;
+    private data: ContextInteractionData;
 
     public get defaultEnabled(): Boolean;
     public deploy(): Promise<Boolean | DisGroupDevError>;
@@ -227,7 +252,7 @@ export class Event {
     public constructor(client: Client, manager: EventManager, data: EventData);
     public client: Client;
     public manager: EventManager;
-    public data: EventData;
+    private data: EventData;
 
     public get enabled(): Boolean;
     public load(): Promise<Boolean | DisGroupDevError>;
@@ -322,6 +347,11 @@ export class InteractionManager extends EventEmitter {
     public selectMenu: SelectMenuInteractionManager | null;
     public slash: SlashCommandInteractionManager | null;
 
+    public deployAll(): Promise<Boolean | DisGroupDevError>;
+    public loadAll(): Promise<Boolean | DisGroupDevError>;
+    public reloadAll(): Promise<Boolean | DisGroupDevError>;
+    public unloadAll(): Promise<Boolean | DisGroupDevError>;
+
     public on<K extends keyof InteractionManagerEvents>(event: K, listener: (...args: InteractionManagerEvents[K]) => Awaitable<void>): this;
     public on<S extends string | symbol>(
         event: Exclude<S, keyof InteractionManagerEvents>,
@@ -377,6 +407,10 @@ export interface InteractionManagerEvents {
 export interface InteractionManagerOptions {
 
     guildIDs: Snowflake[];
+    locationButtonInteractions: String | null;
+    locationContextInteractions: String | null;
+    locationModalInteractions: String | null;
+    locationSelectMenuInteractions: String | null;
     locationSlashCommands: String | null;
 
 }
@@ -422,7 +456,7 @@ export class ModalInteraction extends BaseComponent {
     public constructor(client: Client, manager: ModalInteractionManager, data: ModalInteractionData);
     public client: Client;
     public manager: ModalInteractionManager;
-    public data: ModalInteractionData;
+    private data: ModalInteractionData;
 
     public buildModal(): Modal | DisGroupDevError;
     public get components(): Array<MessageActionRowComponentResolvable>;
@@ -461,7 +495,7 @@ export class SelectMenuInteraction extends BaseComponent {
     public constructor(client: Client, manager: SelectMenuInteractionManager, data: SelectMenuInteractionData);
     public client: Client;
     public manager: SelectMenuInteractionManager;
-    public data: SelectMenuInteractionData;
+    private data: SelectMenuInteractionData;
 
     public buildSelectMenU(): MessageSelectMenu | DisGroupDevError;
     public get disabled(): Boolean;
@@ -506,7 +540,7 @@ export class SlashCommand extends BaseInteraction {
     public constructor(client: Client, manager: SlashCommandInteractionManager, data: SlashCommandData);
     public client: Client;
     public manager: SlashCommandInteractionManager;
-    public data: SlashCommandData;
+    private data: SlashCommandData;
 
     public get defaultEnabled(): Boolean;
     public deploy(): Promise<Boolean | DisGroupDevError>;
@@ -690,6 +724,21 @@ export interface StatusPageCheckerIncidentDataRawUpdate {
     update_at: String;
 
 }
+
+export interface TicketDataRaw {
+
+    channelId: Snowflake;
+    guildId: Snowflake;
+    participants: Array<Snowflake>;
+    status: TicketDataStatus;
+    type: TicketDataType;
+    userId: Snowflaek;
+
+}
+
+export type TicketDataStatus = 'CLOSED' | 'OPEN';
+
+export type TicketDataType = 'DM' | 'CHANNEL' | 'THREAD';
 
 export class TranslationManager {
 

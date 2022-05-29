@@ -11,7 +11,7 @@ client.login(token)
 
 setTimeout(async () => {
 
-    console.log(client.events._events);
+    console.log(client.events.cache);
 
     await client.events.unloadAll();
 
