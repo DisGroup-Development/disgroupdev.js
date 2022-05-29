@@ -3,8 +3,13 @@ import {
     ApplicationCommandType,
     Client,
     Collection,
+    EmojiIdentifierResolvable,
     MessageActionRowComponentResolvable,
+    MessageButton,
+    MessageButtonStyle,
     MessageEmbed,
+    MessageSelectMenu,
+    MessageSelectMenuOptionData,
     Modal,
     PermissionString,
     Snowflake,
@@ -128,6 +133,48 @@ export interface BaseInteractionData {
     ownerOnly: Boolean;
     premiumOnly: Boolean;
     nsfw: Boolean;
+
+}
+
+export class ButtonInteraction extends BaseComponent {
+
+    public constructor(client: Client, manager: InteractionManager, data: ButtonInteractionData);
+    public client: Client;
+    public manager: ButtonInteractionManager;
+    public data: ButtonInteractionData;
+
+    public buildButton(): MessageButton | DisGroupDevError;
+    public get disabled(): Boolean;
+    public get emoji(): EmojiIdentifierResolvable | null;
+    public get label(): String;
+    public get style(): MessageButtonStyle;
+    public get url(): URL | null;
+
+}
+
+export interface ButtonInteractionData {
+
+    disabled: Boolean;
+    emoji: EmojiIdentifierResolvable | null;
+    label: String;
+    style: MessageButtonStyle;
+    url: URL | null;
+
+}
+
+export class ButtonInteractionManager {
+
+    public constructor(client: Client, interactionManager: InteractionManager);
+    public cache: Collection<String, ButtonInteraction>;
+    public client: Client;
+    public manager: InteractionManager;
+
+    public load(path: String): Promise<Boolean | DisGroupDevError>;
+    public loadAll(): Promise<Boolean | DisGroupDevError>;
+    public reload(name: String): Promise<Boolean | DisGroupDevError>;
+    public reloadAll(): Promise<Boolean | DisGroupDevError>;
+    public unload(name: String): Promise<Boolean | DisGroupDevError>;
+    public unloadAll(): Promise<Boolean | DisGroupDevError>;
 
 }
 
@@ -264,6 +311,76 @@ export interface ExperimentData {
 
 }
 
+export class InteractionManager extends EventEmitter {
+
+    public constructor(client: Client, options: InteractionManagerOptions);
+    public client: Client;
+    public options: InteractionManagerOptions;
+    public button: ButtonInteractionManager | null;
+    public context: ContextInteractionManager | null;
+    public modal: ModalInteractionManager | null;
+    public selectMenu: SelectMenuInteractionManager | null;
+    public slash: SlashCommandInteractionManager | null;
+
+    public on<K extends keyof InteractionManagerEvents>(event: K, listener: (...args: InteractionManagerEvents[K]) => Awaitable<void>): this;
+    public on<S extends string | symbol>(
+        event: Exclude<S, keyof InteractionManagerEvents>,
+        listener: (...args: any[]) => Awaitable<void>,
+    ): this;
+
+    public once<K extends keyof InteractionManagerEvents>(event: K, listener: (...args: InteractionManagerEvents[K]) => Awaitable<void>): this;
+    public once<S extends string | symbol>(
+        event: Exclude<S, keyof InteractionManagerEvents>,
+        listener: (...args: any[]) => Awaitable<void>,
+    ): this;
+
+    public emit<K extends keyof InteractionManagerEvents>(event: K, ...args: InteractionManagerEvents[K]): boolean;
+    public emit<S extends string | symbol>(event: Exclude<S, keyof InteractionManagerEvents>, ...args: unknown[]): boolean;
+
+    public off<K extends keyof InteractionManagerEvents>(event: K, listener: (...args: InteractionManagerEvents[K]) => Awaitable<void>): this;
+    public off<S extends string | symbol>(
+        event: Exclude<S, keyof InteractionManagerEvents>,
+        listener: (...args: any[]) => Awaitable<void>,
+    ): this;
+
+    public removeAllListeners<K extends keyof InteractionManagerEvents>(event?: K): this;
+    public removeAllListeners<S extends string | symbol>(event?: Exclude<S, keyof InteractionManagerEvents>): this;
+
+}
+
+export interface InteractionManagerEvents {
+
+    buttonInteractionLoad: [buttonInteraction: ButtonInteraction];
+    buttonInteractionReload: [buttonInteraction: ButtonInteraction];
+    buttonInteractionUnload: [name: String];
+
+    contextInteractionDeploy: [contextInteraction: ContextInteraction];
+    contextInteractionLoad: [contextInteraction: ContextInteraction];
+    contextInteractionReload: [contextInteraction: ContextInteraction];
+    contextInteractionUnload: [name: String];
+
+    modalInteractionLoad: [modalInteraction: ModalInteraction];
+    modalInteractionReload: [modalInteraction: ModalInteraction];
+    modalInteractionUnload: [name: String];
+
+    selectMenuInteractionLoad: [selectMenuInteraction: SelectMenuInteraction];
+    selectMenuInteractionReload: [selectMenuInteraction: SelectMenuInteraction];
+    selectMenuInteractionUnload: [name: String];
+
+    slashCommandDeploy: [slashComand: SlashCommand];
+    slashCommandLoad: [slashComand: SlashCommand];
+    slashCommandReload: [slashComand: SlashCommand];
+    slashCommandUnload: [name: String];
+
+}
+
+export interface InteractionManagerOptions {
+
+    guildIDs: Snowflake[];
+    locationSlashCommands: String | null;
+
+}
+
 export class Logger {
 
     public constructor(options: LoggerOptions);
@@ -297,70 +414,6 @@ export interface LoggerOptions {
     icons: LoggerIcons,
     name: String,
     webhooks: WebhookClient[]
-
-}
-
-export class InteractionManager extends EventEmitter {
-
-    public constructor(client: Client, options: InteractionManagerOptions);
-    public client: Client;
-    public options: InteractionManagerOptions;
-    public context: ContextInteractionManager | null;
-    public modal: ModalInteractionManager | null;
-    public slash: SlashCommandInteractionManager | null;
-
-    public on<K extends keyof InteractionManagerEvents>(event: K, listener: (...args: InteractionManagerEvents[K]) => Awaitable<void>): this;
-    public on<S extends string | symbol>(
-        event: Exclude<S, keyof InteractionManagerEvents>,
-        listener: (...args: any[]) => Awaitable<void>,
-    ): this;
-
-    public once<K extends keyof InteractionManagerEvents>(event: K, listener: (...args: InteractionManagerEvents[K]) => Awaitable<void>): this;
-    public once<S extends string | symbol>(
-        event: Exclude<S, keyof InteractionManagerEvents>,
-        listener: (...args: any[]) => Awaitable<void>,
-    ): this;
-
-    public emit<K extends keyof InteractionManagerEvents>(event: K, ...args: InteractionManagerEvents[K]): boolean;
-    public emit<S extends string | symbol>(event: Exclude<S, keyof InteractionManagerEvents>, ...args: unknown[]): boolean;
-
-    public off<K extends keyof InteractionManagerEvents>(event: K, listener: (...args: InteractionManagerEvents[K]) => Awaitable<void>): this;
-    public off<S extends string | symbol>(
-        event: Exclude<S, keyof InteractionManagerEvents>,
-        listener: (...args: any[]) => Awaitable<void>,
-    ): this;
-
-    public removeAllListeners<K extends keyof InteractionManagerEvents>(event?: K): this;
-    public removeAllListeners<S extends string | symbol>(event?: Exclude<S, keyof InteractionManagerEvents>): this;
-
-}
-
-export interface InteractionManagerEvents {
-
-    contextInteractionDeploy: [contextInteraction: ContextInteraction];
-    contextInteractionLoad: [contextInteraction: ContextInteraction];
-    contextInteractionReload: [contextInteraction: ContextInteraction];
-    contextInteractionUnload: [name: String];
-
-    modalInteractionLoad: [modalInteraction: ModalInteraction];
-    modalInteractionReload: [modalInteraction: ModalInteraction];
-    modalInteractionUnload: [name: String];
-
-    selectMenuInteractionLoad: [selectMenuInteraction: SelectMenuInteraction];
-    selectMenuInteractionReload: [selectMenuInteraction: SelectMenuInteraction];
-    selectMenuInteractionUnload: [name: String];
-
-    slashCommandDeploy: [slashComand: SlashCommand];
-    slashCommandLoad: [slashComand: SlashCommand];
-    slashCommandReload: [slashComand: SlashCommand];
-    slashCommandUnload: [name: String];
-
-}
-
-export interface InteractionManagerOptions {
-
-    guildIDs: Snowflake[];
-    locationSlashCommands: String | null;
 
 }
 
@@ -405,19 +458,46 @@ export class ModalInteractionManager {
 
 export class SelectMenuInteraction extends BaseComponent {
 
+    public constructor(client: Client, manager: SelectMenuInteractionManager, data: SelectMenuInteractionData);
+    public client: Client;
+    public manager: SelectMenuInteractionManager;
+    public data: SelectMenuInteractionData;
 
+    public buildSelectMenU(): MessageSelectMenu | DisGroupDevError;
+    public get disabled(): Boolean;
+    public load(): Promise<Boolean | DisGroupDevError>;
+    public get maxValues(): Number;
+    public get minValues(): Number;
+    public get options(): MessageSelectMenuOptionData[];
+    public get placeholder(): String;
+    public reload(): Promise<Boolean | DisGroupDevError>;
+    public unload(): Promise<Boolean | DisGroupDevError>;
 
 }
 
 export interface SelectMenuInteractionData extends BaseComponentData {
 
-
+    disabled: Boolean;
+    maxValues: Number;
+    minValues: Number;
+    options: MessageSelectMenuOptionData[];
+    placeholder: String;
 
 }
 
 export class SelectMenuInteractionManager {
 
+    public constructor(client: Client, interactionManager: InteractionManager);
+    public cache: Collection<String, SelectMenuInteraction>;
+    public client: Client;
+    public manager: InteractionManager;
 
+    public load(path: String): Promise<Boolean | DisGroupDevError>;
+    public loadAll(): Promise<Boolean | DisGroupDevError>;
+    public reload(name: String): Promise<Boolean | DisGroupDevError>;
+    public reloadAll(): Promise<Boolean | DisGroupDevError>;
+    public unload(name: String): Promise<Boolean | DisGroupDevError>;
+    public unloadAll(): Promise<Boolean | DisGroupDevError>;
 
 }
 
