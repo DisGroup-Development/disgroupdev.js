@@ -5,6 +5,8 @@ import {
     Collection,
     EmojiIdentifierResolvable,
     Guild,
+    GuildMember,
+    GuildMemberResolvable,
     GuildResolvable,
     MessageActionRowComponentResolvable,
     MessageButton,
@@ -16,6 +18,9 @@ import {
     PermissionString,
     Snowflake,
     TextBasedChannelTypes,
+    TextChannel,
+    User,
+    UserResolvable,
     WebhookClient
 } from 'discord.js';
 import { LocalizationMap } from 'discord-api-types/v10';
@@ -138,6 +143,27 @@ export interface BaseInteractionData {
 
 }
 
+export class BaseTicket {
+
+    public constructor(client: Client, manager: BaseTicketManager, data: TicketDataRaw);
+    public client: Client;
+    public manager: BaseTicketManager;
+    private data: TicketDataRaw;
+
+    public get channel(): TextChannel;
+    public get channelId(): Snowflake;
+    public get guild(): Guild;
+    public get guildId(): SNowflake;
+    public get member(): GuildMember;
+    public get number(): Number;
+    public get participants(): Array<Snowflake>;
+    public get status(): TicketDataStatus;
+    public get type(): TicketDataType;
+    public get user(): User;
+    public get userId(): Snowflake;
+
+}
+
 export class BaseTicketManager extends EventEmitter {
 
     public constructor(client: Client, data: BaseTicketManagerOptions);
@@ -147,10 +173,11 @@ export class BaseTicketManager extends EventEmitter {
     public isReady: Boolean;
 
     private _getTickets(): Array<TicketDataRaw> | DisGroupDevError;
-    private _save(): Boolean | DisGroupDevError;
 
     public checkDoubleTickets(guildId: Snowflake, userId: Snowflake): Boolean;
-    public resolveGuild(guild: GuildResolvable): Guild;
+    public resolveGuild(guild: GuildResolvable): Guild | null;
+    public resolveUser(user: UserResolvable): User | null;
+    public save(): Boolean | DisGroupDevError;
 
 }
 
@@ -725,6 +752,80 @@ export interface StatusPageCheckerIncidentDataRawUpdate {
 
 }
 
+export class TextTicket extends BaseTicket {
+
+    public constructor(client: Client, manager: TextTicketManager, data: TicketDataRaw);
+    public client: Client;
+    public manager: TextTicketManager;
+    private data: TicketDataRaw;
+
+    public addMember(member: GuildMemberResolvable): Promise<TextTicket | DisGroupDevError>;
+    public close(): Promise<TextTicket | DisGroupDevError>;
+    public delete(): Promise<Boolean | DisGroupDevError>;
+    public removeMember(member: GuildMemberResolvable): Promise<TextTicket | DisGroupDevError>;
+    public rename(name: String): Promise<TextTicket | DisGroupDevError>;
+    public reopen(): Promise<TextTicket | DisGroupDevError>;
+
+}
+
+export class TextTicketManager extends BaseTicketManager {
+
+    public constructor(client: Client, options: TextTicketManagerOptions);
+
+    public cache: Collection<Number, TextTicket>;
+    public options: TextTicketManagerOptions;
+
+    private _init(): void;
+    public closeTicket(ticket: TextTicket): Promise<TextTicket | DisGroupDevError>;
+    public createTicket(guild: GuildResolvable, user: UserResolvable): Promise<TextTicket | DisGroupDevError>;
+    public deleteTicket(ticket: TextTicket): Promise<Boolean | DisGroupDevError>;
+    public renameTicket(ticket: TextTicket, name: String): Promise<TextTicket | DisGroupDevError>;
+    public reopenTicket(ticket: TextTicket): Promise<TextTicket | DisGroupDevError>;
+
+    public on<K extends keyof TextTicketManagerEvents>(event: K, listener: (...args: TextTicketManagerEvents[K]) => Awaitable<void>): this;
+    public on<S extends string | symbol>(
+        event: Exclude<S, keyof TextTicketManagerEvents>,
+        listener: (...args: any[]) => Awaitable<void>,
+    ): this;
+
+    public once<K extends keyof TextTicketManagerEvents>(event: K, listener: (...args: TextTicketManagerEvents[K]) => Awaitable<void>): this;
+    public once<S extends string | symbol>(
+        event: Exclude<S, keyof TextTicketManagerEvents>,
+        listener: (...args: any[]) => Awaitable<void>,
+    ): this;
+
+    public emit<K extends keyof TextTicketManagerEvents>(event: K, ...args: TextTicketManagerEvents[K]): boolean;
+    public emit<S extends string | symbol>(event: Exclude<S, keyof TextTicketManagerEvents>, ...args: unknown[]): boolean;
+
+    public off<K extends keyof TextTicketManagerEvents>(event: K, listener: (...args: TextTicketManagerEvents[K]) => Awaitable<void>): this;
+    public off<S extends string | symbol>(
+        event: Exclude<S, keyof TextTicketManagerEvents>,
+        listener: (...args: any[]) => Awaitable<void>,
+    ): this;
+
+    public removeAllListeners<K extends keyof TextTicketManagerEvents>(event?: K): this;
+    public removeAllListeners<S extends string | symbol>(event?: Exclude<S, keyof TextTicketManagerEvents>): this;
+
+}
+
+export interface TextTicketManagerEvents {
+
+    ticketClose: [ticket: TextTicket];
+    ticketCreate: [ticket: TextTicket];
+    ticketDelete: [ticket: TextTicket];
+    ticketRename: [ticket: TextTicket];
+    ticketReopen: [ticket: TextTicket];
+
+}
+
+export interface TextTicketManagerOptions extends BaseTicketManagerOptions {
+
+    channelTopic: String;
+    closedParentId: Snowflake | null;
+    parentId: Snowflake;
+
+}
+
 export interface TicketDataRaw {
 
     channelId: Snowflake;
@@ -736,9 +837,9 @@ export interface TicketDataRaw {
 
 }
 
-export type TicketDataStatus = 'CLOSED' | 'OPEN';
+export type TicketDataStatus = 'CLOSED' | 'DELETED' | 'OPEN';
 
-export type TicketDataType = 'DM' | 'CHANNEL' | 'THREAD';
+export type TicketDataType = 'CHANNEL';
 
 export class TranslationManager {
 
