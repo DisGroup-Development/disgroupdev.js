@@ -32,7 +32,7 @@ npm install disgroupdev.js
 ---
 
 ## 📄 | Documentation
-The documentation to this module can be found [here](https://js.disgroupdev.de)!
+The documentation to this module can be found [here](https://disgroupdev.js.org)!
 
 ---
 
