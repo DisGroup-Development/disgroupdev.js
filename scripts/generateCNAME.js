@@ -1,3 +1,3 @@
-const FileSystem = require('fs');
+const FileSystem = require('node:fs');
 
-FileSystem.writeFileSync(require('path').resolve(__dirname, '../docs/CNAME'), 'disgroupdev.js.org', { encoding: 'utf-8' });
+FileSystem.writeFileSync(require('node:path').resolve(__dirname, '../docs/CNAME'), 'disgroupdev.js.org', { encoding: 'utf-8' });
