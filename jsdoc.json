@@ -17,15 +17,21 @@
       ],
       "menu": [
         {
-          "title": "Github",
+          "title": "GitHub",
           "id": "github",
           "link": "https://github.com/DisGroup-Development/disgroupdev.js",
           "target": "_blank"
         },
         {
-          "title": "npm",
+          "title": "NPM",
           "id": "npm",
           "link": "https://www.npmjs.com/package/disgroupdev.js",
+          "target": "_blank"
+        },
+        {
+          "title": "Wiki",
+          "id": "wiki",
+          "link": "https://wiki.disgroupdevjs.ga",
           "target": "_blank"
         }
       ]
