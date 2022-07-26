@@ -1,6 +1,5 @@
 import {
     ApplicationCommandOptionData,
-    ApplicationCommandType,
     Client,
     Collection,
     EmojiIdentifierResolvable,
@@ -15,7 +14,6 @@ import {
     MessageSelectMenu,
     MessageSelectMenuOptionData,
     Modal,
-    PermissionString,
     Snowflake,
     TextBasedChannelTypes,
     TextChannel,
@@ -23,7 +21,7 @@ import {
     UserResolvable,
     WebhookClient
 } from 'discord.js';
-import { LocalizationMap } from 'discord-api-types/v10';
+import { APIMessageComponentEmoji, ApplicationCommandType, ButtonStyle, LocalizationMap, PermissionFlagsBits } from 'discord-api-types/v10';
 import { EventEmitter } from 'node:events';
 import { InitOptions } from 'i18next';
 
@@ -37,7 +35,7 @@ export class BaseComponent {
     public get betaOnly(): Boolean;
     public get category(): String;
     public get channelOnly(): Array<TextBasedChannelTypes>;
-    public get clientPermissions(): Array<PermissionString>;
+    public get clientPermissions(): Array<PermissionFlagsBits>;
     public get cooldown(): Number;
     public get customId(): String | null;
     public get defer(): Boolean;
@@ -53,7 +51,7 @@ export class BaseComponent {
     public get nsfw(): Boolean;
     public get ownerOnly(): Boolean;
     public get premiumOnly(): Boolean;
-    public get userPermissions(): Array<PermissionString>;
+    public get userPermissions(): Array<PermissionFlagsBits>;
     public toJSON(): BaseComponentData;
 
 }
@@ -62,8 +60,8 @@ export interface BaseComponentData {
 
     name: String;
     enabled: Boolean;
-    clientPermissions: Array<PermissionString>;
-    userPermissions: Array<PermissionString>;
+    clientPermissions: Array<PermissionFlagsBits>;
+    userPermissions: Array<PermissionFlagsBits>;
     category: String;
     cooldown: Number;
     customId: String;
@@ -92,7 +90,7 @@ export class BaseInteraction {
     public get betaOnly(): Boolean;
     public get category(): String;
     public get channelOnly(): Array<TextBasedChannelTypes>;
-    public get clientPermissions(): Array<PermissionString>;
+    public get clientPermissions(): Array<PermissionFlagsBits>;
     public get cooldown(): Number;
     public get defer(): Boolean;
     public get devOnly(): Boolean;
@@ -101,7 +99,6 @@ export class BaseInteraction {
     public get ephemeral(): Boolean;
     public get experiment(): ExperimentData;
     public get guildOnly(): Boolean;
-    // @ts-ignore
     public get id(): Snowflake | null;
     public set id(id: Snowflake);
     public get location(): String;
@@ -112,7 +109,7 @@ export class BaseInteraction {
     public get ownerOnly(): Boolean;
     public get premiumOnly(): Boolean;
     public get type(): ApplicationCommandType | null;
-    public get userPermissions(): Array<PermissionString>;
+    public get userPermissions(): Array<PermissionFlagsBits>;
     public toJSON(): BaseInteractionData;
 
 }
@@ -122,8 +119,8 @@ export interface BaseInteractionData {
     name: String;
     nameLocalizations: LocalizationMap;
     enabled: Boolean;
-    clientPermissions: Array<PermissionString>;
-    userPermissions: Array<PermissionString>;
+    clientPermissions: Array<PermissionFlagsBits>;
+    userPermissions: Array<PermissionFlagsBits>;
     category: String;
     cooldown: Number;
     defer: Boolean;
@@ -197,9 +194,9 @@ export class ButtonInteraction extends BaseComponent {
 
     public buildButton(): MessageButton | DisGroupDevError;
     public get disabled(): Boolean;
-    public get emoji(): EmojiIdentifierResolvable | null;
+    public get emoji(): APIMessageComponentEmoji | null;
     public get label(): String;
-    public get style(): MessageButtonStyle;
+    public get style(): ButtonStyle;
     public get url(): URL | null;
 
 }
@@ -207,7 +204,7 @@ export class ButtonInteraction extends BaseComponent {
 export interface ButtonInteractionData {
 
     disabled: Boolean;
-    emoji: EmojiIdentifierResolvable | null;
+    emoji: APIMessageComponentEmoji | null;
     label: String;
     style: MessageButtonStyle;
     url: URL | null;
