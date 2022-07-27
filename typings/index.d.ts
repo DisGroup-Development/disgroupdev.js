@@ -2,18 +2,11 @@ import {
     ApplicationCommandOptionData,
     Client,
     Collection,
-    EmojiIdentifierResolvable,
     Guild,
     GuildMember,
     GuildMemberResolvable,
     GuildResolvable,
-    MessageActionRowComponentResolvable,
-    MessageButton,
-    MessageButtonStyle,
     MessageEmbed,
-    MessageSelectMenu,
-    MessageSelectMenuOptionData,
-    Modal,
     Snowflake,
     TextBasedChannelTypes,
     TextChannel,
@@ -22,6 +15,7 @@ import {
     WebhookClient
 } from 'discord.js';
 import { APIMessageComponentEmoji, ApplicationCommandType, ButtonStyle, LocalizationMap, PermissionFlagsBits } from 'discord-api-types/v10';
+import { ButtonBuilder, ModalBuilder, SelectMenuBuilder, SelectMenuOptionBuilder, TextInputBuilder } from '@discordjs/builders';
 import { EventEmitter } from 'node:events';
 import { InitOptions } from 'i18next';
 
@@ -192,7 +186,7 @@ export class ButtonInteraction extends BaseComponent {
     public manager: ButtonInteractionManager;
     private data: ButtonInteractionData;
 
-    public buildButton(): MessageButton | DisGroupDevError;
+    public buildButton(): ButtonBuilder | DisGroupDevError;
     public get disabled(): Boolean;
     public get emoji(): APIMessageComponentEmoji | null;
     public get label(): String;
@@ -206,7 +200,7 @@ export interface ButtonInteractionData {
     disabled: Boolean;
     emoji: APIMessageComponentEmoji | null;
     label: String;
-    style: MessageButtonStyle;
+    style: ButtonStyle;
     url: URL | null;
 
 }
@@ -482,8 +476,8 @@ export class ModalInteraction extends BaseComponent {
     public manager: ModalInteractionManager;
     private data: ModalInteractionData;
 
-    public buildModal(): Modal | DisGroupDevError;
-    public get components(): Array<MessageActionRowComponentResolvable>;
+    public buildModal(): ModalBuilder | DisGroupDevError;
+    public get components(): Array<TextInputBuilder>;
     public load(): Promise<Boolean | DisGroupDevError>;
     public get title(): String;
     public reload(): Promise<Boolean | DisGroupDevError>;
@@ -493,7 +487,7 @@ export class ModalInteraction extends BaseComponent {
 
 export interface ModalInteractionData extends BaseComponentData {
 
-    components: MessageActionRowComponentResolvable[];
+    components: TextInputBuilder[];
     title: String;
 
 }
@@ -521,12 +515,12 @@ export class SelectMenuInteraction extends BaseComponent {
     public manager: SelectMenuInteractionManager;
     private data: SelectMenuInteractionData;
 
-    public buildSelectMenU(): MessageSelectMenu | DisGroupDevError;
+    public buildSelectMenu(): SelectMenuBuilder | DisGroupDevError;
     public get disabled(): Boolean;
     public load(): Promise<Boolean | DisGroupDevError>;
     public get maxValues(): Number;
     public get minValues(): Number;
-    public get options(): MessageSelectMenuOptionData[];
+    public get options(): SelectMenuOptionBuilder[];
     public get placeholder(): String;
     public reload(): Promise<Boolean | DisGroupDevError>;
     public unload(): Promise<Boolean | DisGroupDevError>;
@@ -538,7 +532,7 @@ export interface SelectMenuInteractionData extends BaseComponentData {
     disabled: Boolean;
     maxValues: Number;
     minValues: Number;
-    options: MessageSelectMenuOptionData[];
+    options: SelectMenuOptionBuilder[];
     placeholder: String;
 
 }
