@@ -87,6 +87,8 @@ export class BaseInteraction {
     public get clientPermissions(): Array<PermissionFlagsBits>;
     public get cooldown(): Number;
     public get defer(): Boolean;
+    public get defaultMemberPermissions(): Array<PermissionFlagsBits>;
+    public get deployEnabled(): Boolean;
     public get devOnly(): Boolean;
     public get dirname(): String;
     public get enabled(): Boolean;
@@ -117,6 +119,8 @@ export interface BaseInteractionData {
     userPermissions: Array<PermissionFlagsBits>;
     category: String;
     cooldown: Number;
+    defaultMemberPermissions: Array<PermissionFlagsBits>;
+    deployEnabled: Boolean;
     defer: Boolean;
     dirname: String;
     ephemeral: Boolean;
@@ -228,9 +232,7 @@ export class ContextInteraction extends BaseInteraction {
     public manager: ContextInteractionManager;
     private data: ContextInteractionData;
 
-    public get defaultEnabled(): Boolean;
     public deploy(): Promise<Boolean | DisGroupDevError>;
-    public get deployEnabled(): Boolean;
     public load(): Promise<Boolean | DisGroupDevError>;
     public reload(): Promise<Boolean | DisGroupDevError>;
     public unload(): Promise<Boolean | DisGroupDevError>;
@@ -239,8 +241,6 @@ export class ContextInteraction extends BaseInteraction {
 
 export interface ContextInteractionData extends BaseInteractionData {
 
-    defaultEnabled: Boolean;
-    deployEnabled: Boolean;
     type: ApplicationCommandType;
 
 }
@@ -560,9 +560,7 @@ export class SlashCommand extends BaseInteraction {
     public manager: SlashCommandInteractionManager;
     private data: SlashCommandData;
 
-    public get defaultEnabled(): Boolean;
     public deploy(): Promise<Boolean | DisGroupDevError>;
-    public get deployEnabled(): Boolean;
     public get description(): String;
     public get descriptionLocalizations(): LocalizationMap;
     public get hidden(): Boolean;
@@ -576,8 +574,6 @@ export class SlashCommand extends BaseInteraction {
 
 export interface SlashCommandData extends BaseInteractionData {
 
-    defaultEnabled: Boolean;
-    deployEnabled: Boolean;
     description: String;
     descriptionLocalizations: LocalizationMap;
     hidden: Boolean;
