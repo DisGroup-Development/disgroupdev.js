@@ -1,2 +1,2 @@
 '📂 Dependencies':
-  - any: ['node_modules/*']
+  - any: ['package-lock.json']
