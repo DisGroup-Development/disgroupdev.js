@@ -6,7 +6,7 @@ class Ready extends Event {
 
         super(client, manager, {
             name: 'ready',
-            enabled: false,
+            enabled: true,
             once: false,
         });
 
