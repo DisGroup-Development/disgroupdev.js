@@ -27,6 +27,8 @@ A powerful 🔥 [NodeJS](https://nodejs.org) library for all data and managers o
 
 ```shell
 npm install disgroupdev.js
+yarn add disgroupdev.js
+pnpm add disgroupdev.js
 ```
 
 ---
