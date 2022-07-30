@@ -37,12 +37,14 @@
   ],
   "main": "./lib/index.js",
   "name": "disgroupdev.js",
+  "packageManager": "yarn@3.2.2",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/DisGroup-Development/disgroupdev.js.git"
   },
   "scripts": {
     "docs": "jsdoc -c jsdoc.json -R ./README.md && node ./scripts/generateCNAME.js",
+    "publish": "npm publish && yarn publish && pnpm publish",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "types": "./typings/index.d.ts",
