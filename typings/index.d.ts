@@ -6,7 +6,6 @@ import {
     GuildMember,
     GuildMemberResolvable,
     GuildResolvable,
-    MessageEmbed,
     Snowflake,
     TextBasedChannelTypes,
     TextChannel,
@@ -15,7 +14,7 @@ import {
     WebhookClient
 } from 'discord.js';
 import { APIMessageComponentEmoji, ApplicationCommandType, ButtonStyle, LocalizationMap, PermissionFlagsBits } from 'discord-api-types/v10';
-import { ButtonBuilder, ModalBuilder, SelectMenuBuilder, SelectMenuOptionBuilder, TextInputBuilder } from '@discordjs/builders';
+import { ButtonBuilder, EmbedBuilder, ModalBuilder, SelectMenuBuilder, SelectMenuOptionBuilder, TextInputBuilder } from '@discordjs/builders';
 import { EventEmitter } from 'node:events';
 import { InitOptions } from 'i18next';
 
@@ -609,7 +608,7 @@ export class StatusPageChecker extends EventEmitter {
     public webhook: WebhookClient;
 
     private _fetch():  Promise<any>;
-    private _generateEmbed(): Promise<MessageEmbed>;
+    private _generateEmbed(): Promise<EmbedBuilder>;
     private _loadIncidents(): Promise<Boolean | DisGroupDevError>;
     private _loadRawIncidents(): Promise<Array<StatusPageCheckerIncidentData>>;
     private _save(): Boolean;
