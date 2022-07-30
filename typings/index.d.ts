@@ -353,6 +353,41 @@ export interface ExperimentData {
 
 }
 
+export class Giveaway {
+
+    public constructor(client: Client, manager: GiveawayManager, data: GiveawayData);
+    public client: Client;
+    public manager: GiveawayManager;
+    private data: GiveawayData;
+
+    public toJSON(): GiveawayData
+
+}
+
+export interface GiveawayData {
+
+
+
+}
+
+export class GiveawayManager {
+
+
+
+}
+
+export interface GiveawayManagerEvents {
+
+    
+
+}
+
+export interface GiveawayManagerOptions {
+
+
+
+}
+
 export class InteractionManager extends EventEmitter {
 
     public constructor(client: Client, options: InteractionManagerOptions);
