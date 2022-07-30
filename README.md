@@ -36,6 +36,11 @@ The documentation to this module can be found [here](https://disgroupdev.js.org)
 
 ---
 
+## 🌐 | Wiki
+The wiki to this module can be found [here](https://wiki.disgroupdevjs.ga)!
+
+---
+
 ## 🎧 | Support
 [![Support](https://discordapp.com/api/guilds/719506936810438667/widget.png?style=banner2)](https://discord.gg/xRveKFVUuG)
 
