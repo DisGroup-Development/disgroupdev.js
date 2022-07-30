@@ -1,8 +1,9 @@
 const { EventManager } = require('../lib');
-const { Client, Intents } = require('discord.js');
+const { Client } = require('discord.js');
+const { GatewayIntentBits } = require('discord-api-types/v10');
 const { token } = require('./auth.js');
 
-const client = new Client({ intents: [ Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES ] });
+const client = new Client({ intents: [ GatewayIntentBits.Guilds, GatewayIntentBits.MessageContent ] });
 
 client.events = new EventManager(client, { locationEvents: require('path').resolve(__dirname, './Events') });
 client.events.loadAll();

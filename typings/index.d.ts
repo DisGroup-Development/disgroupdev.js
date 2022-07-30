@@ -1,21 +1,11 @@
 import {
     ApplicationCommandOptionData,
-    ApplicationCommandType,
     Client,
     Collection,
-    EmojiIdentifierResolvable,
     Guild,
     GuildMember,
     GuildMemberResolvable,
     GuildResolvable,
-    MessageActionRowComponentResolvable,
-    MessageButton,
-    MessageButtonStyle,
-    MessageEmbed,
-    MessageSelectMenu,
-    MessageSelectMenuOptionData,
-    Modal,
-    PermissionString,
     Snowflake,
     TextBasedChannelTypes,
     TextChannel,
@@ -23,7 +13,8 @@ import {
     UserResolvable,
     WebhookClient
 } from 'discord.js';
-import { LocalizationMap } from 'discord-api-types/v10';
+import { APIMessageComponentEmoji, ApplicationCommandType, ButtonStyle, LocalizationMap, PermissionFlagsBits } from 'discord-api-types/v10';
+import { ButtonBuilder, EmbedBuilder, ModalBuilder, SelectMenuBuilder, SelectMenuOptionBuilder, TextInputBuilder } from '@discordjs/builders';
 import { EventEmitter } from 'node:events';
 import { InitOptions } from 'i18next';
 
@@ -37,7 +28,7 @@ export class BaseComponent {
     public get betaOnly(): Boolean;
     public get category(): String;
     public get channelOnly(): Array<TextBasedChannelTypes>;
-    public get clientPermissions(): Array<PermissionString>;
+    public get clientPermissions(): Array<PermissionFlagsBits>;
     public get cooldown(): Number;
     public get customId(): String | null;
     public get defer(): Boolean;
@@ -53,7 +44,7 @@ export class BaseComponent {
     public get nsfw(): Boolean;
     public get ownerOnly(): Boolean;
     public get premiumOnly(): Boolean;
-    public get userPermissions(): Array<PermissionString>;
+    public get userPermissions(): Array<PermissionFlagsBits>;
     public toJSON(): BaseComponentData;
 
 }
@@ -62,8 +53,8 @@ export interface BaseComponentData {
 
     name: String;
     enabled: Boolean;
-    clientPermissions: Array<PermissionString>;
-    userPermissions: Array<PermissionString>;
+    clientPermissions: Array<PermissionFlagsBits>;
+    userPermissions: Array<PermissionFlagsBits>;
     category: String;
     cooldown: Number;
     customId: String;
@@ -92,16 +83,17 @@ export class BaseInteraction {
     public get betaOnly(): Boolean;
     public get category(): String;
     public get channelOnly(): Array<TextBasedChannelTypes>;
-    public get clientPermissions(): Array<PermissionString>;
+    public get clientPermissions(): Array<PermissionFlagsBits>;
     public get cooldown(): Number;
     public get defer(): Boolean;
+    public get defaultMemberPermissions(): Array<PermissionFlagsBits>;
+    public get deployEnabled(): Boolean;
     public get devOnly(): Boolean;
     public get dirname(): String;
     public get enabled(): Boolean;
     public get ephemeral(): Boolean;
     public get experiment(): ExperimentData;
     public get guildOnly(): Boolean;
-    // @ts-ignore
     public get id(): Snowflake | null;
     public set id(id: Snowflake);
     public get location(): String;
@@ -112,7 +104,7 @@ export class BaseInteraction {
     public get ownerOnly(): Boolean;
     public get premiumOnly(): Boolean;
     public get type(): ApplicationCommandType | null;
-    public get userPermissions(): Array<PermissionString>;
+    public get userPermissions(): Array<PermissionFlagsBits>;
     public toJSON(): BaseInteractionData;
 
 }
@@ -122,10 +114,12 @@ export interface BaseInteractionData {
     name: String;
     nameLocalizations: LocalizationMap;
     enabled: Boolean;
-    clientPermissions: Array<PermissionString>;
-    userPermissions: Array<PermissionString>;
+    clientPermissions: Array<PermissionFlagsBits>;
+    userPermissions: Array<PermissionFlagsBits>;
     category: String;
     cooldown: Number;
+    defaultMemberPermissions: Array<PermissionFlagsBits>;
+    deployEnabled: Boolean;
     defer: Boolean;
     dirname: String;
     ephemeral: Boolean;
@@ -195,11 +189,11 @@ export class ButtonInteraction extends BaseComponent {
     public manager: ButtonInteractionManager;
     private data: ButtonInteractionData;
 
-    public buildButton(): MessageButton | DisGroupDevError;
+    public buildButton(): ButtonBuilder | DisGroupDevError;
     public get disabled(): Boolean;
-    public get emoji(): EmojiIdentifierResolvable | null;
+    public get emoji(): APIMessageComponentEmoji | null;
     public get label(): String;
-    public get style(): MessageButtonStyle;
+    public get style(): ButtonStyle;
     public get url(): URL | null;
 
 }
@@ -207,9 +201,9 @@ export class ButtonInteraction extends BaseComponent {
 export interface ButtonInteractionData {
 
     disabled: Boolean;
-    emoji: EmojiIdentifierResolvable | null;
+    emoji: APIMessageComponentEmoji | null;
     label: String;
-    style: MessageButtonStyle;
+    style: ButtonStyle;
     url: URL | null;
 
 }
@@ -237,9 +231,7 @@ export class ContextInteraction extends BaseInteraction {
     public manager: ContextInteractionManager;
     private data: ContextInteractionData;
 
-    public get defaultEnabled(): Boolean;
     public deploy(): Promise<Boolean | DisGroupDevError>;
-    public get deployEnabled(): Boolean;
     public load(): Promise<Boolean | DisGroupDevError>;
     public reload(): Promise<Boolean | DisGroupDevError>;
     public unload(): Promise<Boolean | DisGroupDevError>;
@@ -248,8 +240,6 @@ export class ContextInteraction extends BaseInteraction {
 
 export interface ContextInteractionData extends BaseInteractionData {
 
-    defaultEnabled: Boolean;
-    deployEnabled: Boolean;
     type: ApplicationCommandType;
 
 }
@@ -485,8 +475,8 @@ export class ModalInteraction extends BaseComponent {
     public manager: ModalInteractionManager;
     private data: ModalInteractionData;
 
-    public buildModal(): Modal | DisGroupDevError;
-    public get components(): Array<MessageActionRowComponentResolvable>;
+    public buildModal(): ModalBuilder | DisGroupDevError;
+    public get components(): Array<TextInputBuilder>;
     public load(): Promise<Boolean | DisGroupDevError>;
     public get title(): String;
     public reload(): Promise<Boolean | DisGroupDevError>;
@@ -496,7 +486,7 @@ export class ModalInteraction extends BaseComponent {
 
 export interface ModalInteractionData extends BaseComponentData {
 
-    components: MessageActionRowComponentResolvable[];
+    components: TextInputBuilder[];
     title: String;
 
 }
@@ -524,12 +514,12 @@ export class SelectMenuInteraction extends BaseComponent {
     public manager: SelectMenuInteractionManager;
     private data: SelectMenuInteractionData;
 
-    public buildSelectMenU(): MessageSelectMenu | DisGroupDevError;
+    public buildSelectMenu(): SelectMenuBuilder | DisGroupDevError;
     public get disabled(): Boolean;
     public load(): Promise<Boolean | DisGroupDevError>;
     public get maxValues(): Number;
     public get minValues(): Number;
-    public get options(): MessageSelectMenuOptionData[];
+    public get options(): SelectMenuOptionBuilder[];
     public get placeholder(): String;
     public reload(): Promise<Boolean | DisGroupDevError>;
     public unload(): Promise<Boolean | DisGroupDevError>;
@@ -541,7 +531,7 @@ export interface SelectMenuInteractionData extends BaseComponentData {
     disabled: Boolean;
     maxValues: Number;
     minValues: Number;
-    options: MessageSelectMenuOptionData[];
+    options: SelectMenuOptionBuilder[];
     placeholder: String;
 
 }
@@ -569,9 +559,7 @@ export class SlashCommand extends BaseInteraction {
     public manager: SlashCommandInteractionManager;
     private data: SlashCommandData;
 
-    public get defaultEnabled(): Boolean;
     public deploy(): Promise<Boolean | DisGroupDevError>;
-    public get deployEnabled(): Boolean;
     public get description(): String;
     public get descriptionLocalizations(): LocalizationMap;
     public get hidden(): Boolean;
@@ -585,8 +573,6 @@ export class SlashCommand extends BaseInteraction {
 
 export interface SlashCommandData extends BaseInteractionData {
 
-    defaultEnabled: Boolean;
-    deployEnabled: Boolean;
     description: String;
     descriptionLocalizations: LocalizationMap;
     hidden: Boolean;
@@ -622,7 +608,7 @@ export class StatusPageChecker extends EventEmitter {
     public webhook: WebhookClient;
 
     private _fetch():  Promise<any>;
-    private _generateEmbed(): Promise<MessageEmbed>;
+    private _generateEmbed(): Promise<EmbedBuilder>;
     private _loadIncidents(): Promise<Boolean | DisGroupDevError>;
     private _loadRawIncidents(): Promise<Array<StatusPageCheckerIncidentData>>;
     private _save(): Boolean;

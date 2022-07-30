@@ -27,12 +27,19 @@ A powerful 🔥 [NodeJS](https://nodejs.org) library for all data and managers o
 
 ```shell
 npm install disgroupdev.js
+yarn add disgroupdev.js
+pnpm add disgroupdev.js
 ```
 
 ---
 
 ## 📄 | Documentation
 The documentation to this module can be found [here](https://disgroupdev.js.org)!
+
+---
+
+## 🌐 | Wiki
+The wiki to this module can be found [here](https://wiki.disgroupdevjs.ga)!
 
 ---
 
