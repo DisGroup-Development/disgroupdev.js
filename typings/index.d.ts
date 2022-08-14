@@ -8,6 +8,7 @@ import {
     GuildMember,
     GuildMemberResolvable,
     GuildResolvable,
+    Message,
     MessageMentionOptions,
     MessageReaction,
     Snowflake,
@@ -394,7 +395,7 @@ export class Giveaway {
     public get messageReaction(): MessageReaction | null;
     public get messageURL(): String;
     public get messages(): GiveawayMessagesData;
-    public pause(options: GiveawayPauseOptions): Promise<Givewaway>;
+    public pause(options: GiveawayPauseData): Promise<Givewaway>;
     public get pause(): GiveawayPauseData;
     public get prize(): String | null;
     public get reaction(): EmojiResolvable | String;
@@ -438,6 +439,20 @@ export interface GiveawayData {
 
 }
 
+export interface GiveawayEditData {
+
+    addTime?: Number,
+    exceptMembers?: Array<Snowflake>,
+    image?: String,
+    lastChange?: GiveawayLastChanceData,
+    messages?: GiveawayMessagesData,
+    prize?: String,
+    thumbnail?: String,
+    timestamp?: String,
+    winners?: Number
+
+}
+
 export interface GiveawayLastChanceData {
 
     embedColor?: ColorResolvable,
@@ -472,6 +487,16 @@ export interface GiveawayPauseData {
     isPaused?: Boolean,
     message?: String,
     unpauseAfter?: Number
+
+}
+
+export interface GiveawayRerollOptions {
+
+    messages: {
+        congrat?: String,
+        error?: String
+    },
+    winners?: Number
 
 }
 
