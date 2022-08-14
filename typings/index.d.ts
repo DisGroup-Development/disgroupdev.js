@@ -2,10 +2,14 @@ import {
     ApplicationCommandOptionData,
     Client,
     Collection,
+    ColorResolvable,
+    EmojiResolvable,
     Guild,
     GuildMember,
     GuildMemberResolvable,
     GuildResolvable,
+    MessageMentionOptions,
+    MessageReaction,
     Snowflake,
     TextBasedChannelTypes,
     TextChannel,
@@ -14,7 +18,7 @@ import {
     WebhookClient
 } from 'discord.js';
 import { APIMessageComponentEmoji, ApplicationCommandType, ButtonStyle, LocalizationMap, PermissionFlagsBits } from 'discord-api-types/v10';
-import { ButtonBuilder, EmbedBuilder, ModalBuilder, SelectMenuBuilder, SelectMenuOptionBuilder, TextInputBuilder } from '@discordjs/builders';
+import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, EmbedFooterOptions, ModalBuilder, SelectMenuBuilder, SelectMenuOptionBuilder, TextInputBuilder } from '@discordjs/builders';
 import { EventEmitter } from 'node:events';
 import { InitOptions } from 'i18next';
 
@@ -357,16 +361,117 @@ export class Giveaway {
 
     public constructor(client: Client, manager: GiveawayManager, data: GiveawayData);
     public client: Client;
+    private endTimeout: Function | null;
     public manager: GiveawayManager;
+    private message: Message | null
     private data: GiveawayData;
 
-    public toJSON(): GiveawayData
+    private _fillInComponent(com: Array<ActionRowBuilder>): Array<ActionRowBuilder>;
+    private _fillInEmbed(emb: EmbedBuilder): EmbedBuilder;
+    private _fillInString(str: String): String;
+    public get allowedMentions(): MessageMentionOptions | null;
+    public get botsCanWin(): Boolean;
+    public get channelId(): Snowflake | null;
+    public checkWinnerEntry(user: User): Promise<Boolean>;
+    public get duration(): Number;
+    public edit(data: GiveawayEditData): Promise<Giveaway>;
+    public get embedColor(): Number;
+    public get embedColorEnded(): Number;
+    public end(): Promise<Array<User>>;
+    public get endAt(): Number;
+    public get ended(): Boolean;
+    private ensureEndTimeout(): Function | null;
+    public get exceptMembers(): Array<Snowflake>;
+    public get exceptPermissions(): Array<PermissionFlagsBits>;
+    public fetchAllEntries(): Promise<Collection<Snowflake, User>|DisGroupDevError>;
+    public fetchMessage(): Promise<Message|DisGroupDevError>;
+    public get guildId(): Snowflake | null;
+    public get hostedBy(): String | null;
+    public get image(): String | null;
+    public get isDrop(): Boolean;
+    public get lastChance(): GiveawayLastChanceData;
+    public get messageId(): Snowflake | null;
+    public get messageReaction(): MessageReaction | null;
+    public get messageURL(): String;
+    public get messages(): GiveawayMessagesData;
+    public pause(options: GiveawayPauseOptions): Promise<Givewaway>;
+    public get pause(): GiveawayPauseData;
+    public get prize(): String | null;
+    public get reaction(): EmojiResolvable | String;
+    public get remainingTime(): Number;
+    public reroll(options: GiveawayRerollOptions): Promise<Array<User>>;
+    public roll(): Promise<User>;
+    public get startAt(): Number;
+    public get thumbnail(): String | null;
+    public unpause(): Promise<Giveaway>;
+    public get winnerIds(): Array<Snowflake>;
+    public get winners(): Number;
+    public toJSON(): GiveawayData;
 
 }
 
 export interface GiveawayData {
 
+    allowedMentions?: MessageMentionOptions,
+    botsCanWin?: Boolean,
+    channelId: Snowflake,
+    embedColor?: ColorResolvable,
+    embedColorEnded?: ColorResolvable,
+    endAt: Number,
+    ended: Boolean,
+    exceptMembers: Array<Snowflake>,
+    exceptPermissions: Array<PermissionFlagsBits>,
+    guildId: Snowflake,
+    hostedBy?: String,
+    image?: String,
+    isDrop?: Boolean,
+    lastChance?: GiveawayLastChanceData
+    messageId: Snowflake,
+    messages?: GiveawayMessagesData,
+    pause?: GiveawayPauseData,
+    prize: String,
+    reaction: EmojiResolvable | String,
+    startAt: Number,
+    thumbnail?: String,
+    winnerIds?: Array<Snowflake>,
+    winners: Number
 
+}
+
+export interface GiveawayLastChanceData {
+
+    embedColor?: ColorResolvable,
+    enabled?: Boolean,
+    message?: String,
+    time?: Number
+
+}
+
+export interface GiveawayMessagesData {
+
+    drawing?: String,
+    dropMessage?: String,
+    endedAt?: String,
+    footer?: EmbedFooterOptions,
+    giveaway?: String,
+    giveawayEnded?: String,
+    hostedBy?: String,
+    noWinner?: String,
+    reactToParticipate?: String,
+    title?: String,
+    winMessage?: String,
+    winners?: String
+
+}
+
+export interface GiveawayPauseData {
+
+    durationAfterPause?: Number,
+    embedColor?: ColorResolvable,
+    infiniteDurationText?: String,
+    isPaused?: Boolean,
+    message?: String,
+    unpauseAfter?: Number
 
 }
 
