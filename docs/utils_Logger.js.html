@@ -117,7 +117,7 @@ class Logger {
      */
     debug(string) {
 
-        this._log({ consoleString: `[ ${this.options.name} | ${this._getTime()} ] : ${Chalk.bgGreenBright.white(`${this.options.icons.debug} DEBUG`)} | ${string}`, webhookString: `[ ${this.options.name} | ${this._getTime()} ] : ${this.options.icons.debug} DEBUG | ${string}`});
+        this._log({ consoleString: `[ ${this.options.name} | ${Utils.getReadableTime()} ] : ${Chalk.bgGreenBright.white(`${this.options.icons.debug} DEBUG`)} | ${string}`, webhookString: `[ ${this.options.name} | ${Utils.getReadableTime()} ] : ${this.options.icons.debug} DEBUG | ${string}`});
 
         return this;
 
@@ -131,7 +131,7 @@ class Logger {
      */
     error(string) {
 
-        this._log({ consoleString: `[ ${this.options.name} | ${this._getTime()} ] : ${Chalk.bgRedBright.white(`${this.options.icons.error} ERROR`)} | ${string}`, webhookString: `[ ${this.options.name} | ${this._getTime()} ] : ${this.options.icons.error} ERROR | ${string}`});
+        this._log({ consoleString: `[ ${this.options.name} | ${Utils.getReadableTime()} ] : ${Chalk.bgRedBright.white(`${this.options.icons.error} ERROR`)} | ${string}`, webhookString: `[ ${this.options.name} | ${Utils.getReadableTime()} ] : ${this.options.icons.error} ERROR | ${string}`});
 
         return this;
 
@@ -145,7 +145,7 @@ class Logger {
      */
     fail(string) {
 
-        this._log({ consoleString: `[ ${this.options.name} | ${this._getTime()} ] : ${Chalk.bgRedBright.white(`${this.options.icons.fail} FAIL`)} | ${string}`, webhookString: `[ ${this.options.name} | ${this._getTime()} ] : ${this.options.icons.fail} FAIL | ${string}`});
+        this._log({ consoleString: `[ ${this.options.name} | ${Utils.getReadableTime()} ] : ${Chalk.bgRedBright.white(`${this.options.icons.fail} FAIL`)} | ${string}`, webhookString: `[ ${this.options.name} | ${Utils.getReadableTime()} ] : ${this.options.icons.fail} FAIL | ${string}`});
 
         return this;
 
@@ -159,7 +159,7 @@ class Logger {
      */
     info(string) {
 
-        this._log({ consoleString: `[ ${this.options.name} | ${this._getTime()} ] : ${Chalk.bgBlueBright.white(`${this.options.icons.info} INFO`)} | ${string}`, webhookString: `[ ${this.options.name} | ${this._getTime()} ] : ${this.options.icons.info} INFO | ${string}`});
+        this._log({ consoleString: `[ ${this.options.name} | ${Utils.getReadableTime()} ] : ${Chalk.bgBlueBright.white(`${this.options.icons.info} INFO`)} | ${string}`, webhookString: `[ ${this.options.name} | ${Utils.getReadableTime()} ] : ${this.options.icons.info} INFO | ${string}`});
 
         return this;
 
@@ -173,7 +173,7 @@ class Logger {
      */
     success(string) {
 
-        this._log({ consoleString: `[ ${this.options.name} | ${this._getTime()} ] : ${Chalk.bgGreenBright.white(`${this.options.icons.success} SUCCESS`)} | ${string}`, webhookString: `[ ${this.options.name} | ${this._getTime()} ] : ${this.options.icons.success} SUCCESS | ${string}`});
+        this._log({ consoleString: `[ ${this.options.name} | ${Utils.getReadableTime()} ] : ${Chalk.bgGreenBright.white(`${this.options.icons.success} SUCCESS`)} | ${string}`, webhookString: `[ ${this.options.name} | ${Utils.getReadableTime()} ] : ${this.options.icons.success} SUCCESS | ${string}`});
 
         return this;
 
@@ -187,7 +187,7 @@ class Logger {
      */
     warn(string) {
 
-        this._log({ consoleString: `[ ${this.options.name} | ${this._getTime()} ] : ${Chalk.bgYellowBright.white(`${this.options.icons.warn} WARN`)} | ${string}`, webhookString: `[ ${this.options.name} | ${this._getTime()} ] : ${this.options.icons.warn} WARN | ${string}`});
+        this._log({ consoleString: `[ ${this.options.name} | ${Utils.getReadableTime()} ] : ${Chalk.bgYellowBright.white(`${this.options.icons.warn} WARN`)} | ${string}`, webhookString: `[ ${this.options.name} | ${Utils.getReadableTime()} ] : ${this.options.icons.warn} WARN | ${string}`});
 
         return this;
 
