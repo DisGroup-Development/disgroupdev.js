@@ -3,7 +3,7 @@ import {
     Client,
     Collection,
     ColorResolvable,
-    EmojiResolvable,
+    EmojiIdentifierResolvable,
     Guild,
     GuildMember,
     GuildMemberResolvable,
@@ -398,7 +398,7 @@ export class Giveaway {
     public pause(options: GiveawayPauseData): Promise<Givewaway>;
     public get pause(): GiveawayPauseData;
     public get prize(): String | null;
-    public get reaction(): EmojiResolvable | String;
+    public get reaction(): EmojiIdentifierResolvable;
     public get remainingTime(): Number;
     public reroll(options: GiveawayRerollOptions): Promise<Array<User>>;
     public roll(): Promise<User>;
@@ -431,7 +431,7 @@ export interface GiveawayData {
     messages?: GiveawayMessagesData,
     pause?: GiveawayPauseData,
     prize: String,
-    reaction: EmojiResolvable | String,
+    reaction: EmojiIdentifierResolvable,
     startAt: Number,
     thumbnail?: String,
     winnerIds?: Array<Snowflake>,
