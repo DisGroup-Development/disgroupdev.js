@@ -396,7 +396,7 @@ export class Giveaway {
     public get messageURL(): String;
     public get messages(): GiveawayMessagesData;
     public pause(options: GiveawayPauseData): Promise<Givewaway>;
-    public get pause(): GiveawayPauseData;
+    public get pauseOptions(): GiveawayPauseData;
     public get prize(): String | null;
     public get reaction(): EmojiIdentifierResolvable;
     public get remainingTime(): Number;
