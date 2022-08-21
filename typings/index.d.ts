@@ -465,7 +465,7 @@ export interface GiveawayLastChanceData {
 export interface GiveawayMessagesData {
 
     drawing?: String,
-    dropMessage?: String,
+    drop?: String,
     endedAt?: String,
     footer?: EmbedFooterOptions,
     giveaway?: String,
