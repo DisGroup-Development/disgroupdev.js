@@ -367,7 +367,6 @@ export class Giveaway {
     private message: Message | null
     private data: GiveawayData;
 
-    private _fillInComponent(com: Array<ActionRowBuilder>): Array<ActionRowBuilder>;
     private _fillInEmbed(emb: EmbedBuilder): EmbedBuilder;
     private _fillInString(str: String): String;
     public get allowedMentions(): MessageMentionOptions | null;
