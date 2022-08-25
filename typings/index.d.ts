@@ -442,6 +442,7 @@ export interface GiveawayEditData {
 
     addTime?: Number,
     exceptMembers?: Array<Snowflake>,
+    exceptPermissions?: Array<PermissionFlagsBits>,
     image?: String,
     lastChange?: GiveawayLastChanceData,
     messages?: GiveawayMessagesData,
