@@ -5,6 +5,13 @@ __metadata:
   version: 6
   cacheKey: 8
 
+"@babel/helper-string-parser@npm:^7.18.10":
+  version: 7.18.10
+  resolution: "@babel/helper-string-parser@npm:7.18.10"
+  checksum: d554a4393365b624916b5c00a4cc21c990c6617e7f3fe30be7d9731f107f12c33229a7a3db9d829bfa110d2eb9f04790745d421640e3bd245bb412dc0ea123c1
+  languageName: node
+  linkType: hard
+
 "@babel/helper-validator-identifier@npm:^7.18.6":
   version: 7.18.6
   resolution: "@babel/helper-validator-identifier@npm:7.18.6"
@@ -31,12 +38,13 @@ __metadata:
   linkType: hard
 
 "@babel/types@npm:^7.8.3":
-  version: 7.18.9
-  resolution: "@babel/types@npm:7.18.9"
+  version: 7.18.13
+  resolution: "@babel/types@npm:7.18.13"
   dependencies:
+    "@babel/helper-string-parser": ^7.18.10
     "@babel/helper-validator-identifier": ^7.18.6
     to-fast-properties: ^2.0.0
-  checksum: f0e0147267895fd8a5b82133e711ce7ce99941f3ce63647e0e3b00656a7afe48a8aa48edbae27543b701794d2b29a562a08f51f88f41df401abce7c3acc5e13a
+  checksum: abc3ad1f3b6864df0ea0e778bcdf7d2c5ee2293811192962d50e8a8c05c1aeec90a48275f53b2a45aad882ed8bef9477ae1f8e70ac1d44d039e14930d1388dcc
   languageName: node
   linkType: hard
 
@@ -258,9 +266,9 @@ __metadata:
   linkType: hard
 
 "discord-api-types@npm:^0.37.0":
-  version: 0.37.0
-  resolution: "discord-api-types@npm:0.37.0"
-  checksum: a411d1f5a04301507e095af4b311fdf31593f42e57ff5259eaf1b8e6f3a1828b5899c9a5123cae005cad567c765367fcf20d434154ecba3e6fcdd79e53aa9f20
+  version: 0.37.5
+  resolution: "discord-api-types@npm:0.37.5"
+  checksum: 10a23b813d9a30d836aa27169f768883eeed971ab67e58325ff272bfe6b63b169d727ae983d7c1b69c7e0b02ed9072e66e79319ce48174b36cd4a2a5fafe2e9f
   languageName: node
   linkType: hard
 
@@ -774,7 +782,7 @@ __metadata:
 
 "typescript@patch:typescript@^4.7.4#~builtin<compat/typescript>":
   version: 4.7.4
-  resolution: "typescript@patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=f456af"
+  resolution: "typescript@patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=a1c5e5"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver

@@ -37,7 +37,7 @@
   ],
   "main": "./lib/index.js",
   "name": "disgroupdev.js",
-  "packageManager": "yarn@3.2.2",
+  "packageManager": "yarn@3.2.3",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/DisGroup-Development/disgroupdev.js.git"
