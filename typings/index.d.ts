@@ -493,8 +493,8 @@ export interface GiveawayPauseData {
 export interface GiveawayRerollOptions {
 
     messages: {
-        congrat?: String,
-        error?: String
+        noWinner?: String,
+        winMessage?: String
     },
     winners?: Number
 
