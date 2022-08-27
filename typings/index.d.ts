@@ -527,9 +527,9 @@ export class GiveawayManager extends EventEmitter {
     public endGiveaway(giveaway: Giveaway): Promise<Giveaway|DisGroupDevError> | DisGroupDevError;
     public handleMessageReactionAdd(reaction: MessageReaction, user: User): void;
     public handleMessageReactionRemove(reaction: MessageReaction, user: User): void;
-    public puaseGiveaway(giveaway: Giveaway, options: GiveawayPauseData);
-    public rerollGiveaway(giveaway: Giveaway, options: GiveawayRerollOptions): Promise<Array<GuildMember>|DisGroupDevError> | DisGroupDevError;
-    public rollGiveaway(giveaway): Promise<Array<GuildMember>|DisGroupDevError> | DisGroupDevError;
+    public pauseGiveaway(giveaway: Giveaway, options: GiveawayPauseData);
+    public rerollGiveaway(giveaway: Giveaway, options: GiveawayRerollOptions): Promise<Array<User>|DisGroupDevError> | DisGroupDevError;
+    public rollGiveaway(giveaway): Promise<Array<User>|DisGroupDevError> | DisGroupDevError;
     public save(): Boolean | DisGroupDevError;
     public unpauseGiveaway(giveaway: Giveaway): Promise<Giveaway|DisGroupDevError> | DisGroupDevError;
 
