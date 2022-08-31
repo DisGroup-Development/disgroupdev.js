@@ -17,6 +17,7 @@
     "node-fetch": "^3.2.4"
   },
   "devDependencies": {
+    "@octokit/action": "^4.0.8",
     "clean-jsdoc-theme": "4.1.7",
     "jsdoc": "3.6.11",
     "typescript": "4.8.2"
@@ -40,7 +41,7 @@
   "name": "disgroupdev.js",
   "packageManager": "yarn@3.2.3",
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com/"
+    "registry": "https://npm.pkg.github.com/"
   },
   "repository": {
     "type": "git",
