@@ -1,3 +1,4 @@
+import { Canvas, JPEGStream, PDFStream, PNGStream } from 'canvas';
 import {
     ApplicationCommandOptionData,
     Client,
@@ -221,6 +222,30 @@ export class ButtonInteractionManager {
     public reloadAll(): Promise<Boolean | DisGroupDevError>;
     public unload(name: String): Promise<Boolean | DisGroupDevError>;
     public unloadAll(): Promise<Boolean | DisGroupDevError>;
+
+}
+
+export class Captcha {
+
+    public constructor(options: CaptchaOptions);
+    private _canvas: Canvas;
+    public options: CaptchaOptions;
+    public value: String;
+
+    public get jpeg(): JPEGStream;
+    public get pdf(): PDFStream;
+    public get png(): PNGStream;
+    public static randomText(length: Number): String;
+    public static shuffleArray(arr: Array<Number>): Array<Number>;
+
+}
+
+export interface CaptchaOptions {
+
+    height: Number;
+    length: Number;
+    value: String;
+    width: Number;
 
 }
 
