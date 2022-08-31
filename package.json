@@ -19,6 +19,7 @@
   "devDependencies": {
     "@octokit/action": "^4.0.8",
     "clean-jsdoc-theme": "4.1.7",
+    "conventional-recommended-bump": "^6.1.0",
     "jsdoc": "3.6.11",
     "typescript": "4.8.2"
   },
