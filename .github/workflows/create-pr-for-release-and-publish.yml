@@ -37,7 +37,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Bump version
-        run: node ./scripts/bumpVersion.mjs
+        run: node ../scripts/bumpVersion.mjs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -54,7 +54,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Pull Request
-        run: node ./scripts/actions/createPR.mjs
+        run: node ../scripts/actions/createPR.mjs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -84,6 +84,6 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
       - name: Create GitHub release
-        run: node ./scripts/actions/createRelease.mjs
+        run: node ../scripts/actions/createRelease.mjs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
