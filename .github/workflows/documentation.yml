@@ -9,7 +9,7 @@ jobs:
   deploy:
     name: Build & Publish
     runs-on: ubuntu-latest
-    if: github.repository_owner === 'DisGroup-Development'
+    if: github.repository_owner == 'DisGroup-Development'
     steps:
       - uses: actions/checkout@v2
 
