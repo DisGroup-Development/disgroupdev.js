@@ -31,7 +31,7 @@ const pullRequestBody = [
 console.log(`🎉 Creating pull request for disgroupdev.js ${packageJson.version}`);
 
 const pullRequest = await octokit.pulls.create({
-	base: 'main',
+	base: 'master',
 	// The format must stay in sync with the one in create-pr-for-release-and-publish.yml
 	head: `chore/release/${packageJson.version}`,
 	owner: OWNER,
