@@ -4,7 +4,7 @@
     "url": "https://github.com/DisGroup-Development/disgroupdev.js/issues"
   },
   "contributors": [
-    "XEfnexX"
+    "fh.prv <fh.prv@disgroupdev.de>"
   ],
   "dependencies": {
     "canvas": "^2.9.3",
@@ -39,6 +39,9 @@
   "main": "./lib/index.js",
   "name": "disgroupdev.js",
   "packageManager": "yarn@3.2.3",
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com/"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/DisGroup-Development/disgroupdev.js.git"
