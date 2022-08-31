@@ -95,7 +95,7 @@ export class BaseInteraction {
     public get ephemeral(): Boolean;
     public get experiment(): ExperimentData;
     public get guildOnly(): Boolean;
-    public get id(): Snowflake | null;
+    public get id(): Snowflake;
     public set id(id: Snowflake);
     public get location(): String;
     public set location(path: String);
@@ -148,7 +148,7 @@ export class BaseTicket {
     public get channel(): TextChannel;
     public get channelId(): Snowflake;
     public get guild(): Guild;
-    public get guildId(): SNowflake;
+    public get guildId(): Snowflake;
     public get member(): GuildMember;
     public get number(): Number;
     public get participants(): Array<Snowflake>;
@@ -199,7 +199,7 @@ export class ButtonInteraction extends BaseComponent {
 
 }
 
-export interface ButtonInteractionData {
+export interface ButtonInteractionData extends BaseComponentData {
 
     disabled: Boolean;
     emoji: APIMessageComponentEmoji | null;
@@ -669,8 +669,8 @@ export class StatusPageChecker extends EventEmitter {
 export interface StatusPageCheckerEvents {
 
     incidentCheck: [];
-    incidentCreate: [incident: IncidentData];
-    incidentUpdate: [incidentData: IncidentData];
+    incidentCreate: [incident: StatusPageCheckerIncidentData];
+    incidentUpdate: [incidentData: StatusPageCheckerIncidentData];
 
 }
 
@@ -855,7 +855,7 @@ export type TicketDataType = 'CHANNEL';
 export class TranslationManager {
 
     public constructor(options: TranslationMangerOptions);
-    private _namespaces: Array | null;
+    private _namespaces: Array<String> | null;
     private _translations: Map<String, Function> | null;
     public options: TranslationMangerOptions;
     public isReady: Boolean;
