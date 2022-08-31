@@ -45,7 +45,7 @@ jobs:
         run: |
           git checkout -b "chore/release/$(jq --raw-output '.version' package.json)"
           # Run changelog generation, deno script, website version bump
-          npm run ci:pr
+          npm run changelog
           # Add all changes, commit and push
           git add --all .
           git commit -m "chore(release): $(jq --raw-output '.version' package.json) 🎉" -m "Build ran for ${GITHUB_SHA}"

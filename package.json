@@ -50,6 +50,7 @@
     "url": "git+https://github.com/DisGroup-Development/disgroupdev.js.git"
   },
   "scripts": {
+    "changelog": "conventional-changelog -p angular -i ./.github/CHANGELOG.md -s",
     "docs": "jsdoc -c jsdoc.json -R ./README.md && node ./scripts/generateCNAME.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

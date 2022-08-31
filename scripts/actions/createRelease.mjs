@@ -22,7 +22,7 @@ const previousRelease = previousReleases.data.find((release) => !release.draft);
 console.log('👀 Previous release version:', previousRelease?.tag_name);
 
 const releaseChangelog = [];
-const changelogContent = await readFile(new URL('../../CHANGELOG.md', import.meta.url), { encoding: 'utf8' });
+const changelogContent = await readFile(new URL('../../.github/CHANGELOG.md', import.meta.url), { encoding: 'utf8' });
 
 let contentToParseAndAdd = '';
 
