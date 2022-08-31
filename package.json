@@ -17,7 +17,6 @@
     "node-fetch": "^3.2.4"
   },
   "devDependencies": {
-    "@angular/core": "^14.2.0",
     "@octokit/action": "^4.0.8",
     "clean-jsdoc-theme": "4.1.7",
     "conventional-recommended-bump": "^6.1.0",
