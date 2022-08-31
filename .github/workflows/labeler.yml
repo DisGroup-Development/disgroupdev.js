@@ -5,7 +5,7 @@ on: [ pull_request_target ]
 jobs:
   triage:
     runs-on: ubuntu-latest
-
+    if: github.repository_owner == 'DisGroup-Development'
     permissions:
       contents: read
       pull-requests: write
