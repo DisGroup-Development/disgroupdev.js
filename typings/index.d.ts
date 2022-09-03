@@ -463,7 +463,6 @@ export class Logger {
     public options: LoggerOptions;
     public webhooks: WebhookClient[];
 
-    private _getTime(date: Date): Date;
     private _log(strings: { consoleString: String, webhookString: String }): void;
     public debug(string: String): Logger;
     public error(string: String): Logger;
@@ -628,7 +627,7 @@ export class SlashCommandInteractionManager {
 export class StatusPageChecker extends EventEmitter {
 
     public constructor(options: StatusPageCheckerOptions);
-    public incidents: Collection<String, StatusPageCheckerIncidentData>;
+    public cache: Collection<String, StatusPageCheckerIncidentData>;
     public options: StatusPageCheckerOptions;
     public webhook: WebhookClient;
 
