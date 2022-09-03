@@ -8,7 +8,7 @@ on:
 
 jobs:
   testing:
-    name: ESLint and TypeScript compilation
+    name: Check ESLint
     runs-on: ubuntu-latest
     steps:
       - name: Setup Checkout
