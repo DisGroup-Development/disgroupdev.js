@@ -37,7 +37,7 @@ console.info(`ℹ️ Bumping the ${expectedBumpType} version: ${result.reason}`)
 
 execSync(`npm version ${expectedBumpType}`);
 
-const newVersion = JSON.parse(execSync('npm version --json --no-git-tag-version', { encoding: 'utf8' }));
+const newVersion = JSON.parse(execSync('npm version --json', { encoding: 'utf8' }));
 
 console.info(
 	`✅ Done! disgroupdev.js was bumped to ${newVersion['disgroupdev.js']}! Checking if there was a pull request open already and closing it if so...`,
