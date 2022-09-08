@@ -18,6 +18,7 @@ import { APIMessageComponentEmoji, ApplicationCommandType, ButtonStyle, Localiza
 import { ButtonBuilder, EmbedBuilder, ModalBuilder, SelectMenuBuilder, SelectMenuOptionBuilder, TextInputBuilder } from '@discordjs/builders';
 import { EventEmitter } from 'node:events';
 import { InitOptions } from 'i18next';
+import * as Sentry from '@sentry/node';
 
 export class BaseComponent {
 
@@ -461,6 +462,7 @@ export class Logger {
 
     public constructor(options: LoggerOptions);
     public options: LoggerOptions;
+    public sentry: Sentry | null;
     public webhooks: WebhookClient[];
 
     private _log(strings: { consoleString: String, webhookString: String }): void;
@@ -488,6 +490,7 @@ export interface LoggerOptions {
 
     icons: LoggerIcons,
     name: String,
+    sentryOptions: Sentry.NodeOptions,
     webhooks: WebhookClient[]
 
 }
