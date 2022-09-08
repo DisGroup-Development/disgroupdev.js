@@ -64,5 +64,5 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "types": "./typings/index.d.ts",
-  "version": "2.2.1"
+  "version": "2.2.2"
 }
