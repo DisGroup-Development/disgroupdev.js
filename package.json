@@ -14,23 +14,23 @@
     "discord.js": "^14.0.3",
     "i18next": "^21.6.16",
     "i18next-fs-backend": "^1.1.4",
-    "luxon": "^2.4.0",
+    "luxon": "^3.0.0",
     "node-fetch": "^3.2.4"
   },
   "devDependencies": {
-    "@octokit/action": "^4.0.8",
-    "@typescript-eslint/eslint-plugin": "^5.36.1",
-    "@typescript-eslint/parser": "^5.36.1",
+    "@octokit/action": "4.0.8",
+    "@typescript-eslint/eslint-plugin": "5.36.2",
+    "@typescript-eslint/parser": "5.36.2",
     "clean-jsdoc-theme": "4.1.7",
-    "conventional-changelog-cli": "^2.2.2",
-    "conventional-recommended-bump": "^6.1.0",
-    "eslint": "^8.23.0",
-    "eslint-config-standard-with-typescript": "^22.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-n": "^15.2.5",
-    "eslint-plugin-promise": "^6.0.1",
+    "conventional-changelog-cli": "2.2.2",
+    "conventional-recommended-bump": "6.1.0",
+    "eslint": "8.23.0",
+    "eslint-config-standard-with-typescript": "22.0.0",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-n": "15.2.5",
+    "eslint-plugin-promise": "6.0.1",
     "jsdoc": "3.6.11",
-    "typescript": "^4.8.2"
+    "typescript": "4.8.2"
   },
   "description": "A 🔥 powerful NodeJS module from DisGroup Development for managing data and managers.",
   "engines": {
@@ -64,5 +64,5 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "types": "./typings/index.d.ts",
-  "version": "2.2.3"
+  "version": "2.2.0"
 }
