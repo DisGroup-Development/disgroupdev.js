@@ -1,3 +1,4 @@
+import { Canvas, JPEGStream, PDFStream, PNGStream } from 'canvas';
 import {
     ApplicationCommandOptionData,
     BaseGuildTextChannel,
@@ -23,6 +24,7 @@ import { APIMessageComponentEmoji, ApplicationCommandType, ButtonStyle, Localiza
 import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, EmbedFooterOptions, ModalBuilder, SelectMenuBuilder, SelectMenuOptionBuilder, TextInputBuilder } from '@discordjs/builders';
 import { EventEmitter } from 'node:events';
 import { InitOptions } from 'i18next';
+import * as Sentry from '@sentry/node';
 
 export class BaseComponent {
 
@@ -100,7 +102,7 @@ export class BaseInteraction {
     public get ephemeral(): Boolean;
     public get experiment(): ExperimentData;
     public get guildOnly(): Boolean;
-    public get id(): Snowflake | null;
+    public get id(): Snowflake;
     public set id(id: Snowflake);
     public get location(): String;
     public set location(path: String);
@@ -153,7 +155,7 @@ export class BaseTicket {
     public get channel(): TextChannel;
     public get channelId(): Snowflake;
     public get guild(): Guild;
-    public get guildId(): SNowflake;
+    public get guildId(): Snowflake;
     public get member(): GuildMember;
     public get number(): Number;
     public get participants(): Array<Snowflake>;
@@ -204,7 +206,7 @@ export class ButtonInteraction extends BaseComponent {
 
 }
 
-export interface ButtonInteractionData {
+export interface ButtonInteractionData extends BaseComponentData {
 
     disabled: Boolean;
     emoji: APIMessageComponentEmoji | null;
@@ -227,6 +229,30 @@ export class ButtonInteractionManager {
     public reloadAll(): Promise<Boolean | DisGroupDevError>;
     public unload(name: String): Promise<Boolean | DisGroupDevError>;
     public unloadAll(): Promise<Boolean | DisGroupDevError>;
+
+}
+
+export class Captcha {
+
+    public constructor(options: CaptchaOptions);
+    private _canvas: Canvas;
+    public options: CaptchaOptions;
+    public value: String;
+
+    public get jpeg(): JPEGStream;
+    public get pdf(): PDFStream;
+    public get png(): PNGStream;
+    public static randomText(length: Number): String;
+    public static shuffleArray(arr: Array<Number>): Array<Number>;
+
+}
+
+export interface CaptchaOptions {
+
+    height: Number;
+    length: Number;
+    value: String;
+    width: Number;
 
 }
 
@@ -664,9 +690,9 @@ export class Logger {
 
     public constructor(options: LoggerOptions);
     public options: LoggerOptions;
+    public sentry: Sentry | null;
     public webhooks: WebhookClient[];
 
-    private _getTime(date: Date): Date;
     private _log(strings: { consoleString: String, webhookString: String }): void;
     public debug(string: String): Logger;
     public error(string: String): Logger;
@@ -692,6 +718,7 @@ export interface LoggerOptions {
 
     icons: LoggerIcons,
     name: String,
+    sentryOptions: Sentry.NodeOptions,
     webhooks: WebhookClient[]
 
 }
@@ -831,7 +858,7 @@ export class SlashCommandInteractionManager {
 export class StatusPageChecker extends EventEmitter {
 
     public constructor(options: StatusPageCheckerOptions);
-    public incidents: Collection<String, StatusPageCheckerIncidentData>;
+    public cache: Collection<String, StatusPageCheckerIncidentData>;
     public options: StatusPageCheckerOptions;
     public webhook: WebhookClient;
 
@@ -872,8 +899,8 @@ export class StatusPageChecker extends EventEmitter {
 export interface StatusPageCheckerEvents {
 
     incidentCheck: [];
-    incidentCreate: [incident: IncidentData];
-    incidentUpdate: [incidentData: IncidentData];
+    incidentCreate: [incident: StatusPageCheckerIncidentData];
+    incidentUpdate: [incidentData: StatusPageCheckerIncidentData];
 
 }
 
@@ -1058,7 +1085,7 @@ export type TicketDataType = 'CHANNEL';
 export class TranslationManager {
 
     public constructor(options: TranslationMangerOptions);
-    private _namespaces: Array | null;
+    private _namespaces: Array<String> | null;
     private _translations: Map<String, Function> | null;
     public options: TranslationMangerOptions;
     public isReady: Boolean;
