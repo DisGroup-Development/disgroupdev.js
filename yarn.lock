@@ -232,7 +232,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/action@npm:^4.0.8":
+"@octokit/action@npm:4.0.8":
   version: 4.0.8
   resolution: "@octokit/action@npm:4.0.8"
   dependencies:
@@ -1165,7 +1165,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"conventional-changelog-cli@npm:^2.2.2":
+"conventional-changelog-cli@npm:2.2.2":
   version: 2.2.2
   resolution: "conventional-changelog-cli@npm:2.2.2"
   dependencies:
@@ -1339,7 +1339,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"conventional-recommended-bump@npm:^6.1.0":
+"conventional-recommended-bump@npm:6.1.0":
   version: 6.1.0
   resolution: "conventional-recommended-bump@npm:6.1.0"
   dependencies:
@@ -1543,28 +1543,28 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "disgroupdev.js@workspace:."
   dependencies:
-    "@octokit/action": ^4.0.8
+    "@octokit/action": 4.0.8
     "@sentry/node": ^7.12.1
     "@typescript-eslint/eslint-plugin": 5.36.2
     "@typescript-eslint/parser": 5.36.2
     canvas: ^2.9.3
     chalk: ^4.1.2
     clean-jsdoc-theme: 4.1.7
-    conventional-changelog-cli: ^2.2.2
-    conventional-recommended-bump: ^6.1.0
+    conventional-changelog-cli: 2.2.2
+    conventional-recommended-bump: 6.1.0
     discord-api-types: ^0.37.0
     discord.js: ^14.0.3
-    eslint: ^8.23.0
-    eslint-config-standard-with-typescript: ^22.0.0
-    eslint-plugin-import: ^2.26.0
-    eslint-plugin-n: ^15.2.5
-    eslint-plugin-promise: ^6.0.1
+    eslint: 8.23.0
+    eslint-config-standard-with-typescript: 22.0.0
+    eslint-plugin-import: 2.26.0
+    eslint-plugin-n: 15.2.5
+    eslint-plugin-promise: 6.0.1
     i18next: ^21.6.16
     i18next-fs-backend: ^1.1.4
     jsdoc: 3.6.11
     luxon: ^2.4.0
     node-fetch: ^3.2.4
-    typescript: ^4.8.2
+    typescript: 4.8.2
   languageName: unknown
   linkType: soft
 
@@ -1720,7 +1720,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-standard-with-typescript@npm:^22.0.0":
+"eslint-config-standard-with-typescript@npm:22.0.0":
   version: 22.0.0
   resolution: "eslint-config-standard-with-typescript@npm:22.0.0"
   dependencies:
@@ -1783,7 +1783,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-import@npm:^2.26.0":
+"eslint-plugin-import@npm:2.26.0":
   version: 2.26.0
   resolution: "eslint-plugin-import@npm:2.26.0"
   dependencies:
@@ -1806,7 +1806,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-n@npm:^15.2.5":
+"eslint-plugin-n@npm:15.2.5":
   version: 15.2.5
   resolution: "eslint-plugin-n@npm:15.2.5"
   dependencies:
@@ -1824,7 +1824,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-promise@npm:^6.0.1":
+"eslint-plugin-promise@npm:6.0.1":
   version: 6.0.1
   resolution: "eslint-plugin-promise@npm:6.0.1"
   peerDependencies:
@@ -1894,7 +1894,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^8.23.0":
+"eslint@npm:8.23.0":
   version: 8.23.0
   resolution: "eslint@npm:8.23.0"
   dependencies:
@@ -4648,7 +4648,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.8.2":
+"typescript@npm:4.8.2":
   version: 4.8.2
   resolution: "typescript@npm:4.8.2"
   bin:
@@ -4658,7 +4658,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.8.2#~builtin<compat/typescript>":
+"typescript@patch:typescript@4.8.2#~builtin<compat/typescript>":
   version: 4.8.2
   resolution: "typescript@patch:typescript@npm%3A4.8.2#~builtin<compat/typescript>::version=4.8.2&hash=a1c5e5"
   bin:
