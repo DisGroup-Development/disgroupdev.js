@@ -1031,16 +1031,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clean-jsdoc-theme@npm:4.1.7":
-  version: 4.1.7
-  resolution: "clean-jsdoc-theme@npm:4.1.7"
+"clean-jsdoc-theme@npm:4.1.8":
+  version: 4.1.8
+  resolution: "clean-jsdoc-theme@npm:4.1.8"
   dependencies:
     fs-extra: ^10.1.0
     html-minifier: ^4.0.0
     nanoid: ^3.3.4
   peerDependencies:
     jsdoc: 3
-  checksum: b57ed5ec6ed13b7b1494b60897f052568baaa6a4f85f1d6fa4049dbb5545aeb93b309f1108638c34b4b6de909059b5b4bfb702e6162aee1c670bc02bb98f163b
+  checksum: c3119490f4aa7a3237a3b6ab311ffe2c463401f6996ffd34cd6a662f83ab70745d864cf7a5efbf69bf961c389e2e7b36cf5262157402a81f2c1eb79aa12d13d0
   languageName: node
   linkType: hard
 
@@ -1549,7 +1549,7 @@ __metadata:
     "@typescript-eslint/parser": 5.36.2
     canvas: ^2.9.3
     chalk: ^4.1.2
-    clean-jsdoc-theme: 4.1.7
+    clean-jsdoc-theme: 4.1.8
     conventional-changelog-cli: 2.2.2
     conventional-recommended-bump: 6.1.0
     discord-api-types: ^0.37.0
