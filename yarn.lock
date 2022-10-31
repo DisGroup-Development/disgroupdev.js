@@ -1582,7 +1582,7 @@ __metadata:
     eslint-plugin-n: 15.2.5
     eslint-plugin-promise: 6.1.1
     i18next: ^21.6.16
-    i18next-fs-backend: ^1.1.4
+    i18next-fs-backend: ^2.0.0
     jsdoc: 3.6.11
     luxon: ^3.0.0
     node-fetch: ^3.2.4
@@ -2582,10 +2582,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next-fs-backend@npm:^1.1.4":
-  version: 1.2.0
-  resolution: "i18next-fs-backend@npm:1.2.0"
-  checksum: da74d20f2b007f8e34eaf442fa91ad12aaff3b9891e066c6addd6d111b37e370c62370dfbc656730ab2f8afd988f2e7ea1c48301ebb19ccb716fb5965600eddf
+"i18next-fs-backend@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "i18next-fs-backend@npm:2.0.0"
+  checksum: a452aaf6a3d5fb1e9b3d8f58e44a6be2cc9de89239c52deb628b49732a3ce0982e76aface55b2b5005a86914ab88ac02dd13408f8eb85505f5d41cbeb8969122
   languageName: node
   linkType: hard
 
