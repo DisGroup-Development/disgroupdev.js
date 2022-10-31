@@ -49,7 +49,7 @@
   ],
   "main": "./lib/index.js",
   "name": "disgroupdev.js",
-  "packageManager": "yarn@3.2.3",
+  "packageManager": "yarn@3.2.4",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
   },
