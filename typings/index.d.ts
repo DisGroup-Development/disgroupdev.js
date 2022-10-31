@@ -20,6 +20,36 @@ import { EventEmitter } from 'node:events';
 import { InitOptions } from 'i18next';
 import * as Sentry from '@sentry/node';
 
+export class Badges extends null {
+
+    public static readonly BOOST_LEVEL_0: BadgeData;
+    public static readonly BOOST_LEVEL_1: BadgeData;
+    public static readonly BOOST_LEVEL_2: BadgeData;
+    public static readonly BOOST_LEVEL_3: BadgeData;
+    public static readonly BUG_HUNTER_LEVEL_1: BadgeData;
+    public static readonly BUG_HUNTER_LEVEL_2: BadgeData;
+    public static readonly CERTIFIED_MODERATOR: BadgeData;
+    public static readonly EARLY_SUPPORTER: BadgeData;
+    public static readonly EARLY_VERIFIED_DEVELOPER: BadgeData;
+    public static readonly HYPESQUARD: BadgeData;
+    public static readonly HYPESQUARD_BALANCE: BadgeData;
+    public static readonly HYPESQUARD_BRAVERY: BadgeData;
+    public static readonly HYPESQUARD_BRILLIANCE: BadgeData;
+    public static readonly PARTNER: BadgeData;
+    public static readonly STAFF: BadgeData;
+    public static readonly VERIFIED_BOT: BadgeData;
+
+}
+
+export interface BadgeData {
+
+    emoji: String;
+    id: Snowflake;
+    name: String;
+    url: String;
+
+}
+
 export class BaseComponent {
 
     public constructor(client: Client, data: BaseComponentData);
@@ -87,9 +117,10 @@ export class BaseInteraction {
     public get channelOnly(): Array<TextBasedChannelTypes>;
     public get clientPermissions(): Array<PermissionFlagsBits>;
     public get cooldown(): Number;
-    public get defer(): Boolean;
     public get defaultMemberPermissions(): Array<PermissionFlagsBits>;
+    public get defer(): Boolean;
     public get deployEnabled(): Boolean;
+    public get dmEnabled(): Boolean;
     public get devOnly(): Boolean;
     public get dirname(): String;
     public get enabled(): Boolean;
@@ -121,8 +152,9 @@ export interface BaseInteractionData {
     category: String;
     cooldown: Number;
     defaultMemberPermissions: Array<PermissionFlagsBits>;
-    deployEnabled: Boolean;
     defer: Boolean;
+    deployEnabled: Boolean;
+    dmEnabled: Boolean;
     dirname: String;
     ephemeral: Boolean;
     experiment: ExperimentData;
@@ -250,6 +282,22 @@ export interface CaptchaOptions {
 
 }
 
+export class Colors extends null {
+
+    public static readonly AIKO: Number;
+    public static readonly BLUE: Number;
+    public static readonly GREEN: Number;
+    public static readonly GREY: Number;
+    public static readonly ORANGE: Number;
+    public static readonly PURPLE: Number;
+    public static readonly RED: Number;
+    public static readonly TURQUOISE: Number;
+    public static readonly WHITE: Number;
+    public static readonly YELLOW: Number;
+
+
+}
+
 export class ContextInteraction extends BaseInteraction {
 
     public constructor(client: Client, manager: ContextInteractionManager, data: ContextInteractionData);
@@ -289,6 +337,38 @@ export class ContextInteractionManager {
 }
 
 export class DisGroupDevError extends Error {}
+
+export class Emojis extends null {
+
+    public static readonly AIKO: EmojiData;
+    public static readonly ANNOUNCEMENT: EmojiData;
+    public static readonly ARROW_D: EmojiData;
+    public static readonly ARROW_L: EmojiData;
+    public static readonly ARROW_R: EmojiData;
+    public static readonly ARROW_U: EmojiData;
+    public static readonly CATEGORY: EmojiData;
+    public static readonly CHECK: EmojiData;
+    public static readonly CROSS: EmojiData;
+    public static readonly DISCORD: EmojiData;
+    public static readonly DISGROUPDEV: EmojiData;
+    public static readonly INFO: EmojiData;
+    public static readonly KERNELHOST: EmojiData;
+    public static readonly LINK: EmojiData;
+    public static readonly NEUTRAL: EmojiData;
+    public static readonly PING: EmojiData;
+    public static readonly TEXT_CHANNEL: EmojiData;
+    public static readonly VOICE_CHANNEL: EmojiData;
+
+}
+
+export interface EmojiData {
+
+    emoji: String;
+    id: Snowflake;
+    name: String;
+    url: String;
+
+}
 
 export class Event {
 
@@ -531,6 +611,30 @@ export class ModalInteractionManager {
     public reloadAll(): Promise<Boolean | DisGroupDevError>;
     public unload(name: String): Promise<Boolean | DisGroupDevError>;
     public unloadAll(): Promise<Boolean | DisGroupDevError>;
+
+}
+
+export class Partner extends null {
+
+    public static readonly KERNELHOST: PartnerData;
+    public static readonly LARA_GAMING: PartnerData;
+
+}
+
+export interface PartnerData {
+
+    name: String;
+    longDescription: Object<String, String>;
+    shortDescription: Object<String, String>;
+    emoji: EmojiData;
+    owner: Snowflake;
+    type: Object<String, String>;
+    bannerURL: ?String;
+    iconURL: ?String;
+    discordURL: ?String;
+    instagramURL: ?String;
+    twitterURL: ?String;
+    websiteURL: ?String;
 
 }
 
