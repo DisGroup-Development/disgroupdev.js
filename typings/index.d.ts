@@ -1,12 +1,18 @@
 import { Canvas, JPEGStream, PDFStream, PNGStream } from 'canvas';
 import {
     ApplicationCommandOptionData,
+    BaseGuildTextChannel,
     Client,
     Collection,
+    ColorResolvable,
+    EmojiIdentifierResolvable,
     Guild,
     GuildMember,
     GuildMemberResolvable,
     GuildResolvable,
+    Message,
+    MessageMentionOptions,
+    MessageReaction,
     Snowflake,
     TextBasedChannelTypes,
     TextChannel,
@@ -15,7 +21,7 @@ import {
     WebhookClient
 } from 'discord.js';
 import { APIMessageComponentEmoji, ApplicationCommandType, ButtonStyle, LocalizationMap, PermissionFlagsBits } from 'discord-api-types/v10';
-import { ButtonBuilder, EmbedBuilder, ModalBuilder, SelectMenuBuilder, SelectMenuOptionBuilder, TextInputBuilder } from '@discordjs/builders';
+import { ActionRowBuilder, ButtonBuilder, EmbedBuilder, EmbedFooterOptions, ModalBuilder, SelectMenuBuilder, SelectMenuOptionBuilder, TextInputBuilder } from '@discordjs/builders';
 import { EventEmitter } from 'node:events';
 import { InitOptions } from 'i18next';
 import * as Sentry from '@sentry/node';
@@ -456,6 +462,228 @@ export interface ExperimentData {
 
     required: Boolean;
     id: Number | null;
+
+}
+
+export class Giveaway {
+
+    public constructor(client: Client, manager: GiveawayManager, data: GiveawayData);
+    public client: Client;
+    private endTimeout: Function | null;
+    public manager: GiveawayManager;
+    private message: Message | null
+    private data: GiveawayData;
+
+    private _fillInEmbed(emb: EmbedBuilder): EmbedBuilder;
+    private _fillInString(str: String): String;
+    public get allowedMentions(): MessageMentionOptions | null;
+    public get botsCanWin(): Boolean;
+    public get channelId(): Snowflake | null;
+    public checkWinnerEntry(user: User): Promise<Boolean>;
+    public get duration(): Number;
+    public edit(data: GiveawayEditData): Promise<Giveaway>;
+    public get embedColor(): Number;
+    public get embedColorEnded(): Number;
+    public end(): Promise<Array<User>>;
+    public get endAt(): Number;
+    public get ended(): Boolean;
+    private ensureEndTimeout(): Function | null;
+    public get exceptMembers(): Array<Snowflake>;
+    public get exceptPermissions(): Array<PermissionFlagsBits>;
+    public fetchAllEntries(): Promise<Collection<Snowflake, User>|DisGroupDevError>;
+    public fetchMessage(): Promise<Message|DisGroupDevError>;
+    public get guildId(): Snowflake | null;
+    public get hostedBy(): String | null;
+    public get image(): String | null;
+    public get isDrop(): Boolean;
+    public get lastChance(): GiveawayLastChanceData;
+    public get messageId(): Snowflake | null;
+    public get messageReaction(): MessageReaction | null;
+    public get messageURL(): String;
+    public get messages(): GiveawayMessagesData;
+    public pause(options: GiveawayPauseData): Promise<Givewaway>;
+    public get pauseOptions(): GiveawayPauseData;
+    public get prize(): String | null;
+    public get reaction(): EmojiIdentifierResolvable;
+    public get remainingTime(): Number;
+    public reroll(options: GiveawayRerollOptions): Promise<Array<User>>;
+    public roll(): Promise<User>;
+    public get startAt(): Number;
+    public get thumbnail(): String | null;
+    public unpause(): Promise<Giveaway>;
+    public get winnerIds(): Array<Snowflake>;
+    public get winners(): Number;
+    public toJSON(): GiveawayData;
+
+}
+
+export interface GiveawayData {
+
+    allowedMentions?: MessageMentionOptions,
+    botsCanWin?: Boolean,
+    channelId: Snowflake,
+    embedColor?: ColorResolvable,
+    embedColorEnded?: ColorResolvable,
+    endAt: Number,
+    ended: Boolean,
+    exceptMembers: Array<Snowflake>,
+    exceptPermissions: Array<PermissionFlagsBits>,
+    guildId: Snowflake,
+    hostedBy?: String,
+    image?: String,
+    isDrop?: Boolean,
+    lastChance?: GiveawayLastChanceData
+    messageId: Snowflake,
+    messages?: GiveawayMessagesData,
+    pause?: GiveawayPauseData,
+    prize: String,
+    reaction: EmojiIdentifierResolvable,
+    startAt: Number,
+    thumbnail?: String,
+    winnerIds?: Array<Snowflake>,
+    winners: Number
+
+}
+
+export interface GiveawayEditData {
+
+    addTime?: Number,
+    exceptMembers?: Array<Snowflake>,
+    exceptPermissions?: Array<PermissionFlagsBits>,
+    image?: String,
+    lastChange?: GiveawayLastChanceData,
+    messages?: GiveawayMessagesData,
+    prize?: String,
+    thumbnail?: String,
+    timestamp?: String,
+    winners?: Number
+
+}
+
+export interface GiveawayLastChanceData {
+
+    embedColor?: ColorResolvable,
+    enabled?: Boolean,
+    message?: String,
+    time?: Number
+
+}
+
+export interface GiveawayMessagesData {
+
+    drawing?: String,
+    drop?: String,
+    endedAt?: String,
+    footer?: EmbedFooterOptions,
+    giveaway?: String,
+    giveawayEnded?: String,
+    hostedBy?: String,
+    noWinner?: String,
+    reactToParticipate?: String,
+    title?: String,
+    winMessage?: String,
+    winners?: String
+
+}
+
+export interface GiveawayPauseData {
+
+    durationAfterPause?: Number,
+    embedColor?: ColorResolvable,
+    infiniteDurationText?: String,
+    isPaused?: Boolean,
+    message?: String,
+    unpauseAfter?: Number
+
+}
+
+export interface GiveawayRerollOptions {
+
+    messages: {
+        noWinner?: String,
+        winMessage?: String
+    },
+    winners?: Number
+
+}
+
+export interface GiveawayStartOptions {
+
+
+
+}
+
+export class GiveawayManager extends EventEmitter {
+
+    public constructor(client: Client, options: GiveawayManagerOptions);
+    public client: Client;
+    public options: GiveawayManagerOptions;
+    public cache: Array<Giveaway>;
+    public isReady: Boolean;
+
+    private _init(): void;
+    private _checkGiveaways(): void;
+    private _generateGiveawayEmbed(giveaway: Giveaway): EmbedBuilder;
+    private _generateGiveawayEndEmbed(giveaway: Giveaway, winnerIds: Array<Snowflake>): EmbedBuilder;
+    private _generateGiveawayNoValidParticipationsEmbed(giveaway: Giveaway): EmbedBuilder;
+    private _getGiveaways(): Array<GiveawayData> | DisGroupDevError;
+    public createGiveaway(channel: BaseGuildTextChannel, user: User, options: GiveawayStartOptions): Promise<Giveaway|DisGroupDevError> | DisGroupDevError;
+    public deleteGiveaway(giveaway: Giveaway): Promise<Giveaway> | DisGroupDevError;
+    public editGiveaway(giveaway: Giveaway, data: GiveawayEditData): Promise<Giveaway|DisGroupDevError> | DisGroupDevError;
+    public endGiveaway(giveaway: Giveaway): Promise<Giveaway|DisGroupDevError> | DisGroupDevError;
+    public handleMessageReactionAdd(reaction: MessageReaction, user: User): void;
+    public handleMessageReactionRemove(reaction: MessageReaction, user: User): void;
+    public pauseGiveaway(giveaway: Giveaway, options: GiveawayPauseData);
+    public rerollGiveaway(giveaway: Giveaway, options: GiveawayRerollOptions): Promise<Array<User>|DisGroupDevError> | DisGroupDevError;
+    public rollGiveaway(giveaway): Promise<Array<User>|DisGroupDevError> | DisGroupDevError;
+    public save(): Boolean | DisGroupDevError;
+    public unpauseGiveaway(giveaway: Giveaway): Promise<Giveaway|DisGroupDevError> | DisGroupDevError;
+
+
+    public on<K extends keyof GiveawayManagerEvents>(event: K, listener: (...args: GiveawayManagerEvents[K]) => Awaitable<void>): this;
+    public on<S extends string | symbol>(
+        event: Exclude<S, keyof GiveawayManagerEvents>,
+        listener: (...args: any[]) => Awaitable<void>,
+    ): this;
+
+    public once<K extends keyof GiveawayManagerEvents>(event: K, listener: (...args: GiveawayManagerEvents[K]) => Awaitable<void>): this;
+    public once<S extends string | symbol>(
+        event: Exclude<S, keyof GiveawayManagerEvents>,
+        listener: (...args: any[]) => Awaitable<void>,
+    ): this;
+
+    public emit<K extends keyof GiveawayManagerEvents>(event: K, ...args: GiveawayManagerEvents[K]): boolean;
+    public emit<S extends string | symbol>(event: Exclude<S, keyof GiveawayManagerEvents>, ...args: unknown[]): boolean;
+
+    public off<K extends keyof GiveawayManagerEvents>(event: K, listener: (...args: GiveawayManagerEvents[K]) => Awaitable<void>): this;
+    public off<S extends string | symbol>(
+        event: Exclude<S, keyof GiveawayManagerEvents>,
+        listener: (...args: any[]) => Awaitable<void>,
+    ): this;
+
+    public removeAllListeners<K extends keyof GiveawayManagerEvents>(event?: K): this;
+    public removeAllListeners<S extends string | symbol>(event?: Exclude<S, keyof GiveawayManagerEvents>): this;
+
+}
+
+export interface GiveawayManagerEvents {
+
+    giveawayCreate: [giveaway: Giveaway];
+    giveawayDelete: [giveaway: Giveaway];
+    giveawayEnd: [giveaway: Giveaway];
+    giveawayPause: [giveaway: Giveaway];
+    giveawayReroll: [giveaway: Giveaway];
+    giveawayRoll: [giveaway: Giveaway];
+    giveawayUnpause: [giveaway: Giveaway];
+    giveawayUpdate: [giveaway: Giveaway];
+
+}
+
+export interface GiveawayManagerOptions {
+
+    checkInterval: Number | null,
+    deleteAfter: Number | null,
+    storage: String
 
 }
 
