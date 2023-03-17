@@ -30,7 +30,7 @@
     "eslint-plugin-n": "15.4.0",
     "eslint-plugin-promise": "6.1.1",
     "jsdoc": "3.6.11",
-    "typescript": "4.8.4"
+    "typescript": "4.9.5"
   },
   "description": "A 🔥 powerful NodeJS module from DisGroup Development for managing data and managers.",
   "engines": {
