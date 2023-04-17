@@ -19,8 +19,8 @@
   },
   "devDependencies": {
     "@octokit/action": "4.0.10",
-    "@typescript-eslint/eslint-plugin": "5.42.0",
-    "@typescript-eslint/parser": "5.42.0",
+    "@typescript-eslint/eslint-plugin": "5.59.0",
+    "@typescript-eslint/parser": "5.59.0",
     "clean-jsdoc-theme": "4.1.8",
     "conventional-changelog-cli": "2.2.2",
     "conventional-recommended-bump": "6.1.0",
